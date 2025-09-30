@@ -280,7 +280,7 @@ const HeroSection = () => {
           <MobileImageSection>
             <MobileProfileImage 
               animate={animate}
-              src="/profile.png" 
+              src="/portfolio/profile.png" 
               alt="BARATH R - Professional Portrait"
             />
           </MobileImageSection>
@@ -366,7 +366,7 @@ const HeroSection = () => {
       <RightSection>
         <AnimatedProfileImage 
           animate={animate}
-          src="/profile.png" 
+          src="/portfolio/profile.png" 
           alt="BARATH R - Professional Portrait"
         />
       </RightSection>

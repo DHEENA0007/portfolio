@@ -13,12 +13,17 @@ const DashboardContainer = styled(Box)({
 });
 
 const DashboardTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
+  fontFamily: '"DM Sans", "Manrope", sans-serif',
+  fontSize: '3rem',
   fontWeight: 700,
-  color: '#1e3a5f',
+  color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '3rem'
+  marginBottom: '3rem',
+  letterSpacing: '-0.025em',
+  background: 'linear-gradient(135deg, #1a73e8 0%, #1557b0 50%, #0f4c81 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const MainContent = styled(Box)({
@@ -275,7 +280,7 @@ const GoogleAnalyticsDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        Google Analytics - Acquisition Overview
+        Analytics Acquisition Overview
       </DashboardTitle>
       
       <MainContent>

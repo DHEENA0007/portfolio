@@ -2,9 +2,8 @@ import { Box, Typography, IconButton, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -65,10 +64,10 @@ const Footer = () => {
           <Typography 
             variant="body2" 
             sx={{ 
-              fontFamily: '"Montserrat", sans-serif',
-              fontWeight: 700,
-              letterSpacing: '0.18em',
-              fontSize: '0.9375rem'
+              fontFamily: '"Outfit", sans-serif',
+              fontWeight: 600,
+              letterSpacing: '0.15em',
+              fontSize: '0.95rem'
             }}
           >
             BACK TO TOP
@@ -80,19 +79,23 @@ const Footer = () => {
           justifyContent="center" 
           spacing={{ xs: 0.5, sm: 1 }}
           flexWrap="wrap"
+          mb={3}
         >
-          <SocialIconButton>
-            <LinkedInIcon />
-          </SocialIconButton>
-          <SocialIconButton>
-            <GitHubIcon />
-          </SocialIconButton>
-          <SocialIconButton>
-            <EmailIcon />
-          </SocialIconButton>
-          <SocialIconButton>
-            <TwitterIcon />
-          </SocialIconButton>
+          <a href="mailto:barath.bhojan@gmail.com" aria-label="Email" style={{ textDecoration: 'none' }}>
+            <SocialIconButton>
+              <EmailIcon />
+            </SocialIconButton>
+          </a>
+          <a href="https://www.linkedin.com/in/barathxo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ textDecoration: 'none' }}>
+            <SocialIconButton>
+              <LinkedInIcon />
+            </SocialIconButton>
+          </a>
+          <a href="tel:+917448645076" aria-label="Phone" style={{ textDecoration: 'none' }}>
+            <SocialIconButton>
+              <PhoneIcon />
+            </SocialIconButton>
+          </a>
         </Stack>
       </ContentWrapper>
     </FooterContainer>

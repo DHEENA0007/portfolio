@@ -9,16 +9,21 @@ const DashboardContainer = styled(Box)({
 });
 
 const DashboardTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
-  fontWeight: 700,
-  color: '#1e3a5f',
+  fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
+  fontSize: '3rem',
+  fontWeight: 800,
+  color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '1.5rem'
+  marginBottom: '1.5rem',
+  letterSpacing: '-0.02em',
+  background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const DashboardDescription = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"Lato", sans-serif',
   fontSize: '1rem',
   color: '#64748b',
   textAlign: 'center',
@@ -81,7 +86,7 @@ const PhaseNumber = styled(Box)<{ backgroundColor: string }>(({ backgroundColor 
 }));
 
 const PhaseTitle = styled(Typography)<{ titleColor: string }>(({ titleColor }) => ({
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"Montserrat", sans-serif',
   fontSize: '1.5rem',
   fontWeight: 700,
   color: titleColor
@@ -94,7 +99,7 @@ const BulletList = styled(Box)({
 });
 
 const BulletPoint = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"Lato", sans-serif',
   fontSize: '0.875rem',
   color: '#64748b',
   lineHeight: 1.5,
@@ -177,7 +182,7 @@ const SEOFrameworkDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        My 2-Phase Strategic SEO Framework
+        Strategic SEO Framework
       </DashboardTitle>
       
       <DashboardDescription>

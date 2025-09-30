@@ -10,22 +10,29 @@ const DashboardContainer = styled(Box)({
 });
 
 const DashboardTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
+  fontFamily: '"Satoshi", "Inter", sans-serif',
+  fontSize: '3rem',
   fontWeight: 700,
-  color: '#1e3a5f',
+  color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '1rem'
+  marginBottom: '1rem',
+  letterSpacing: '-0.025em',
+  background: 'linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const DashboardSubtitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"General Sans", "Inter", sans-serif',
   fontSize: '1.125rem',
   color: '#64748b',
   textAlign: 'center',
   marginBottom: '3rem',
   maxWidth: '600px',
-  margin: '0 auto 3rem'
+  margin: '0 auto 3rem',
+  fontWeight: 400,
+  letterSpacing: '0.01em'
 });
 
 const MetricsGrid = styled(Box)({
@@ -136,7 +143,7 @@ const SEOPerformanceDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        My Projects – SEO Performance
+        SEO Performance Analytics
       </DashboardTitle>
       
       <DashboardSubtitle>

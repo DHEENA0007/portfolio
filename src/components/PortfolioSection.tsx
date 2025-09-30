@@ -8,6 +8,7 @@ import SEOPerformanceDashboard from './SEOPerformanceDashboard';
 import TrafficImpactDashboard from './TrafficImpactDashboard';
 import SEOFrameworkDashboard from './SEOFrameworkDashboard';
 import GoogleAnalyticsDashboard from './GoogleAnalyticsDashboard';
+import StrategicRebalancingDashboard from './StrategicRebalancingDashboard';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
@@ -28,11 +29,13 @@ const ContentWrapper = styled(Box)({
 
 const FilterButton = styled(Typography)<{ active?: boolean }>(({ active }) => ({
   color: active ? '#000000' : '#999999',
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"Outfit", sans-serif',
   fontSize: '1rem',
   fontWeight: active ? 600 : 400,
   cursor: 'pointer',
   transition: 'all 0.3s ease',
+  letterSpacing: '0.05em',
+  textTransform: 'uppercase',
   '&:hover': {
     color: '#000000'
   }
@@ -94,20 +97,27 @@ const portfolioData = [
   },
   {
     id: 5,
+    title: 'Strategic Rebalancing Act',
+    category: 'Strategy',
+    component: 'StrategicRebalancing',
+    isCustom: true
+  },
+  {
+    id: 6,
     title: 'Traffic Impact Analysis',
     category: 'Web Analytics',
     component: 'TrafficImpact',
     isCustom: true
   },
   {
-    id: 6,
+    id: 7,
     title: 'SEO Strategic Framework',
     category: 'Web Analytics',
     component: 'SEOFramework',
     isCustom: true
   },
   {
-    id: 7,
+    id: 8,
     title: 'Google Analytics Overview',
     category: 'Web Analytics',
     component: 'GoogleAnalytics',
@@ -147,9 +157,9 @@ const PortfolioSection = () => {
           <Typography 
             variant="h2" 
             sx={{ 
-              fontFamily: '"Inter", sans-serif',
+              fontFamily: '"Playfair Display", serif',
               fontWeight: 700, 
-              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              fontSize: { xs: '2.5rem', md: '4rem' },
               color: '#000000',
               mb: 2,
               letterSpacing: '-0.02em'
@@ -206,6 +216,7 @@ const PortfolioSection = () => {
                 {project.component === 'TrafficImpact' && <TrafficImpactDashboard />}
                 {project.component === 'SEOFramework' && <SEOFrameworkDashboard />}
                 {project.component === 'GoogleAnalytics' && <GoogleAnalyticsDashboard />}
+                {project.component === 'StrategicRebalancing' && <StrategicRebalancingDashboard />}
               </CustomProjectContent>
             </ProjectItem>
           ))}

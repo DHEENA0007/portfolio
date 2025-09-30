@@ -10,23 +10,30 @@ const DashboardContainer = styled(Box)({
 });
 
 const DashboardTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
+  fontFamily: '"PP Neue Montreal", "Outfit", sans-serif',
+  fontSize: '2.8rem',
   fontWeight: 700,
-  color: '#1e3a5f',
+  color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '1.5rem'
+  marginBottom: '1.5rem',
+  letterSpacing: '-0.02em',
+  background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const DashboardDescription = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"Manrope", "Inter", sans-serif',
   fontSize: '1rem',
   color: '#64748b',
   textAlign: 'center',
   marginBottom: '3rem',
   maxWidth: '800px',
   margin: '0 auto 3rem',
-  lineHeight: 1.6
+  lineHeight: 1.6,
+  fontWeight: 400,
+  letterSpacing: '0.005em'
 });
 
 const ChartContainer = styled(Box)({
@@ -60,7 +67,7 @@ const LegendColor = styled(Box)<{ color: string }>(({ color }) => ({
 }));
 
 const LegendText = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
+  fontFamily: '"Lato", sans-serif',
   fontSize: '0.875rem',
   color: '#64748b',
   fontWeight: 500
@@ -76,7 +83,7 @@ const TrafficImpactDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        Traffic Impact: Current Year vs. Baseline (Active Users)
+        Traffic Impact Analysis
       </DashboardTitle>
       
       <DashboardDescription>

@@ -16,11 +16,16 @@ const HeaderSection = styled(Box)({
 });
 
 const MainTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
-  fontWeight: 700,
+  fontFamily: '"Darker Grotesque", "Space Grotesk", sans-serif',
+  fontSize: '3.2rem',
+  fontWeight: 800,
   color: '#1e293b',
-  marginBottom: '0.5rem'
+  marginBottom: '0.5rem',
+  letterSpacing: '-0.03em',
+  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const Subtitle = styled(Typography)({
@@ -140,7 +145,7 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
   return (
     <PortfolioContainer>
       <HeaderSection>
-        <MainTitle>Google Ads Campaign Portfolio</MainTitle>
+        <MainTitle>Campaign Performance Portfolio</MainTitle>
         <Subtitle>A showcase of successful budget management and strategic optimization.</Subtitle>
       </HeaderSection>
 

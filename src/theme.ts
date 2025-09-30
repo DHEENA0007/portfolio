@@ -55,24 +55,37 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: '"Inter", "Montserrat", "Open Sans", sans-serif',
+    fontFamily: '"Inter", "Space Grotesk", sans-serif',
     h1: {
-      fontFamily: '"Inter", sans-serif',
+      fontFamily: '"Playfair Display", serif',
       fontWeight: 700,
-      fontSize: '3rem',
+      fontSize: '3.5rem',
       letterSpacing: '-0.02em',
       '@media (max-width:768px)': {
-        fontSize: '2.2rem'
+        fontSize: '2.5rem'
       },
       '@media (max-width:480px)': {
-        fontSize: '1.8rem'
+        fontSize: '2rem'
       }
     },
     h2: {
-      fontFamily: '"Inter", sans-serif',
+      fontFamily: '"Syne", sans-serif',
       fontWeight: 700,
+      fontSize: '2.5rem',
+      letterSpacing: '0.05em',
+      textTransform: 'uppercase',
+      '@media (max-width:768px)': {
+        fontSize: '2rem'
+      },
+      '@media (max-width:480px)': {
+        fontSize: '1.6rem'
+      }
+    },
+    h3: {
+      fontFamily: '"Space Grotesk", sans-serif',
+      fontWeight: 600,
       fontSize: '2rem',
-      letterSpacing: '-0.01em',
+      letterSpacing: '0.02em',
       '@media (max-width:768px)': {
         fontSize: '1.6rem'
       },
@@ -80,55 +93,44 @@ const theme = createTheme({
         fontSize: '1.4rem'
       }
     },
-    h3: {
-      fontFamily: '"Inter", sans-serif',
-      fontWeight: 700,
-      fontSize: '1.5rem',
-      letterSpacing: '-0.01em',
-      '@media (max-width:768px)': {
-        fontSize: '1.3rem'
-      },
-      '@media (max-width:480px)': {
-        fontSize: '1.2rem'
-      }
-    },
     h4: {
-      fontFamily: '"Inter", sans-serif',
-      fontWeight: 700,
-      fontSize: '1.25rem',
-      letterSpacing: '0em',
+      fontFamily: '"Outfit", sans-serif',
+      fontWeight: 600,
+      fontSize: '1.5rem',
+      letterSpacing: '0.05em',
       color: '#1e293b'
     },
     h6: {
-      fontFamily: '"Inter", sans-serif',
-      fontWeight: 600,
-      fontSize: '1rem',
+      fontFamily: '"Caveat", cursive',
+      fontWeight: 500,
+      fontSize: '1.2rem',
       letterSpacing: '0em',
       color: '#475569'
     },
     h5: {
-      fontFamily: '"Inter", sans-serif',
-      fontWeight: 400,
-      fontSize: '1.125rem',
-      letterSpacing: '0em'
+      fontFamily: '"Space Grotesk", sans-serif',
+      fontWeight: 500,
+      fontSize: '1.3rem',
+      letterSpacing: '0.02em'
     },
     body1: {
       fontFamily: '"Inter", sans-serif',
       fontWeight: 400,
       fontSize: '1rem',
-      lineHeight: 1.6
+      lineHeight: 1.7
     },
     body2: {
       fontFamily: '"Inter", sans-serif',
       fontWeight: 300,
-      fontSize: '0.875rem',
-      lineHeight: 1.5
+      fontSize: '0.9rem',
+      lineHeight: 1.6
     },
     button: {
-      fontFamily: '"Inter", sans-serif',
+      fontFamily: '"Outfit", sans-serif',
       fontWeight: 500,
-      letterSpacing: '0.02em',
-      textTransform: 'none'
+      letterSpacing: '0.05em',
+      textTransform: 'uppercase',
+      fontSize: '0.9rem'
     }
   },
   shape: {

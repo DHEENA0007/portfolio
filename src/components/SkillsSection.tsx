@@ -74,28 +74,30 @@ const CustomSkillIcon = styled(Box)({
 });
 
 const SkillName = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '1rem',
+  fontFamily: '"Outfit", sans-serif',
+  fontSize: '1.1rem',
   fontWeight: 600,
   color: '#333333',
-  marginBottom: '0.5rem'
+  marginBottom: '0.5rem',
+  letterSpacing: '0.02em'
 });
 
 const SkillDescription = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
-  fontSize: '0.875rem',
+  fontSize: '0.9rem',
   color: '#666666',
-  lineHeight: 1.5
+  lineHeight: 1.6
 });
 
 const CategoryTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '1.5rem',
-  fontWeight: 700,
+  fontFamily: '"Space Grotesk", sans-serif',
+  fontSize: '1.8rem',
+  fontWeight: 600,
   color: '#000000',
   marginBottom: '1rem',
   textAlign: 'center',
   position: 'relative',
+  letterSpacing: '0.02em',
   '&:after': {
     content: '""',
     position: 'absolute',
@@ -110,30 +112,30 @@ const CategoryTitle = styled(Typography)({
 });
 
 const MainTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '3.5rem',
-  fontWeight: 800,
+  fontFamily: '"Playfair Display", serif',
+  fontSize: '4rem',
+  fontWeight: 700,
   color: '#000000',
   textAlign: 'center',
   marginBottom: '1rem',
   letterSpacing: '-0.02em',
   [theme.breakpoints.down('md')]: {
-    fontSize: '2.5rem'
+    fontSize: '3rem'
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: '2rem'
+    fontSize: '2.5rem'
   }
 }));
 
 const SubTitle = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
-  fontSize: '1.25rem',
+  fontSize: '1.2rem',
   color: '#666666',
   textAlign: 'center',
   marginBottom: '5rem',
   maxWidth: '700px',
   margin: '0 auto 5rem',
-  lineHeight: 1.6
+  lineHeight: 1.7
 });
 
 // Modern skills data with icons and descriptions

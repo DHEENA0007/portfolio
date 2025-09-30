@@ -15,9 +15,11 @@ const StyledAppBar = styled(AppBar)<{ isVisible: boolean }>(({ isVisible }) => (
 
 const NavButton = styled(Button)({
   color: '#ffffff',
+  fontFamily: '"Space Grotesk", sans-serif',
   fontWeight: 500,
   fontSize: '1rem',
   textTransform: 'none',
+  letterSpacing: '0.02em',
   '&:hover': {
     backgroundColor: 'rgba(255, 255, 255, 0.1)'
   }
@@ -27,9 +29,11 @@ const ContactButton = styled(Button)({
   backgroundColor: 'transparent',
   color: '#ffffff',
   border: '2px solid #ffffff',
-  fontWeight: 500,
+  fontFamily: '"Outfit", sans-serif',
+  fontWeight: 600,
   fontSize: '0.875rem',
   textTransform: 'uppercase',
+  letterSpacing: '0.1em',
   padding: '8px 24px',
   borderRadius: '24px',
   '&:hover': {
@@ -110,9 +114,9 @@ const Navigation = () => {
   const mobileMenu = (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: 700, color: '#ffffff', fontSize: '1.5rem' }}>
-          BH
-        </Typography>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#ffffff', fontSize: '1.5rem', fontFamily: '"Caveat", cursive', letterSpacing: '0.02em' }}>
+            &lt;/barath_R/&gt;
+          </Typography>
         <IconButton onClick={handleDrawerToggle} sx={{ color: '#ffffff' }}>
           <CloseIcon />
         </IconButton>
@@ -141,8 +145,8 @@ const Navigation = () => {
     <>
       <StyledAppBar isVisible={isVisible}>
         <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
-          <Typography variant="h6" component="div" sx={{ fontWeight: 700, color: '#000000ff', fontSize: '1.5rem' }}>
-            BH
+          <Typography variant="h6" component="div" sx={{ fontWeight: 700, color: '#000000ff', fontSize: '1.5rem', fontFamily: '"Caveat", cursive', letterSpacing: '0.02em' }}>
+            &lt;/barath_R/&gt;
           </Typography>
           
           {isMobile ? (

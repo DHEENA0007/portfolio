@@ -36,13 +36,14 @@ const SubSection = styled(Box)({
 });
 
 const SubSectionTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '1.75rem',
-  fontWeight: 700,
+  fontFamily: '"Space Grotesk", sans-serif',
+  fontSize: '1.8rem',
+  fontWeight: 600,
   color: '#2563eb',
   marginBottom: '2rem',
   textAlign: 'center',
   position: 'relative',
+  letterSpacing: '0.05em',
   '&:after': {
     content: '""',
     position: 'absolute',
@@ -98,11 +99,12 @@ const CertificationText = styled(Typography)({
 });
 
 const EducationTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '1.25rem',
-  fontWeight: 700,
+  fontFamily: '"Outfit", sans-serif',
+  fontSize: '1.3rem',
+  fontWeight: 600,
   color: '#333333',
-  marginBottom: '0.5rem'
+  marginBottom: '0.5rem',
+  letterSpacing: '0.02em'
 });
 
 const EducationDetails = styled(Typography)({
@@ -114,8 +116,8 @@ const EducationDetails = styled(Typography)({
 });
 
 const GPAText = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '1rem',
+  fontFamily: '"Caveat", cursive',
+  fontSize: '1.2rem',
   color: '#2563eb',
   fontWeight: 600
 });

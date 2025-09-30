@@ -34,23 +34,24 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
   '& .MuiInputLabel-root': {
     color: theme.palette.text.secondary,
-    fontFamily: '"Montserrat", sans-serif',
-    fontWeight: 700,
-    fontSize: '0.875rem',
-    letterSpacing: '0.04em',
+    fontFamily: '"Outfit", sans-serif',
+    fontWeight: 600,
+    fontSize: '0.9rem',
+    letterSpacing: '0.05em',
     textTransform: 'uppercase'
   },
   '& .MuiInputBase-input': {
     padding: '1rem 0',
-    fontFamily: '"Open Sans", sans-serif'
+    fontFamily: '"Inter", sans-serif',
+    fontSize: '1rem'
   }
 }));
 
 const SubmitButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
-  fontFamily: '"Montserrat", sans-serif',
+  fontFamily: '"Outfit", sans-serif',
   fontWeight: 700,
-  fontSize: '1rem',
+  fontSize: '1.1rem',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
   padding: 0,

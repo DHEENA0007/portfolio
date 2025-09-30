@@ -10,12 +10,17 @@ const DashboardContainer = styled(Box)({
 });
 
 const DashboardTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
-  fontWeight: 700,
-  color: '#2c3e50',
+  fontFamily: '"Cabinet Grotesk", "Space Grotesk", sans-serif',
+  fontSize: '3rem',
+  fontWeight: 800,
+  color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '3rem'
+  marginBottom: '3rem',
+  letterSpacing: '-0.03em',
+  background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const CampaignGrid = styled(Box)({
@@ -142,7 +147,7 @@ const GoogleAdsDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        My Projects - Google Ads Campaigns
+        Google Ads Campaign Portfolio
       </DashboardTitle>
       
       <CampaignGrid>

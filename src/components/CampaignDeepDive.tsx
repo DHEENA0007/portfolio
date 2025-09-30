@@ -10,12 +10,17 @@ const DashboardContainer = styled(Box)({
 });
 
 const DashboardTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
+  fontFamily: '"Bricolage Grotesque", "Outfit", sans-serif',
+  fontSize: '3rem',
   fontWeight: 700,
-  color: '#475569',
+  color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '3rem'
+  marginBottom: '3rem',
+  letterSpacing: '-0.025em',
+  background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text'
 });
 
 const CountriesGrid = styled(Box)({
@@ -196,7 +201,7 @@ const CampaignDeepDive = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        Campaign Deep Dive
+        Campaign Deep Dive Analytics
       </DashboardTitle>
       
       <CountriesGrid>

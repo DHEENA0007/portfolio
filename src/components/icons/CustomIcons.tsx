@@ -19,19 +19,41 @@ export const TableauIcon: FC<IconProps> = ({ width = 48, height = 48, className 
 
 export const SEOIcon: FC<IconProps> = ({ width = 48, height = 48, className }) => (
   <svg width={width} height={height} viewBox="0 0 48 48" className={className}>
-    <rect width="48" height="48" rx="8" fill="#4285F4"/>
-    <circle cx="20" cy="18" r="8" fill="none" stroke="white" strokeWidth="3"/>
-    <path d="26 26l8 8" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M16 14l8 8M24 14l-8 8" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+    <defs>
+      <linearGradient id="seoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#10B981"/>
+        <stop offset="100%" stopColor="#059669"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="12" fill="url(#seoGradient)"/>
+    <circle cx="19" cy="19" r="7" fill="none" stroke="white" strokeWidth="2.5"/>
+    <path d="24.5 24.5l7 7" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+    <path d="M15 15l8 8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+    <circle cx="32" cy="16" r="3" fill="white"/>
+    <path d="M30.5 16h3M32 14.5v3" stroke="#10B981" strokeWidth="1.2" strokeLinecap="round"/>
+    <rect x="12" y="32" width="12" height="2" rx="1" fill="white" opacity="0.8"/>
+    <rect x="12" y="36" width="8" height="2" rx="1" fill="white" opacity="0.6"/>
   </svg>
 );
 
 export const GoogleAdsIcon: FC<IconProps> = ({ width = 48, height = 48, className }) => (
   <svg width={width} height={height} viewBox="0 0 48 48" className={className}>
-    <rect width="48" height="48" rx="8" fill="#4285F4"/>
-    <path d="M12 24L24 12L36 24L24 36L12 24Z" fill="white"/>
-    <path d="M18 24L24 18L30 24L24 30L18 24Z" fill="#4285F4"/>
-    <circle cx="24" cy="24" r="3" fill="white"/>
+    <defs>
+      <linearGradient id="adsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FBBC04"/>
+        <stop offset="50%" stopColor="#EA4335"/>
+        <stop offset="100%" stopColor="#4285F4"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="12" fill="url(#adsGradient)"/>
+    <path d="M24 8L32 20H28L24 14L20 20H16L24 8Z" fill="white"/>
+    <circle cx="16" cy="28" r="4" fill="white"/>
+    <circle cx="32" cy="28" r="4" fill="white"/>
+    <rect x="20" y="26" width="8" height="4" rx="2" fill="white"/>
+    <path d="M12 36h24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="18" cy="40" r="1.5" fill="white"/>
+    <circle cx="24" cy="40" r="1.5" fill="white"/>
+    <circle cx="30" cy="40" r="1.5" fill="white"/>
   </svg>
 );
 

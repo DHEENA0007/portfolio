@@ -20,13 +20,6 @@ const TextContent = styled(Box)({
   flex: 1
 });
 
-const LogoContent = styled(Box)({
-  flex: 1,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
-});
-
 
 const ITBerriesSection = () => {
   return (
@@ -36,6 +29,7 @@ const ITBerriesSection = () => {
           <Typography 
             variant="h3" 
             sx={{ 
+              fontFamily: '"Montserrat", sans-serif',
               fontWeight: 700, 
               letterSpacing: '0.35em',
               mb: 3
@@ -73,23 +67,6 @@ const ITBerriesSection = () => {
             Explore our portfolio to see how we combine vision, technology, and creativity to make every brand story unforgettable.
           </Typography>
         </TextContent>
-        <LogoContent>
-          <Box
-            sx={{
-              width: '400px',
-              height: '300px',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              borderRadius: '20px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Typography variant="h4" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-              DIGITAL HORIZONS
-            </Typography>
-          </Box>
-        </LogoContent>
       </ContentWrapper>
     </SectionContainer>
   );

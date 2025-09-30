@@ -1,0 +1,328 @@
+import { Box, Typography, Card, Table, TableBody, TableRow, TableCell } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { LineChart } from '@mui/x-charts/LineChart';
+import { BarChart } from '@mui/x-charts/BarChart';
+import CountUp from './CountUpAnimation';
+import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
+
+const DashboardContainer = styled(Box)({
+  backgroundColor: '#f8f9fa',
+  padding: '3rem 2rem',
+  borderRadius: '16px',
+  margin: '2rem 0'
+});
+
+const DashboardTitle = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '2.5rem',
+  fontWeight: 700,
+  color: '#1e3a5f',
+  textAlign: 'center',
+  marginBottom: '3rem'
+});
+
+const MainContent = styled(Box)({
+  display: 'grid',
+  gridTemplateColumns: '2fr 1fr',
+  gap: '2rem',
+  maxWidth: '1400px',
+  margin: '0 auto'
+});
+
+const LeftPanel = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2rem'
+});
+
+const RightPanel = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2rem'
+});
+
+const MetricsContainer = styled(Box)({
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: '2rem',
+  marginBottom: '2rem'
+});
+
+const MetricCard = styled(Card)({
+  backgroundColor: '#ffffff',
+  borderRadius: '12px',
+  padding: '2rem',
+  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+  }
+});
+
+const MetricLabel = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '0.875rem',
+  fontWeight: 500,
+  color: '#1a73e8',
+  marginBottom: '0.5rem'
+});
+
+const MetricValue = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '2.5rem',
+  fontWeight: 700,
+  color: '#202124',
+  lineHeight: 1
+});
+
+const ChartContainer = styled(Card)({
+  backgroundColor: '#ffffff',
+  borderRadius: '12px',
+  padding: '2rem',
+  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+});
+
+const SidebarCard = styled(Card)({
+  backgroundColor: '#ffffff',
+  borderRadius: '12px',
+  padding: '1.5rem',
+  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+});
+
+const SidebarTitle = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '0.875rem',
+  fontWeight: 500,
+  color: '#5f6368',
+  marginBottom: '1rem',
+  letterSpacing: '0.05em',
+  textTransform: 'uppercase'
+});
+
+const RealtimeValue = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '2rem',
+  fontWeight: 700,
+  color: '#202124',
+  marginBottom: '1rem'
+});
+
+const CountryRow = styled(TableRow)({
+  '&:hover': {
+    backgroundColor: '#f8f9fa'
+  }
+});
+
+const CountryName = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '0.875rem',
+  color: '#202124',
+  fontWeight: 400
+});
+
+const CountryUsers = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '0.875rem',
+  color: '#202124',
+  fontWeight: 500,
+  textAlign: 'right'
+});
+
+interface MetricCardProps {
+  label: string;
+  value: string;
+}
+
+const MetricCardComponent = ({ label, value }: MetricCardProps) => {
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
+  const suffix = value.includes('K') ? 'K' : '';
+  
+  return (
+    <MetricCard>
+      <MetricLabel>{label}</MetricLabel>
+      <CountUp end={numericValue} suffix={suffix}>
+        {(animatedValue) => <MetricValue>{animatedValue}</MetricValue>}
+      </CountUp>
+    </MetricCard>
+  );
+};
+
+interface TimeSeriesChartProps {
+  data: Array<{ month: string; value: number }>;
+}
+
+const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => (
+  <ChartContainer>
+    <LineChart
+      width={700}
+      height={300}
+      series={[
+        {
+          data: data.map(d => d.value),
+          color: '#1a73e8',
+          curve: 'linear'
+        }
+      ]}
+      xAxis={[
+        {
+          scaleType: 'point',
+          data: data.map(d => d.month),
+          tickLabelStyle: {
+            fontSize: 12,
+            fill: '#5f6368'
+          }
+        }
+      ]}
+      yAxis={[
+        {
+          tickLabelStyle: {
+            fontSize: 12,
+            fill: '#5f6368'
+          },
+          max: 4000,
+          tickNumber: 5
+        }
+      ]}
+      grid={{ horizontal: true, vertical: true }}
+      margin={{ left: 60, right: 30, top: 30, bottom: 60 }}
+      sx={{
+        '& .MuiLineElement-root': {
+          strokeWidth: 2
+        },
+        '& .MuiMarkElement-root': {
+          r: 4,
+          strokeWidth: 2,
+          stroke: '#ffffff',
+          fill: '#1a73e8'
+        },
+        '& .MuiChartsGrid-line': {
+          stroke: '#e8eaed',
+          strokeWidth: 1
+        }
+      }}
+    />
+  </ChartContainer>
+);
+
+interface ActiveUsersBarChartProps {
+  data: Array<{ time: number; users: number }>;
+}
+
+const ActiveUsersBarChart = ({ data }: ActiveUsersBarChartProps) => (
+  <BarChart
+    width={280}
+    height={120}
+    series={[
+      {
+        data: data.map(d => d.users),
+        color: '#1a73e8'
+      }
+    ]}
+    xAxis={[
+      {
+        scaleType: 'band',
+        data: data.map(d => d.time.toString()),
+        tickLabelStyle: {
+          fontSize: 10,
+          fill: '#5f6368'
+        }
+      }
+    ]}
+    yAxis={[
+      {
+        tickLabelStyle: {
+          fontSize: 10,
+          fill: '#5f6368'
+        }
+      }
+    ]}
+    margin={{ left: 30, right: 10, top: 10, bottom: 30 }}
+    sx={{
+      '& .MuiBarElement-root': {
+        rx: 2
+      }
+    }}
+  />
+);
+
+interface CountriesTableProps {
+  countries: Array<{ country: string; users: number }>;
+}
+
+const CountriesTable = ({ countries }: CountriesTableProps) => (
+  <Table size="small">
+    <TableBody>
+      {countries.map((country, index) => (
+        <CountryRow key={index}>
+          <TableCell sx={{ border: 'none', padding: '0.5rem 0' }}>
+            <CountryName>{country.country}</CountryName>
+          </TableCell>
+          <TableCell sx={{ border: 'none', padding: '0.5rem 0' }}>
+            <CountUp end={country.users}>
+              {(value) => <CountryUsers>{value}</CountryUsers>}
+            </CountUp>
+          </TableCell>
+        </CountryRow>
+      ))}
+    </TableBody>
+  </Table>
+);
+
+const GoogleAnalyticsDashboard = () => {
+  const data = mockRootProps;
+
+  return (
+    <DashboardContainer>
+      <DashboardTitle>
+        Google Analytics - Acquisition Overview
+      </DashboardTitle>
+      
+      <MainContent>
+        <LeftPanel>
+          <MetricsContainer>
+            <MetricCardComponent
+              label="Active users"
+              value={data.activeUsers}
+            />
+            <MetricCardComponent
+              label="New users"
+              value={data.newUsers}
+            />
+          </MetricsContainer>
+          
+          <TimeSeriesChart data={data.timeSeriesData} />
+        </LeftPanel>
+        
+        <RightPanel>
+          <SidebarCard>
+            <SidebarTitle>Active Users in Last 30 Minutes</SidebarTitle>
+            <CountUp end={data.activeUsersLast30Min}>
+              {(value) => <RealtimeValue>{value}</RealtimeValue>}
+            </CountUp>
+          </SidebarCard>
+          
+          <SidebarCard>
+            <SidebarTitle>Active Users Per Minute</SidebarTitle>
+            <ActiveUsersBarChart data={data.activeUsersPerMinute} />
+          </SidebarCard>
+          
+          <SidebarCard>
+            <SidebarTitle>Top Countries</SidebarTitle>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+              <Typography variant="caption" sx={{ color: '#5f6368', fontWeight: 500 }}>
+                TOP COUNTRIES
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#5f6368', fontWeight: 500 }}>
+                ACTIVE USERS
+              </Typography>
+            </Box>
+            <CountriesTable countries={data.topCountries} />
+          </SidebarCard>
+        </RightPanel>
+      </MainContent>
+    </DashboardContainer>
+  );
+};
+
+export default GoogleAnalyticsDashboard;

@@ -1,0 +1,98 @@
+import { Box, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const SectionContainer = styled(Box)(({ theme }) => ({
+  background: `linear-gradient(90deg, ${theme.palette.secondary.main} 32%, ${theme.palette.secondary.main} 91%)`,
+  padding: '4rem 2rem',
+  color: theme.palette.primary.contrastText
+}));
+
+const ContentWrapper = styled(Box)({
+  maxWidth: '1200px',
+  margin: '0 auto',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '4rem'
+});
+
+const TextContent = styled(Box)({
+  flex: 1
+});
+
+const LogoContent = styled(Box)({
+  flex: 1,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+});
+
+
+const ITBerriesSection = () => {
+  return (
+    <SectionContainer>
+      <ContentWrapper>
+        <TextContent>
+          <Typography 
+            variant="h3" 
+            sx={{ 
+              fontWeight: 700, 
+              letterSpacing: '0.35em',
+              mb: 3
+            }}
+          >
+            DIGITAL HORIZONS
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              lineHeight: 1.6,
+              mb: 3,
+              maxWidth: '800px'
+            }}
+          >
+            At Digital Horizons, we believe that creativity meets strategy to deliver measurable impact. Our work blends innovative design, data-driven marketing, and user-focused solutions to help brands shine in a crowded digital space. Every project is crafted with attention to detail, ensuring seamless experiences across web, social media, and mobile platforms.
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              lineHeight: 1.6,
+              mb: 3,
+              maxWidth: '800px'
+            }}
+          >
+            From conceptualization to execution, we partner with our clients to transform ideas into engaging campaigns that drive growth and build lasting connections. With a commitment to excellence and a passion for innovation, we turn challenges into opportunities, delivering results that speak for themselves.
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              lineHeight: 1.6,
+              maxWidth: '800px'
+            }}
+          >
+            Explore our portfolio to see how we combine vision, technology, and creativity to make every brand story unforgettable.
+          </Typography>
+        </TextContent>
+        <LogoContent>
+          <Box
+            sx={{
+              width: '400px',
+              height: '300px',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <Typography variant="h4" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+              DIGITAL HORIZONS
+            </Typography>
+          </Box>
+        </LogoContent>
+      </ContentWrapper>
+    </SectionContainer>
+  );
+};
+
+export default ITBerriesSection;

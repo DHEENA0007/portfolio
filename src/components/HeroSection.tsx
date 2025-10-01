@@ -290,7 +290,6 @@ const HeroSection = () => {
   const [helloText, setHelloText] = useState('Hello!');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
 
   const greetings = ['Hello!', 'வணக்கம்!', 'ನಮಸ್ಕಾರ!'];
 

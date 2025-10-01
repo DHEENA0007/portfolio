@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, Button, Stack, Divider } from '@mui/material';
+import { Box, Typography, TextField, Button, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
@@ -79,13 +79,6 @@ const SubmitButton = styled(Button)({
     transform: 'translateY(-2px)'
   },
   transition: 'all 0.3s ease'
-});
-
-const StyledDivider = styled(Divider)({
-  borderColor: '#fb923c',
-  borderWidth: '2px',
-  height: '48px',
-  margin: '0 1rem'
 });
 
 const ContactSection = () => {

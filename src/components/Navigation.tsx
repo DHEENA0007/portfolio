@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button, Stack, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Stack, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, useMediaQuery, useTheme, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,35 +12,6 @@ const StyledAppBar = styled(AppBar)<{ isVisible: boolean }>(({ isVisible }) => (
   transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
   transition: 'transform 0.3s ease-in-out'
 }));
-
-const NavButton = styled(Button)({
-  color: '#ffffff',
-  fontFamily: '"Space Grotesk", sans-serif',
-  fontWeight: 500,
-  fontSize: '1rem',
-  textTransform: 'none',
-  letterSpacing: '0.02em',
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)'
-  }
-});
-
-const ContactButton = styled(Button)({
-  backgroundColor: 'transparent',
-  color: '#ffffff',
-  border: '2px solid #ffffff',
-  fontFamily: '"Outfit", sans-serif',
-  fontWeight: 600,
-  fontSize: '0.875rem',
-  textTransform: 'uppercase',
-  letterSpacing: '0.1em',
-  padding: '8px 24px',
-  borderRadius: '24px',
-  '&:hover': {
-    backgroundColor: '#ffffff',
-    color: '#000000'
-  }
-});
 
 const MobileMenuButton = styled(IconButton)({
   color: '#ffffff',

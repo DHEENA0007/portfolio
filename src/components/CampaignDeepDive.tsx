@@ -1,12 +1,15 @@
 import { Box, Typography, Card } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PieChart } from '@mui/x-charts/PieChart';
+import irelandLogo from '../assets/GoIreland.jpeg';
+import franceLogo from '../assets/GoFrance.jpeg';
+import ukLogo from '../assets/GoUk.jpeg';
 
 const DashboardContainer = styled(Box)({
-  backgroundColor: '#f8f9fa',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
-  margin: '1rem 0'
+  margin: '0'
 });
 
 const DashboardTitle = styled(Typography)({
@@ -17,7 +20,7 @@ const DashboardTitle = styled(Typography)({
   textAlign: 'center',
   marginBottom: '3rem',
   letterSpacing: '-0.025em',
-  background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%)',
+  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'
@@ -33,13 +36,14 @@ const CountriesGrid = styled(Box)({
 
 const CountryCard = styled(Card)({
   backgroundColor: '#ffffff',
-  borderRadius: '16px',
+  borderRadius: '20px',
   padding: '2rem',
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   '&:hover': {
     transform: 'translateY(-4px)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
   }
 });
 
@@ -50,13 +54,20 @@ const CountryHeader = styled(Box)({
 });
 
 const CountryFlag = styled(Box)({
-  width: '24px',
-  height: '24px',
-  borderRadius: '50%',
+  width: '40px',
+  height: '40px',
+  borderRadius: '8px',
   marginRight: '0.75rem',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  overflow: 'hidden',
+  '& img': {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '8px'
+  }
 });
 
 const CountryName = styled(Typography)({
@@ -122,38 +133,24 @@ const AchievementText = styled(Typography)({
   textAlign: 'center'
 });
 
-// Country flag components
-const IrelandFlag = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24">
-    <rect width="8" height="24" fill="#009639"/>
-    <rect x="8" width="8" height="24" fill="#ffffff"/>
-    <rect x="16" width="8" height="24" fill="#ff9500"/>
-  </svg>
+// Logo image components using imported image files
+const IrelandLogo = () => (
+  <img src={irelandLogo} alt="GoIreland Campaign Logo" />
 );
 
-const FranceFlag = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24">
-    <rect width="8" height="24" fill="#0055a4"/>
-    <rect x="8" width="8" height="24" fill="#ffffff"/>
-    <rect x="16" width="8" height="24" fill="#ef4135"/>
-  </svg>
+const FranceLogo = () => (
+  <img src={franceLogo} alt="GoFrance Campaign Logo" />
 );
 
-const UKFlag = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24">
-    <rect width="24" height="24" fill="#012169"/>
-    <path d="M0 0 L24 24 M24 0 L0 24" stroke="#ffffff" strokeWidth="2.4"/>
-    <path d="M0 0 L24 24 M24 0 L0 24" stroke="#c8102e" strokeWidth="1.2"/>
-    <path d="M12 0 L12 24 M0 12 L24 12" stroke="#ffffff" strokeWidth="3.6"/>
-    <path d="M12 0 L12 24 M0 12 L24 12" stroke="#c8102e" strokeWidth="2.4"/>
-  </svg>
+const UKLogo = () => (
+  <img src={ukLogo} alt="GoUK Campaign Logo" />
 );
 
 const campaignData = [
   {
     id: 'ireland',
     country: 'GoIreland',
-    flag: <IrelandFlag />,
+    flag: <IrelandLogo />,
     budget: '₹11.97M',
     revenue: '₹195.9M',
     chartData: [
@@ -168,7 +165,7 @@ const campaignData = [
   {
     id: 'france',
     country: 'GoFrance',
-    flag: <FranceFlag />,
+    flag: <FranceLogo />,
     budget: '₹7.62M',
     revenue: '₹65.4M',
     chartData: [
@@ -183,7 +180,7 @@ const campaignData = [
   {
     id: 'uk',
     country: 'GoUK',
-    flag: <UKFlag />,
+    flag: <UKLogo />,
     budget: '₹8.22M',
     revenue: '₹57.3M',
     chartData: [

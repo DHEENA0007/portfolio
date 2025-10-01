@@ -1,64 +1,35 @@
-import { Box, Typography, Stack, IconButton, useMediaQuery, useTheme, Chip } from '@mui/material';
+import { Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
 import { styled, keyframes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
 import profileImage from '../assets/profile.png';
-import CountUpAnimation from './CountUpAnimation';
-import { TableauIcon, SEOIcon, GoogleAdsIcon, GoogleAnalyticsIcon } from './icons/CustomIcons';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-const HeroContainer = styled(Box)({
+const HeroContainer = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
-  display: 'flex',
   position: 'relative',
   overflow: 'hidden',
-  background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
-});
-
-const LeftSection = styled(Box)(({ theme }) => ({
-  width: '60%',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
-  padding: '0 4rem',
-  position: 'relative',
-  zIndex: 2,
+  paddingTop: '100px',
   [theme.breakpoints.down('md')]: {
-    width: '100%',
-    padding: '2rem',
-    minHeight: '100vh'
+    minHeight: '76vh', // Increased from 'auto' to 120vh for mobile
+    paddingBottom: '2rem'
   }
 }));
 
-const RightSection = styled(Box)(({ theme }) => ({
-  width: '60%',
-  backgroundColor: '#000000',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'relative',
-  clipPath: 'polygon(20% 0, 100% 0, 100% 100%, 35% 100%)',
-  marginLeft: '-20%',
-  zIndex: 1,
-  [theme.breakpoints.down('md')]: {
-    display: 'none'
+const float = keyframes`
+  0%, 100% {
+    transform: translateY(0px);
   }
-}));
-
-const MobileImageSection = styled(Box)(({ theme }) => ({
-  display: 'none',
-  [theme.breakpoints.down('md')]: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    padding: '2rem 0',
-    position: 'relative'
+  50% {
+    transform: translateY(-15px);
   }
-}));
+`;
 
 const fadeInUp = keyframes`
   from {
@@ -70,189 +41,258 @@ const fadeInUp = keyframes`
     transform: translateY(0);
   }
 `;
-
-const float = keyframes`
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-`;
-
-const floatReverse = keyframes`
-  0%, 100% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-`;
-
-const pulse = keyframes`
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-`;
-
-const TextContent = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
-  maxWidth: '600px',
-  color: '#333333',
-  opacity: animate ? 1 : 0,
-  animation: animate ? `${fadeInUp} 0.8s ease-out forwards` : 'none',
-  position: 'relative',
-  zIndex: 3,
-  [theme.breakpoints.down('md')]: {
-    maxWidth: '100%',
-    textAlign: 'center'
-  }
-}));
-
-const AnimatedTypography = styled(Typography)<{ delay: number; animate: boolean }>(({ delay, animate }) => ({
-  opacity: animate ? 1 : 0,
-  transform: animate ? 'translateY(0)' : 'translateY(30px)',
-  animation: animate ? `${fadeInUp} 0.8s ease-out ${delay}s forwards` : 'none'
-}));
-
-const ProfileImage = styled('img')({
-  width: '700px',
-  height: 'auto',
-  borderRadius: '30%',
-  objectFit: 'cover',
-  zIndex: 10,
-  transition: 'transform 0.3s ease',
-  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
-  '&:hover': {
-    transform: 'scale(1.05)'
-  },
-  position: 'relative',
-  left: '100px',
-  top: '-90px',
-});
-
-const SocialIcons = styled(Stack)(({ theme }) => ({
-  marginTop: '2rem',
-  paddingLeft: '11rem', // Added padding to move icons to the right
-  [theme.breakpoints.down('md')]: {
-    justifyContent: 'center',
-    paddingLeft: 0 // Reset padding on mobile to keep them centered
-  }
-}));
-
-const SocialIconButton = styled(IconButton)({
-  color: '#333333',
-  backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  margin: '0 8px 0 0',
-  width: '48px',
-  height: '48px',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  '&:hover': {
-    backgroundColor: 'rgba(37, 99, 235, 0.1)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 8px 25px rgba(37, 99, 235, 0.3)'
-  },
-  transition: 'all 0.3s ease'
-});
-
-const FloatingTag = styled(Box)<{ delay: number; direction?: 'normal' | 'reverse' }>(({ delay, direction = 'normal' }) => ({
+const TubeContainer = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
+  // Base styles (mobile)
   position: 'absolute',
-  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-  backdropFilter: 'blur(15px)',
-  border: '1px solid rgba(255, 255, 255, 0.3)',
-  borderRadius: '20px',
-  padding: '8px 16px',
+  bottom: '20px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  display: 'flex',
+  gap: '0.5rem',
+  alignItems: 'center',
+  backgroundColor: '#ffffff36',
+  borderRadius: '50px',
+  padding: '10px 16px',
+  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
+  opacity: animate ? 1 : 0,
+  animation: animate ? `${fadeInUp} 0.8s ease-out 1.2s forwards` : 'none',
+  zIndex: 5,
+  flexDirection: 'column',
+  width: '90%',
+  maxWidth: '320px',
+
+  // Mobile specific styles
+  [theme.breakpoints.down('sm')]: {
+    bottom: '4px',
+    left: '10%',
+    transform: 'translateX(-50%)',
+    flexDirection: 'column',
+    width: '90%',
+    maxWidth: '300px',
+  },
+
+  // Desktop styles
+  [theme.breakpoints.up('sm')]: {
+    flexDirection: 'row',
+    width: 'auto',
+    maxWidth: 'none',
+    left: '42%',
+    transform: 'translateX(-70%)',
+    bottom: '4px',
+  }
+}));
+
+const HelloBubble = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
+  backgroundColor: '#ffffff',
+  border: '2px solid #1a1a1a',
+  borderRadius: '30px',
+  padding: '12px 24px',
+  fontSize: '1.3rem',
+  fontWeight: 500,
+  fontFamily: '"Caveat", cursive',
+  color: '#1a1a1a',
+  position: 'relative',
+  marginBottom: '2.5rem',
+  marginTop: '-5rem',
+  opacity: animate ? 1 : 0,
+  animation: animate ? `${fadeInUp} 0.6s ease-out forwards` : 'none',
+  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    bottom: '-10px',
+    left: '30px',
+    width: '20px',
+    height: '20px',
+    backgroundColor: '#ffffff',
+    border: '2px solid #1a1a1a',
+    borderTop: 'none',
+    borderRight: 'none',
+    transform: 'rotate(-45deg)',
+    borderRadius: '0 0 0 5px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    marginTop: '-2rem',
+    marginBottom: '1.5rem',
+  }
+}));
+
+const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
+  position: 'absolute',
+  top: side === 'left' ? '15%' : '20%',
+  [side]: '5%',
+  width: '60px',
+  height: '3px',
+  backgroundColor: '#fb923c',
+  transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
+  opacity: 0.6
+}));
+
+const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) => ({
+  fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+  fontWeight: 400,
+  fontFamily: '"Bebas Neue", sans-serif',
+  textAlign: 'center',
+  marginTop: '-7.5rem',
+  letterSpacing: '0.05em',
+  opacity: animate ? 1 : 0,
+  animation: animate ? `${fadeInUp} 0.8s ease-out 0.2s forwards` : 'none',
+  '& .name': {
+    color: '#fb923c',
+    display: 'inline-block',
+    fontFamily: '"Bebas Neue", sans-serif'
+  },
+  '& .emoji': {
+    display: 'inline-block',
+    animation: `${float} 2s ease-in-out infinite`
+  },
+  [theme.breakpoints.down('sm')]: {
+    marginTop: '-1rem',
+  }
+}));
+
+const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate }) => ({
+  fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+  fontWeight: 600,
+  fontFamily: '"Poppins", sans-serif',
+  color: '#1a1a1a',
+  textAlign: 'center',
+  marginBottom: '10rem',
+  opacity: animate ? 1 : 0,
+  animation: animate ? `${fadeInUp} 0.8s ease-out 0.4s forwards` : 'none'
+}));
+
+const SemiCircle = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
+  position: 'absolute',
+  bottom: 0,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  width: 'clamp(600px, 55vw, 750px)',
+  height: 'clamp(400px, 27.5vw, 325px)',
+  backgroundColor: '#fb923c',
+  borderRadius: '650px 650px 0 0',
+  opacity: animate ? 1 : 0,
+  transition: 'all 0.8s ease-out',
+  zIndex: 2,
+  [theme.breakpoints.down('md')]: {
+    width: 'clamp(380px, 65vw, 500px)',
+    height: 'clamp(210px, 32.5vw, 250px)'
+  }
+}));
+
+const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) => ({
+  width: 'clamp(400px, 50vw, 670px)',
+  height: 'auto',
+  position: 'absolute',
+  bottom: 0,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  zIndex: 3,
+  objectFit: 'cover',
+  opacity: animate ? 1 : 0,
+  transition: 'all 0.8s ease-out 0.3s',
+  [theme.breakpoints.down('md')]: {
+    width: 'clamp(350px, 60vw, 500px)'
+  }
+}));
+
+const FloatingBadge = styled(Box)<{ delay: number }>(({ delay, theme }) => ({
+  position: 'absolute',
+  backgroundColor: '#1a1a1a',
+  color: '#ffffff',
+  borderRadius: '25px',
+  padding: '10px 20px',
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-  animation: `${direction === 'reverse' ? floatReverse : float} 3s ease-in-out infinite ${delay}s`,
-  zIndex: 1,
-  fontSize: '0.85rem',
-  fontWeight: 500,
-  color: '#1e293b',
-  '&:hover': {
-    transform: 'scale(1.05)',
-    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)'
+  fontSize: '0.95rem',
+  fontWeight: 600,
+  fontFamily: '"Montserrat", sans-serif',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+  animation: `${float} 3s ease-in-out infinite ${delay}s`,
+  zIndex: 3,
+  whiteSpace: 'nowrap',
+  '& .MuiSvgIcon-root': {
+    fontSize: '1.2rem'
   },
-  transition: 'all 0.3s ease'
-}));
-
-const BackgroundOrb = styled(Box)<{ size: number; top: string; left: string; delay: number }>(({ size, top, left, delay }) => ({
-  position: 'absolute',
-  width: `${size}px`,
-  height: `${size}px`,
-  borderRadius: '50%',
-  background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%)',
-  top,
-  left,
-  animation: `${pulse} 4s ease-in-out infinite ${delay}s`,
-  zIndex: 0
-}));
-
-const StatsContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: '2rem',
-  marginTop: '1.5rem',
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    gap: '1rem',
-    alignItems: 'center'
+  [theme.breakpoints.down('md')]: {
+    // Remove the display: 'none' and add mobile-specific styles
+    padding: '8px 16px',
+    fontSize: '0.85rem',
+    borderRadius: '20px',
+    gap: '6px',
+    '& .MuiSvgIcon-root': {
+      fontSize: '1rem'
+    }
   }
 }));
 
-const StatItem = styled(Box)({
+const DescriptionText = styled(Typography)<{ animate: boolean }>(({ animate, theme }) => ({
+  fontSize: '1rem',
+  fontWeight: 400,
+  fontFamily: '"Plus Jakarta Sans", sans-serif',
+  color: '#666',
   textAlign: 'center',
-  '& .stat-number': {
-    fontSize: '1.8rem',
-    fontWeight: 700,
-    color: '#2563eb',
-    display: 'block'
-  },
-  '& .stat-label': {
-    fontSize: '0.8rem',
-    color: '#64748b',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    marginTop: '4px'
+  maxWidth: '700px',
+  lineHeight: 1.6,
+  marginBottom: '2rem',
+  opacity: animate ? 1 : 0,
+  animation: animate ? `${fadeInUp} 0.8s ease-out 0.6s forwards` : 'none',
+  zIndex: 10,
+  position: 'relative',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '0.95rem',
+    maxWidth: '90%'
   }
-});
+}));
 
-const SkillChip = styled(Chip)<{ delay: number }>(({ delay }) => ({
-  backgroundColor: 'rgba(37, 99, 235, 0.1)',
-  color: '#2563eb',
-  border: '1px solid rgba(37, 99, 235, 0.2)',
-  fontWeight: 500,
-  fontSize: '0.75rem',
-  height: '28px',
-  margin: '4px',
-  opacity: 0,
-  animation: `${fadeInUp} 0.6s ease-out ${delay}s forwards`,
+const PortfolioButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#fb923c',
+  color: '#ffffff',
+  padding: '10px 20px',
+  borderRadius: '25px',
+  fontSize: '0.95rem',
+  fontWeight: 600,
+  textTransform: 'none',
   '&:hover': {
-    backgroundColor: 'rgba(37, 99, 235, 0.2)',
+    backgroundColor: '#f97316',
     transform: 'translateY(-2px)'
   },
-  transition: 'all 0.3s ease'
+  transition: 'all 0.3s ease',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.85rem',
+    padding: '8px 16px'
+  }
 }));
 
+const HireMeButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  color: '#1a1a1a',
+  padding: '10px 20px',
+  borderRadius: '25px',
+  fontSize: '0.95rem',
+  fontWeight: 600,
+  textTransform: 'none',
+  border: '2px solid #1a1a1a',
+  '&:hover': {
+    backgroundColor: '#1a1a1a',
+    color: '#ffffff',
+    transform: 'translateY(-2px)'
+  },
+  transition: 'all 0.3s ease',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.85rem',
+    padding: '8px 16px'
+  }
+}));
 const HeroSection = () => {
   const [animate, setAnimate] = useState(false);
-  const [typedText, setTypedText] = useState('');
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const titles = ['Data Analyst', 'Digital Marketing Professional', 'SEO Specialist', 'PPC Expert'];
+  const [helloText, setHelloText] = useState('Hello!');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const skills = [
-    'Python', 'SQL', 'Tableau', 'Power BI', 'Google Analytics', 
-    'Google Ads', 'SEO', 'PPC', 'Data Visualization', 'A/B Testing'
-  ];
+  const greetings = ['Hello!', 'வணக்கம்!', 'ನಮಸ್ಕಾರ!'];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -263,314 +303,138 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    if (!animate) return;
-    
-    const currentTitle = titles[titleIndex];
-    const typeSpeed = isDeleting ? 50 : 100;
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (typedText.length < currentTitle.length) {
-          setTypedText(currentTitle.substring(0, typedText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (typedText.length > 0) {
-          setTypedText(currentTitle.substring(0, typedText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-        }
-      }
-    }, typeSpeed);
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % greetings.length;
+      setHelloText(greetings[currentIndex]);
+    }, 2000);
 
-    return () => clearTimeout(timeout);
-  }, [animate, typedText, titleIndex, isDeleting, titles]);
+    return () => clearInterval(interval);
+  }, []);
 
-  if (isMobile) {
-    return (
-      <HeroContainer id="hero">
-        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-          {/* Background Elements */}
-          <BackgroundOrb size={120} top="10%" left="5%" delay={0} />
-          <BackgroundOrb size={80} top="60%" left="80%" delay={1} />
-          <BackgroundOrb size={60} top="30%" left="85%" delay={2} />
+  const handlePortfolioClick = () => {
+    const portfolioSection = document.getElementById('portfolio');
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-          <LeftSection>
-            <TextContent animate={animate}>
-              <AnimatedTypography 
-                variant="h4" 
-                delay={0}
-                animate={animate}
-                sx={{ 
-                  fontWeight: 400, 
-                  mb: 1, 
-                  color: '#666666',
-                  fontSize: { xs: '1.1rem', sm: '1.3rem' }
-                }}
-              >
-                Hi, I'm Barath R
-              </AnimatedTypography>
-              <AnimatedTypography 
-                variant="h1" 
-                delay={0.3}
-                animate={animate}
-                sx={{ 
-                  fontWeight: 700, 
-                  mb: 2,
-                  fontSize: { xs: '1.8rem', sm: '2.2rem' },
-                  color: '#000000',
-                  lineHeight: 1.1,
-                  minHeight: { xs: '2.5rem', sm: '3rem' }
-                }}
-              >
-                {typedText}
-                <Box 
-                  component="span" 
-                  sx={{ 
-                    borderRight: '3px solid #2563eb',
-                    marginLeft: '2px',
-                    animation: 'blink 1s infinite',
-                    '@keyframes blink': {
-                      '0%, 50%': { borderColor: '#2563eb' },
-                      '51%, 100%': { borderColor: 'transparent' }
-                    }
-                  }}
-                />
-              </AnimatedTypography>
-              <AnimatedTypography 
-                variant="body1" 
-                delay={0.6}
-                animate={animate}
-                sx={{ 
-                  fontWeight: 400, 
-                  color: '#666666',
-                  mb: 3,
-                  fontSize: { xs: '0.95rem', sm: '1.05rem' },
-                  lineHeight: 1.6,
-                  textAlign: { xs: 'center', sm: 'left' }
-                }}
-              >
-                I specialize in transforming data into actionable insights that drive informed business decisions. With expertise in Python, SQL, Tableau, Power BI, SEO, and Google Ads, I bring a unique blend of analytical and marketing skills to deliver measurable results.
-              </AnimatedTypography>
-
-              {/* Skills Tags */}
-              <Box sx={{ mb: 3, display: 'flex', flexWrap: 'wrap', justifyContent: { xs: 'center', sm: 'flex-start' } }}>
-                {skills.map((skill, index) => (
-                  <SkillChip 
-                    key={skill} 
-                    label={skill} 
-                    size="small" 
-                    delay={1 + index * 0.1}
-                  />
-                ))}
-              </Box>
-
-              {/* Stats */}
-              <StatsContainer>
-                <StatItem>
-                  <CountUpAnimation end={50} suffix="+" duration={2000}>
-                    {(value) => <span className="stat-number">{value}</span>}
-                  </CountUpAnimation>
-                  <span className="stat-label">Projects Completed</span>
-                </StatItem>
-                <StatItem>
-                  <CountUpAnimation end={95} suffix="%" duration={2500}>
-                    {(value) => <span className="stat-number">{value}</span>}
-                  </CountUpAnimation>
-                  <span className="stat-label">Client Satisfaction</span>
-                </StatItem>
-                <StatItem>
-                  <CountUpAnimation end={1} suffix="+" duration={1800}>
-                    {(value) => <span className="stat-number">{value}</span>}
-                  </CountUpAnimation>
-                  <span className="stat-label">Years Experience</span>
-                </StatItem>
-              </StatsContainer>
-              
-              <SocialIcons direction="row">
-                <a href="mailto:barath.bhojan@gmail.com" target="_blank" rel="noopener noreferrer">
-                  <SocialIconButton>
-                    <EmailIcon />
-                  </SocialIconButton>
-                </a>
-                <a href="https://www.linkedin.com/in/barathxo" target="_blank" rel="noopener noreferrer">
-                  <SocialIconButton>
-                    <LinkedInIcon />
-                  </SocialIconButton>
-                </a>
-                <a href="tel:+919876543210" target="_blank" rel="noopener noreferrer">
-                  <SocialIconButton>
-                    <PhoneIcon />
-                  </SocialIconButton>
-                </a>
-              </SocialIcons>
-            </TextContent>
-          </LeftSection>
-          
-          <MobileImageSection>
-            <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" 
-              sx={{ width: '250px', height: 'auto' }} />
-          </MobileImageSection>
-        </Box>
-      </HeroContainer>
-    );
-  }
+  const handleHireMeClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <HeroContainer id="hero">
-      {/* Background Elements */}
-      <BackgroundOrb size={200} top="15%" left="10%" delay={0} />
-      <BackgroundOrb size={150} top="70%" left="5%" delay={1} />
-      <BackgroundOrb size={100} top="40%" left="75%" delay={2} />
+      <DecorativeLine side="left" />
+      <DecorativeLine side="right" />
+      
+      {/* Top Content - No Container */}
+      <HelloBubble animate={animate}>{helloText}</HelloBubble>
+      
+      <Box sx={{ marginTop: { xs: '40px', md: '80px' } }} />
+      
+      <MainTitle animate={animate}>
+        I'm <span className="name">Barath R</span> <span className="emoji">👋</span>
+      </MainTitle>
+      
+      <Subtitle animate={animate}>
+        Meta Ads Specialist & Digital Marketing Professional
+      </Subtitle>
 
-      {/* Floating Tags */}
-      <FloatingTag delay={0.5} sx={{ top: '15%', left: '15%' }}>
-        <TableauIcon width={20} height={20} />
-        Tableau Expert
-      </FloatingTag>
-      
-      <FloatingTag delay={1} direction="reverse" sx={{ top: '25%', right: '25%' }}>
-        <SEOIcon width={20} height={20} />
-        SEO Specialist
-      </FloatingTag>
-      
-      {/* Moved this tag to be near the years of experience stat */}
-      <FloatingTag delay={1.5} sx={{ top: '78%', left: '32%' }}>
-        <GoogleAdsIcon width={20} height={20} />
-        Google Ads Certified
-      </FloatingTag>
-      
-      <FloatingTag delay={2} direction="reverse" sx={{ top: '45%', right: '15%' }}>
-        <GoogleAnalyticsIcon width={20} height={20} />
-        GA4 Expert
-      </FloatingTag>
-      
-      <FloatingTag delay={2.5} sx={{ top: '75%', right: '30%' }}>
-        <TrendingUpIcon sx={{ fontSize: 20 }} />
-        ROI Optimization
-      </FloatingTag>
-      
-      <FloatingTag delay={3} direction="reverse" sx={{ top: '35%', left: '5%' }}>
-        <AnalyticsIcon sx={{ fontSize: 20 }} />
-        Data Analytics
-      </FloatingTag>
+      {/* Floating Badges */}
+      <FloatingBadge 
+        delay={0.5} 
+        sx={{ 
+          top: isMobile ? '24%' : '35%', // Changed from '30%' to '28%' for mobile
+          left: isMobile ? '4%' : '15%' 
+        }}
+      >
+        <BarChartIcon />
+        Meta Ads Specialist
+      </FloatingBadge>
 
-      <LeftSection>
-        <TextContent animate={animate}>
-          <AnimatedTypography 
-            variant="h4" 
-            delay={0}
-            animate={animate}
-            sx={{ 
-              fontWeight: 400, 
-              mb: 1, 
-              color: '#666666',
-              fontSize: '1.5rem'
-            }}
-          >
-            Hi, I'm Barath R
-          </AnimatedTypography>
-          <AnimatedTypography 
-            variant="h1" 
-            delay={0.3}
-            animate={animate}
-            sx={{ 
-              fontWeight: 700, 
-              mb: 2,
-              fontSize: { xs: '1.8rem', md: '2.5rem' },
-              color: '#000000',
-              lineHeight: 1.1,
-              minHeight: '3.5rem'
-            }}
-          >
-            {typedText}
-            <Box 
-              component="span" 
-              sx={{ 
-                borderRight: '3px solid #2563eb',
-                marginLeft: '2px',
-                animation: 'blink 1s infinite',
-                '@keyframes blink': {
-                  '0%, 50%': { borderColor: '#2563eb' },
-                  '51%, 100%': { borderColor: 'transparent' }
-                }
-              }}
-            />
-          </AnimatedTypography>
-          <AnimatedTypography 
-            variant="body1" 
-            delay={0.6}
-            animate={animate}
-            sx={{ 
-              fontWeight: 400, 
-              color: '#666666',
-              mb: 3,
-              fontSize: '1.125rem',
-              lineHeight: 1.6
-            }}
-          >
-            I specialize in transforming data into actionable insights that drive informed business decisions. With expertise in Python, SQL, Tableau, Power BI, SEO, and Google Ads, I bring a unique blend of analytical and marketing skills to deliver measurable results.
-          </AnimatedTypography>
+      {!isMobile && (
+        <DescriptionText animate={animate} sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '18%',
+          transform: 'translate(-50%, -50%)',
+          maxWidth: '300px'
+        }}>
+          I specialize in transforming data into actionable insights that drive informed business decisions with expertise in analytics and marketing.
+        </DescriptionText>
+      )}
 
-          {/* Skills Tags */}
-          <Box sx={{ mb: 3, display: 'flex', flexWrap: 'wrap' }}>
-            {skills.map((skill, index) => (
-              <SkillChip 
-                key={skill} 
-                label={skill} 
-                size="small" 
-                delay={1 + index * 0.1}
-              />
-            ))}
-          </Box>
+      <FloatingBadge 
+        delay={1} 
+        sx={{ 
+          bottom: isMobile ? '35%' : '30%', 
+          left: isMobile ? '2%' : '12%' 
+        }}
+      >
+        <TrendingUpIcon />
+        ROI Growth
+      </FloatingBadge>
 
-          {/* Stats */}
-          <StatsContainer>
-            <StatItem>
-              <CountUpAnimation end={50} suffix="+" duration={2000}>
-                {(value) => <span className="stat-number">{value}</span>}
-              </CountUpAnimation>
-              <span className="stat-label">Projects Completed</span>
-            </StatItem>
-            <StatItem>
-              <CountUpAnimation end={95} suffix="%" duration={2500}>
-                {(value) => <span className="stat-number">{value}</span>}
-              </CountUpAnimation>
-              <span className="stat-label">Client Satisfaction</span>
-            </StatItem>
-            <StatItem>
-              <CountUpAnimation end={1} suffix="+" duration={1800}>
-                {(value) => <span className="stat-number">{value}</span>}
-              </CountUpAnimation>
-              <span className="stat-label">Years Experience</span>
-            </StatItem>
-          </StatsContainer>
-          
-          <SocialIcons direction="row">
-            <a href="mailto:barath.bhojan@gmail.com" target="_blank" rel="noopener noreferrer">
-              <SocialIconButton>
-                <EmailIcon />
-              </SocialIconButton>
-            </a>
-            <a href="https://www.linkedin.com/in/barathxo" target="_blank" rel="noopener noreferrer">
-              <SocialIconButton>
-                <LinkedInIcon />
-              </SocialIconButton>
-            </a>
-            <a href="tel:+919876543210" target="_blank" rel="noopener noreferrer">
-              <SocialIconButton>
-                <PhoneIcon />
-              </SocialIconButton>
-            </a>
-          </SocialIcons>
-        </TextContent>
-      </LeftSection>
-      
-      <RightSection>
-        <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" />
-      </RightSection>
+      <FloatingBadge 
+        delay={1.5} 
+        sx={{ 
+          top: isMobile ? '8%' : '20%', 
+          right: isMobile ? '4%' : '15%' 
+        }}
+      >
+        <CheckCircleOutlineIcon />
+        Google Ads
+      </FloatingBadge>
+
+      {!isMobile && (
+        <Box sx={{
+          position: 'absolute',
+          top: '45%',
+          right: '10%',
+          transform: 'translateY(-50%)',
+          textAlign: 'center',
+          opacity: 0,
+          animation: animate ? `${fadeInUp} 0.8s ease-out 1s forwards` : 'none',
+        }}>
+          <Typography variant="h3" sx={{ fontSize: '2rem', fontWeight: 700, color: '#1a1a1a', mb: 0.5 }}>
+            1+ Years
+          </Typography>
+          <Typography variant="body2" sx={{ fontSize: '0.75rem', color: '#666', lineHeight: 1.4 }}>
+            Experience in Meta Ads Specialist &<br />Digital Marketing
+          </Typography>
+        </Box>
+      )}
+
+      <FloatingBadge 
+        delay={2} 
+        sx={{ 
+          bottom: isMobile ? '38%' : '38%', 
+          right: isMobile ? '2%' : '12%' 
+        }}
+      >
+        <ManageSearchIcon />
+        SEO Expert
+      </FloatingBadge>
+
+      {/* Semi-circle at bottom */}
+      <SemiCircle animate={animate} />
+
+      {/* Profile Image over semi-circle */}
+      <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" animate={animate} />
+
+      {/* Buttons over profile image */}
+      <TubeContainer animate={animate}>
+  <PortfolioButton onClick={handlePortfolioClick}>
+    Portfolio ↗
+  </PortfolioButton>
+  <HireMeButton onClick={handleHireMeClick}>
+    Hire me
+  </HireMeButton>
+</TubeContainer>
     </HeroContainer>
   );
 };

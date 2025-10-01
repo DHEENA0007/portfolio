@@ -1,12 +1,15 @@
 import { Box, Typography, Card, CardContent } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CountUp from './CountUpAnimation';
+import irelandLogo from '../assets/GoIreland.jpeg';
+import franceLogo from '../assets/GoFrance.jpeg';
+import ukLogo from '../assets/GoUk.jpeg';
 
 const DashboardContainer = styled(Box)({
-  backgroundColor: '#f5f7fa',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
-  margin: '2rem 0'
+  margin: '0'
 });
 
 const DashboardTitle = styled(Typography)({
@@ -17,7 +20,7 @@ const DashboardTitle = styled(Typography)({
   textAlign: 'center',
   marginBottom: '3rem',
   letterSpacing: '-0.03em',
-  background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%)',
+  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'
@@ -33,110 +36,119 @@ const CampaignGrid = styled(Box)({
 
 const CampaignCard = styled(Card)({
   backgroundColor: '#ffffff',
-  borderRadius: '16px',
+  borderRadius: '20px',
   padding: '2rem',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
   transition: 'transform 0.3s ease',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   '&:hover': {
-    transform: 'translateY(-4px)'
+    transform: 'translateY(-4px)',
+    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
   }
 });
 
-const CountryIcon = styled(Box)({
-  width: '80px',
-  height: '80px',
-  borderRadius: '50%',
+const CountryIcon = styled(Box)(({ theme }) => ({
+  width: '120px',
+  height: '120px',
+  borderRadius: '12px',
   margin: '0 auto 1.5rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontSize: '2.5rem'
-});
+  overflow: 'hidden',
+  '& img': {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '12px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '100px',
+    height: '100px',
+    marginBottom: '1rem'
+  }
+}));
 
-const CampaignName = styled(Typography)({
+const CampaignName = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '2rem',
   fontWeight: 700,
   color: '#2c3e50',
   textAlign: 'center',
-  marginBottom: '2rem'
-});
+  marginBottom: '2rem',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.5rem',
+    marginBottom: '1.5rem'
+  }
+}));
 
-const MetricLabel = styled(Typography)({
+const MetricLabel = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
   fontWeight: 600,
   color: '#7f8c8d',
   textAlign: 'center',
   marginBottom: '0.5rem',
-  letterSpacing: '0.1em'
-});
+  letterSpacing: '0.1em',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.75rem'
+  }
+}));
 
-const MetricValue = styled(Typography)({
+const MetricValue = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1.5rem',
   fontWeight: 700,
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.25rem'
+  },
   color: '#2c3e50',
   textAlign: 'center',
   marginBottom: '1.5rem'
-});
+}));
 
-const Description = styled(Typography)({
+const Description = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
   color: '#7f8c8d',
   textAlign: 'center',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.8rem'
+  },
   lineHeight: 1.5
-});
+}));
 
-const IrelandFlag = () => (
-  <svg width="80" height="80" viewBox="0 0 80 80">
-    <circle cx="40" cy="40" r="40" fill="#ffffff"/>
-    <path d="M40 10 A30 30 0 0 1 40 70 Z" fill="#ff9500"/>
-    <path d="M40 10 A30 30 0 0 0 40 70 Z" fill="#009639"/>
-    <path d="M25 10 L55 10 L55 70 L25 70 Z" fill="#ffffff"/>
-  </svg>
+// Logo image components using imported image files
+const IrelandLogo = () => (
+  <img src={irelandLogo} alt="GoIreland Campaign Logo" />
 );
 
-
-const UKFlag = () => (
-  <svg width="80" height="80" viewBox="0 0 80 80">
-    <circle cx="40" cy="40" r="40" fill="#012169"/>
-    <path d="M10 10 L70 70 M70 10 L10 70" stroke="#ffffff" strokeWidth="8"/>
-    <path d="M10 10 L70 70 M70 10 L10 70" stroke="#c8102e" strokeWidth="4"/>
-    <path d="M40 10 L40 70 M10 40 L70 40" stroke="#ffffff" strokeWidth="12"/>
-    <path d="M40 10 L40 70 M10 40 L70 40" stroke="#c8102e" strokeWidth="8"/>
-  </svg>
+const FranceLogo = () => (
+  <img src={franceLogo} alt="GoFrance Campaign Logo" />
 );
 
-const EiffelTower = () => (
-  <svg width="80" height="80" viewBox="0 0 80 80">
-    <rect width="80" height="80" rx="40" fill="#f8f9fa"/>
-    <path d="M40 15 L35 65 L45 65 Z" fill="#2c3e50"/>
-    <path d="M30 35 L50 35" stroke="#2c3e50" strokeWidth="2"/>
-    <path d="M32 50 L48 50" stroke="#2c3e50" strokeWidth="2"/>
-    <path d="M25 65 L55 65" stroke="#2c3e50" strokeWidth="3"/>
-  </svg>
+const UKLogo = () => (
+  <img src={ukLogo} alt="GoUK Campaign Logo" />
 );
 
 const campaignData = [
   {
     name: 'GoIreland',
-    icon: <IrelandFlag />,
+    logo: <IrelandLogo />,
     budget: { value: 11972280, display: '₹11,972,280.40' },
     revenue: { value: 195900000, display: '₹195,900,000' },
     description: 'High-performing campaigns targeting Indian students for Irish universities'
   },
   {
     name: 'GoFrance',
-    icon: <EiffelTower />,
+    logo: <FranceLogo />,
     budget: { value: 7618972, display: '₹7,618,972.35' },
     revenue: { value: 65400000, display: '₹65,400,000' },
     description: 'Targeted campaigns with segmentation & remarketing'
   },
   {
     name: 'GoUK',
-    icon: <UKFlag />,
+    logo: <UKLogo />,
     budget: { value: 8221098, display: '₹8,221,098.35' },
     revenue: { value: 57300000, display: '₹57,300,000' },
     description: 'Performance-driven campaigns with A/B testing'
@@ -147,7 +159,7 @@ const GoogleAdsDashboard = () => {
   return (
     <DashboardContainer>
       <DashboardTitle>
-        Google Ads Campaign Portfolio
+        Google Ads Campaign Dashboard
       </DashboardTitle>
       
       <CampaignGrid>
@@ -155,7 +167,7 @@ const GoogleAdsDashboard = () => {
           <CampaignCard key={index}>
             <CardContent sx={{ padding: 0 }}>
               <CountryIcon>
-                {campaign.icon}
+                {campaign.logo}
               </CountryIcon>
               
               <CampaignName>

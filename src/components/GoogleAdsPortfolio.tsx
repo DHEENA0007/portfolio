@@ -2,20 +2,30 @@ import { Box, Typography, Card, CardContent } from '@mui/material';
 import { BarChart } from '@mui/x-charts';
 import { styled } from '@mui/material/styles';
 import type { GoogleAdsPortfolioData } from './GoogleAdsPortfolioMockData';
+import { useMediaQuery, useTheme } from '@mui/material';
 
-const PortfolioContainer = styled(Box)({
-  backgroundColor: '#f8fafc',
+const PortfolioContainer = styled(Box)(({ theme }) => ({
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '4rem 2rem',
   borderRadius: '16px',
-  margin: '2rem 0'
-});
+  margin: '0',
+  [theme.breakpoints.down('md')]: {
+    padding: '3rem 1.5rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '2rem 1rem'
+  }
+}));
 
-const HeaderSection = styled(Box)({
+const HeaderSection = styled(Box)(({ theme }) => ({
   textAlign: 'center',
-  marginBottom: '3rem'
-});
+  marginBottom: '3rem',
+  [theme.breakpoints.down('sm')]: {
+    marginBottom: '2rem'
+  }
+}));
 
-const MainTitle = styled(Typography)({
+const MainTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Darker Grotesque", "Space Grotesk", sans-serif',
   fontSize: '3.2rem',
   fontWeight: 800,
@@ -25,39 +35,61 @@ const MainTitle = styled(Typography)({
   background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text'
-});
+  backgroundClip: 'text',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2.5rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem'
+  }
+}));
 
-const Subtitle = styled(Typography)({
+const Subtitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1rem',
   color: '#64748b',
-  fontWeight: 400
-});
+  fontWeight: 400,
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.9rem'
+  }
+}));
 
-const MetricsGrid = styled(Box)({
+const MetricsGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
   gap: '2rem',
   marginBottom: '4rem',
   maxWidth: '1200px',
-  margin: '0 auto 4rem'
-});
+  margin: '0 auto 4rem',
+  [theme.breakpoints.down('md')]: {
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+    marginBottom: '3rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    gap: '1rem',
+    marginBottom: '2rem'
+  }
+}));
 
-const MetricCard = styled(Card)({
+const MetricCard = styled(Card)(({ theme }) => ({
   backgroundColor: '#ffffff',
-  borderRadius: '16px',
+  borderRadius: '20px',
   padding: '2rem',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid #e2e8f0',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   transition: 'all 0.3s ease',
   '&:hover': {
     transform: 'translateY(-2px)',
-    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '1.5rem',
+    borderRadius: '16px'
   }
-});
+}));
 
-const MetricLabel = styled(Typography)({
+const MetricLabel = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
   fontWeight: 600,
@@ -65,36 +97,53 @@ const MetricLabel = styled(Typography)({
   textAlign: 'center',
   marginBottom: '0.5rem',
   letterSpacing: '0.05em',
-  textTransform: 'uppercase'
-});
+  textTransform: 'uppercase',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.75rem'
+  }
+}));
 
-const MetricValue = styled(Typography)<{ color?: string }>(({ color }) => ({
+const MetricValue = styled(Typography)<{ color?: string }>(({ color, theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '2.25rem',
   fontWeight: 700,
   color: color || '#1e293b',
   textAlign: 'center',
-  lineHeight: 1.2
+  lineHeight: 1.2,
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.75rem'
+  }
 }));
 
-const ChartSection = styled(Box)({
+const ChartSection = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
-  borderRadius: '16px',
+  borderRadius: '20px',
   padding: '3rem 2rem',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid #e2e8f0',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   maxWidth: '1000px',
-  margin: '0 auto'
-});
+  margin: '0 auto',
+  [theme.breakpoints.down('md')]: {
+    padding: '2rem 1.5rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '1.5rem 1rem',
+    borderRadius: '16px'
+  }
+}));
 
-const ChartTitle = styled(Typography)({
+const ChartTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1.5rem',
   fontWeight: 700,
   color: '#1e293b',
   textAlign: 'center',
-  marginBottom: '2rem'
-});
+  marginBottom: '2rem',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.25rem',
+    marginBottom: '1.5rem'
+  }
+}));
 
 const ChartDescription = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
@@ -127,6 +176,9 @@ interface GoogleAdsPortfolioProps {
 }
 
 const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   // Default data if none provided
   const portfolioData: GoogleAdsPortfolioData = data || {
     totalBudget: '₹27,812,351.10',
@@ -170,10 +222,16 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
       <ChartSection>
         <ChartTitle>Return on Ad Spend (ROAS) Comparison</ChartTitle>
         
-        <Box sx={{ width: '100%', height: '400px', display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ 
+          width: '100%', 
+          height: { xs: '300px', md: '400px' },
+          display: 'flex', 
+          justifyContent: 'center',
+          overflow: 'hidden'
+        }}>
           <BarChart
-            width={600}
-            height={350}
+            width={isMobile ? 350 : 600} // Responsive width: mobile vs desktop
+            height={isMobile ? 280 : 350} // Responsive height: mobile vs desktop
             series={[
               {
                 data: chartData,
@@ -184,25 +242,30 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
               data: chartLabels,
               scaleType: 'band',
               tickLabelStyle: {
-                fontSize: 14,
+                fontSize: isMobile ? 10 : 14, // Mobile: 10px, Desktop: 14px
                 fontFamily: '"Inter", sans-serif',
                 fill: '#64748b'
               }
             }]}
             yAxis={[{
               tickLabelStyle: {
-                fontSize: 12,
+                fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
                 fontFamily: '"Inter", sans-serif',
                 fill: '#64748b'
               },
-              label: 'Return on Ad Spend (ROAS)',
+              label: 'ROAS',
               labelStyle: {
-                fontSize: 14,
+                fontSize: isMobile ? 12 : 14, // Mobile: 12px, Desktop: 14px
                 fontFamily: '"Inter", sans-serif',
                 fill: '#1e293b'
               }
             }]}
-            margin={{ left: 80, right: 30, top: 30, bottom: 60 }}
+            margin={{ 
+              left: isMobile ? 8 : 80,    // Mobile: 8px, Desktop: 80px
+              right: isMobile ? 50 : 30,   // Mobile: 50px, Desktop: 30px
+              top: isMobile ? 20 : 30,     // Mobile: 20px, Desktop: 30px
+              bottom: isMobile ? 40 : 60   // Mobile: 40px, Desktop: 60px
+            }}
             slotProps={{
               bar: {
                 style: {

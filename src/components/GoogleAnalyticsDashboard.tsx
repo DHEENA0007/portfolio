@@ -1,4 +1,4 @@
-import { Box, Typography, Card, Table, TableBody, TableRow, TableCell } from '@mui/material';
+import { Box, Typography, Card, Table, TableBody, TableRow, TableCell, useMediaQuery, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { BarChart } from '@mui/x-charts/BarChart';
@@ -6,10 +6,10 @@ import CountUp from './CountUpAnimation';
 import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
 
 const DashboardContainer = styled(Box)({
-  backgroundColor: '#f8f9fa',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
-  margin: '2rem 0'
+  margin: '0'
 });
 
 const DashboardTitle = styled(Typography)({
@@ -20,7 +20,7 @@ const DashboardTitle = styled(Typography)({
   textAlign: 'center',
   marginBottom: '3rem',
   letterSpacing: '-0.025em',
-  background: 'linear-gradient(135deg, #1a73e8 0%, #1557b0 50%, #0f4c81 100%)',
+  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'
@@ -55,13 +55,14 @@ const MetricsContainer = styled(Box)({
 
 const MetricCard = styled(Card)({
   backgroundColor: '#ffffff',
-  borderRadius: '12px',
+  borderRadius: '20px',
   padding: '2rem',
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   '&:hover': {
     transform: 'translateY(-2px)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
   }
 });
 
@@ -83,16 +84,18 @@ const MetricValue = styled(Typography)({
 
 const ChartContainer = styled(Card)({
   backgroundColor: '#ffffff',
-  borderRadius: '12px',
+  borderRadius: '20px',
   padding: '2rem',
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  border: '1px solid rgba(251, 146, 60, 0.1)'
 });
 
 const SidebarCard = styled(Card)({
   backgroundColor: '#ffffff',
-  borderRadius: '12px',
+  borderRadius: '20px',
   padding: '1.5rem',
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  border: '1px solid rgba(251, 146, 60, 0.1)'
 });
 
 const SidebarTitle = styled(Typography)({
@@ -275,6 +278,8 @@ const CountriesTable = ({ countries }: CountriesTableProps) => (
 );
 
 const GoogleAnalyticsDashboard = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const data = mockRootProps;
 
   return (
@@ -283,6 +288,8 @@ const GoogleAnalyticsDashboard = () => {
         Analytics Acquisition Overview
       </DashboardTitle>
       
+      {/* Desktop Layout */}
+      {!isMobile && (
       <MainContent>
         <LeftPanel>
           <MetricsContainer>
@@ -326,6 +333,75 @@ const GoogleAnalyticsDashboard = () => {
           </SidebarCard>
         </RightPanel>
       </MainContent>
+      )}
+
+    {/* Mobile Stack Layout */}
+    {isMobile && (
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {/* Mobile Metrics */}
+        <MetricCardComponent
+          label="Active users"
+          value={data.activeUsers}
+        />
+        <MetricCardComponent
+          label="New users"
+          value={data.newUsers}
+        />
+
+        {/* Mobile Time Series Chart */}
+        <SidebarCard>
+          <Typography variant="h6" sx={{ mb: 2, fontSize: '1rem', fontWeight: 600 }}>
+            User Acquisition Timeline
+          </Typography>
+          <LineChart
+            width={320}
+            height={200}
+            series={[
+              {
+                data: data.timeSeriesData.map(d => d.value),
+                color: '#4285f4'
+              }
+            ]}
+            xAxis={[{
+              scaleType: 'point',
+              data: data.timeSeriesData.map(d => d.month),
+              tickLabelStyle: {
+                fontSize: 10,
+                fill: '#5f6368'
+              }
+            }]}
+            yAxis={[{
+              tickLabelStyle: {
+                fontSize: 10,
+                fill: '#5f6368'
+              }
+            }]}
+          />
+        </SidebarCard>
+
+        {/* Mobile Active Users */}
+        <SidebarCard>
+          <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
+            Active Users (Last 30 Min)
+          </Typography>
+          <CountUp end={data.activeUsersLast30Min}>
+            {(value) => (
+              <Typography sx={{ fontSize: '2rem', fontWeight: 700, color: '#202124' }}>
+                {value}
+              </Typography>
+            )}
+          </CountUp>
+        </SidebarCard>
+
+        {/* Mobile Top Countries */}
+        <SidebarCard>
+          <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
+            Top Countries
+          </Typography>
+          <CountriesTable countries={data.topCountries} />
+        </SidebarCard>
+      </Box>
+    )}
     </DashboardContainer>
   );
 };

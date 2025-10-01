@@ -3,10 +3,10 @@ import { styled } from '@mui/material/styles';
 import CountUp from './CountUpAnimation';
 
 const DashboardContainer = styled(Box)({
-  backgroundColor: '#f8f9fa',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
-  margin: '2rem 0'
+  margin: '0'
 });
 
 const DashboardTitle = styled(Typography)({
@@ -17,7 +17,7 @@ const DashboardTitle = styled(Typography)({
   textAlign: 'center',
   marginBottom: '1rem',
   letterSpacing: '-0.025em',
-  background: 'linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%)',
+  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'
@@ -45,15 +45,16 @@ const MetricsGrid = styled(Box)({
 
 const MetricCard = styled(Card)<{ accentColor: string }>(({ accentColor }) => ({
   backgroundColor: '#ffffff',
-  borderRadius: '12px',
+  borderRadius: '20px',
   padding: '2rem',
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   position: 'relative',
   overflow: 'hidden',
   '&:hover': {
     transform: 'translateY(-4px)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
   },
   '&::before': {
     content: '""',

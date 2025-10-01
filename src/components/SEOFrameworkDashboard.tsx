@@ -1,16 +1,22 @@
-import { Box, Typography, Card } from '@mui/material';
+import { Box, Typography, Card, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-const DashboardContainer = styled(Box)({
-  backgroundColor: '#f8f9fa',
+const DashboardContainer = styled(Box)(({ theme }) => ({
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
-  margin: '2rem 0'
-});
+  margin: '0',
+  [theme.breakpoints.down('md')]: {
+    padding: '2rem 1.5rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '1.5rem 1rem'
+  }
+}));
 
-const DashboardTitle = styled(Typography)({
+const DashboardTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
-  fontSize: '3rem',
+  fontSize: '2.8rem',
   fontWeight: 800,
   color: '#1e293b',
   textAlign: 'center',
@@ -19,10 +25,17 @@ const DashboardTitle = styled(Typography)({
   background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text'
-});
+  backgroundClip: 'text',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2.2rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.8rem',
+    marginBottom: '1rem'
+  }
+}));
 
-const DashboardDescription = styled(Typography)({
+const DashboardDescription = styled(Typography)(({ theme }) => ({
   fontFamily: '"Lato", sans-serif',
   fontSize: '1rem',
   color: '#64748b',
@@ -30,28 +43,48 @@ const DashboardDescription = styled(Typography)({
   marginBottom: '3rem',
   maxWidth: '700px',
   margin: '0 auto 3rem',
-  lineHeight: 1.6
-});
+  lineHeight: 1.6,
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.9rem',
+    marginBottom: '2rem',
+    lineHeight: 1.5
+  }
+}));
 
-const PhasesContainer = styled(Box)({
+// Desktop Grid Layout
+const PhasesGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
   gap: '2rem',
   maxWidth: '1200px',
-  margin: '0 auto'
-});
+  margin: '0 auto',
+  [theme.breakpoints.down('md')]: {
+    display: 'none' // Hide on mobile
+  }
+}));
 
-const PhaseCard = styled(Card)<{ accentColor: string }>(({ accentColor }) => ({
+// Mobile Stack Layout
+const PhasesStack = styled(Stack)(({ theme }) => ({
+  display: 'none',
+  maxWidth: '600px',
+  margin: '0 auto',
+  [theme.breakpoints.down('md')]: {
+    display: 'flex' // Show on mobile
+  }
+}));
+
+const PhaseCard = styled(Card)<{ accentColor: string }>(({ accentColor, theme }) => ({
   backgroundColor: '#ffffff',
-  borderRadius: '16px',
+  borderRadius: '20px',
   padding: '2rem',
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  border: '1px solid rgba(251, 146, 60, 0.1)',
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   position: 'relative',
   overflow: 'hidden',
   '&:hover': {
     transform: 'translateY(-4px)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
   },
   '&::before': {
     content: '""',
@@ -61,16 +94,27 @@ const PhaseCard = styled(Card)<{ accentColor: string }>(({ accentColor }) => ({
     right: 0,
     height: '4px',
     backgroundColor: accentColor
+  },
+  [theme.breakpoints.down('md')]: {
+    padding: '1.5rem',
+    borderRadius: '16px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '1rem',
+    borderRadius: '12px'
   }
 }));
 
-const PhaseHeader = styled(Box)({
+const PhaseHeader = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '1.5rem'
-});
+  marginBottom: '1.5rem',
+  [theme.breakpoints.down('sm')]: {
+    marginBottom: '1rem'
+  }
+}));
 
-const PhaseNumber = styled(Box)<{ backgroundColor: string }>(({ backgroundColor }) => ({
+const PhaseNumber = styled(Box)<{ backgroundColor: string }>(({ backgroundColor, theme }) => ({
   width: '40px',
   height: '40px',
   borderRadius: '50%',
@@ -82,23 +126,38 @@ const PhaseNumber = styled(Box)<{ backgroundColor: string }>(({ backgroundColor 
   fontFamily: '"Inter", sans-serif',
   fontSize: '1.25rem',
   fontWeight: 700,
-  marginRight: '1rem'
+  marginRight: '1rem',
+  [theme.breakpoints.down('sm')]: {
+    width: '35px',
+    height: '35px',
+    fontSize: '1rem',
+    marginRight: '0.75rem'
+  }
 }));
 
-const PhaseTitle = styled(Typography)<{ titleColor: string }>(({ titleColor }) => ({
+const PhaseTitle = styled(Typography)<{ titleColor: string }>(({ titleColor, theme }) => ({
   fontFamily: '"Montserrat", sans-serif',
   fontSize: '1.5rem',
   fontWeight: 700,
-  color: titleColor
+  color: titleColor,
+  [theme.breakpoints.down('md')]: {
+    fontSize: '1.3rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.1rem'
+  }
 }));
 
-const BulletList = styled(Box)({
+const BulletList = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.75rem'
-});
+  gap: '0.75rem',
+  [theme.breakpoints.down('sm')]: {
+    gap: '0.5rem'
+  }
+}));
 
-const BulletPoint = styled(Typography)({
+const BulletPoint = styled(Typography)(({ theme }) => ({
   fontFamily: '"Lato", sans-serif',
   fontSize: '0.875rem',
   color: '#64748b',
@@ -111,8 +170,12 @@ const BulletPoint = styled(Typography)({
     left: 0,
     color: '#64748b',
     fontWeight: 'bold'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.8rem',
+    lineHeight: 1.4
   }
-});
+}));
 
 interface PhaseCardProps {
   phaseNumber: string;
@@ -190,7 +253,8 @@ const SEOFrameworkDashboard = () => {
         tracking outcomes.
       </DashboardDescription>
       
-      <PhasesContainer>
+      {/* Desktop Grid Layout */}
+      <PhasesGrid>
         {phasesData.map((phase, index) => (
           <PhaseCardComponent
             key={index}
@@ -202,7 +266,22 @@ const SEOFrameworkDashboard = () => {
             numberBackgroundColor={phase.numberBackgroundColor}
           />
         ))}
-      </PhasesContainer>
+      </PhasesGrid>
+
+      {/* Mobile Stack Layout */}
+      <PhasesStack spacing={2}>
+        {phasesData.map((phase, index) => (
+          <PhaseCardComponent
+            key={index}
+            phaseNumber={phase.phaseNumber}
+            title={phase.title}
+            items={phase.items}
+            accentColor={phase.accentColor}
+            titleColor={phase.titleColor}
+            numberBackgroundColor={phase.numberBackgroundColor}
+          />
+        ))}
+      </PhasesStack>
     </DashboardContainer>
   );
 };

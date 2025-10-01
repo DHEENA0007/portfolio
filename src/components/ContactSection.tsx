@@ -3,8 +3,9 @@ import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
-  background: `radial-gradient(50% 50% at 50% 50%, rgba(26, 21, 21, 0) 0%, rgba(0, 0, 0, 0.16) 100%), ${theme.palette.background.default}`,
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '6rem 2rem',
+  position: 'relative',
   [theme.breakpoints.down('md')]: {
     padding: '4rem 1rem'
   },
@@ -13,60 +14,79 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   }
 }));
 
+const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
+  position: 'absolute',
+  top: side === 'left' ? '15%' : '20%',
+  [side]: '5%',
+  width: '60px',
+  height: '3px',
+  backgroundColor: '#fb923c',
+  transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
+  opacity: 0.6
+}));
+
 const ContentWrapper = styled(Box)({
   maxWidth: '800px',
   margin: '0 auto'
 });
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     backgroundColor: 'transparent',
     '& fieldset': {
       border: 'none',
-      borderBottom: `3px solid ${theme.palette.text.primary}`
+      borderBottom: '3px solid #1a1a1a'
     },
     '&:hover fieldset': {
-      borderBottom: `3px solid ${theme.palette.text.primary}`
+      borderBottom: '3px solid #fb923c'
     },
     '&.Mui-focused fieldset': {
-      borderBottom: `3px solid ${theme.palette.text.primary}`
+      borderBottom: '3px solid #fb923c'
     }
   },
   '& .MuiInputLabel-root': {
-    color: theme.palette.text.secondary,
+    color: '#666',
     fontFamily: '"Outfit", sans-serif',
     fontWeight: 600,
     fontSize: '0.9rem',
     letterSpacing: '0.05em',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    '&.Mui-focused': {
+      color: '#fb923c'
+    }
   },
   '& .MuiInputBase-input': {
     padding: '1rem 0',
     fontFamily: '"Inter", sans-serif',
-    fontSize: '1rem'
+    fontSize: '1rem',
+    color: '#1a1a1a'
   }
-}));
+});
 
-const SubmitButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.text.primary,
+const SubmitButton = styled(Button)({
+  backgroundColor: '#fb923c',
+  color: '#ffffff',
   fontFamily: '"Outfit", sans-serif',
   fontWeight: 700,
   fontSize: '1.1rem',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  padding: 0,
+  padding: '12px 32px',
+  borderRadius: '25px',
   minWidth: 'auto',
   '&:hover': {
-    backgroundColor: 'transparent'
-  }
-}));
+    backgroundColor: '#f97316',
+    transform: 'translateY(-2px)'
+  },
+  transition: 'all 0.3s ease'
+});
 
-const StyledDivider = styled(Divider)(({ theme }) => ({
-  borderColor: theme.palette.text.primary,
-  borderWidth: '3px',
+const StyledDivider = styled(Divider)({
+  borderColor: '#fb923c',
+  borderWidth: '2px',
   height: '48px',
   margin: '0 1rem'
-}));
+});
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -90,22 +110,36 @@ const ContactSection = () => {
 
   return (
     <SectionContainer id="contact">
+      <DecorativeLine side="left" />
+      <DecorativeLine side="right" />
       <ContentWrapper>
         <Box textAlign="center" mb={6}>
           <Typography 
             variant="h2" 
             sx={{ 
+              fontFamily: '"Playfair Display", serif',
               fontWeight: 700, 
-              letterSpacing: { xs: '0.1em', sm: '0.3em', md: '0.67em' },
-              mb: 4,
-              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
+              letterSpacing: '-0.02em',
+              mb: 2,
+              fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
+              color: '#1a1a1a'
             }}
           >
-            CONTACT
+            Get In Touch
+          </Typography>
+          <Typography 
+            sx={{ 
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '1.125rem',
+              color: '#666',
+              maxWidth: '600px',
+              margin: '0 auto',
+              lineHeight: 1.6
+            }}
+          >
+            Let's discuss how we can work together to achieve your goals.
           </Typography>
         </Box>
-
-        <Box sx={{ height: '12px', backgroundColor: 'text.primary', mb: 6 }} />
 
         <Box component="form" onSubmit={handleSubmit}>
           <Stack spacing={4}>
@@ -151,21 +185,9 @@ const ContactSection = () => {
               gap: { xs: 2, sm: 0 }
             }}
           >
-            <StyledDivider 
-              orientation="vertical" 
-              sx={{ 
-                display: { xs: 'none', sm: 'block' }
-              }} 
-            />
             <SubmitButton type="submit">
-              Submit
+              Send Message
             </SubmitButton>
-            <StyledDivider 
-              orientation="vertical" 
-              sx={{ 
-                display: { xs: 'none', sm: 'block' }
-              }} 
-            />
           </Box>
         </Box>
       </ContentWrapper>

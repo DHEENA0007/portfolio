@@ -10,10 +10,10 @@ import InsightsOutlined from '@mui/icons-material/InsightsOutlined';
 import CountUp from './CountUpAnimation';
 
 const DashboardContainer = styled(Box)({
-  backgroundColor: '#f8f9fa',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '4rem 2rem',
   borderRadius: '16px',
-  margin: '2rem 0',
+  margin: '0',
   position: 'relative',
   overflow: 'hidden'
 });
@@ -27,7 +27,7 @@ const MainTitle = styled(Typography)({
   marginBottom: '4rem',
   letterSpacing: '-0.02em',
   lineHeight: 1.1,
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
@@ -48,11 +48,11 @@ const PhasesContainer = styled(Stack)({
 
 const PhaseSection = styled(Box)<{ accentColor: string }>(({ accentColor }) => ({
   backgroundColor: '#ffffff',
-  borderRadius: '12px',
+  borderRadius: '20px',
   padding: '2.5rem',
   position: 'relative',
-  border: `2px solid ${accentColor}`,
-  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+  border: `1px solid rgba(251, 146, 60, 0.2)`,
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
   '&::before': {
     content: '""',
     position: 'absolute',

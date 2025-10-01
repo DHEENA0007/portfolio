@@ -104,12 +104,7 @@ const Navigation = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const navItems = [
-    { label: 'About me', id: 'about' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Portfolio', id: 'portfolio' },
-    { label: 'Contact Me', id: 'contact', isContact: true }
-  ];
+  const navItems: { label: string; id: string; isContact?: boolean }[] = [];
 
   const mobileMenu = (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -155,18 +150,6 @@ const Navigation = () => {
             </MobileMenuButton>
           ) : (
             <Stack direction="row" spacing={4} alignItems="center">
-              <NavButton onClick={() => scrollToSection('about')}>
-                About me
-              </NavButton>
-              <NavButton onClick={() => scrollToSection('skills')}>
-                Skills
-              </NavButton>
-              <NavButton onClick={() => scrollToSection('portfolio')}>
-                Portfolio
-              </NavButton>
-              <ContactButton onClick={() => scrollToSection('contact')}>
-                Contact Me
-              </ContactButton>
             </Stack>
           )}
         </Toolbar>

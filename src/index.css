@@ -6,16 +6,19 @@
 
 html {
   scroll-behavior: smooth;
+  background: linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%);
+  background-attachment: fixed;
 }
 
 body {
-  font-family: 'Inter', 'Space Grotesk', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%);
 }
 
 /* Mobile-first responsive typography */
@@ -33,6 +36,7 @@ body {
 
 #root {
   min-height: 100vh;
+  background: linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%);
 }
 
 /* Custom scrollbar */

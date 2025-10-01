@@ -6,9 +6,10 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '3rem 2rem',
-  color: theme.palette.primary.contrastText,
+  color: '#1a1a1a',
+  borderTop: '1px solid rgba(251, 146, 60, 0.2)',
   [theme.breakpoints.down('md')]: {
     padding: '2rem 1rem'
   },
@@ -30,26 +31,28 @@ const BackToTopButton = styled(Box)(() => ({
   gap: '0.5rem',
   marginBottom: '2rem',
   cursor: 'pointer',
+  color: '#1a1a1a',
   '&:hover': {
-    opacity: 0.8
-  }
+    color: '#fb923c'
+  },
+  transition: 'color 0.3s ease'
 }));
 
-const SocialIconButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+const SocialIconButton = styled(IconButton)({
+  color: '#ffffff',
+  backgroundColor: '#fb923c',
   margin: '0 0.5rem',
   width: '40px',
   height: '40px',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    backgroundColor: '#f97316',
     transform: 'translateY(-2px)'
   },
   transition: 'all 0.3s ease',
   '& svg': {
-    color: theme.palette.secondary.main
+    color: '#ffffff'
   }
-}));
+});
 
 const Footer = () => {
   const scrollToTop = () => {

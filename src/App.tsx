@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Box } from '@mui/material';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { useEffect } from 'react';
@@ -8,8 +8,7 @@ import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import ITBerriesSection from './components/ITBerriesSection';
 import AboutSection from './components/AboutSection';
-import SkillsSection from './components/SkillsSection';
-import CertificationsEducationSection from './components/CertificationsEducationSection';
+import SkillsCertificationsSection from './components/SkillsCertificationsSection';
 import PortfolioSection from './components/PortfolioSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -32,15 +31,20 @@ function App() {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Navigation />
-        <HeroSection />
-        <ITBerriesSection />
-        <AboutSection />
-        <SkillsSection />
-        <CertificationsEducationSection />
-        <PortfolioSection />
-        <ContactSection />
-        <Footer />
+        <Box sx={{ 
+          minHeight: '100vh',
+          background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+          backgroundAttachment: 'fixed'
+        }}>
+          <Navigation />
+          <HeroSection />
+          <ITBerriesSection />
+          <AboutSection />
+          <SkillsCertificationsSection />
+          <PortfolioSection />
+          <ContactSection />
+          <Footer />
+        </Box>
       </ThemeProvider>
     </CacheProvider>
   );

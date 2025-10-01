@@ -34,7 +34,7 @@ const theme = createTheme({
       contrastText: '#ffffff'
     },
     background: {
-      default: '#f8fafc',
+      default: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
       paper: '#ffffff'
     },
     text: {
@@ -55,37 +55,37 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: '"Inter", "Space Grotesk", sans-serif',
+    fontFamily: '"Plus Jakarta Sans", "DM Sans", sans-serif',
     h1: {
-      fontFamily: '"Playfair Display", serif',
-      fontWeight: 700,
-      fontSize: '3.5rem',
-      letterSpacing: '-0.02em',
+      fontFamily: '"Bebas Neue", sans-serif',
+      fontWeight: 400,
+      fontSize: '4rem',
+      letterSpacing: '0.02em',
+      textTransform: 'uppercase',
       '@media (max-width:768px)': {
-        fontSize: '2.5rem'
+        fontSize: '3rem'
       },
       '@media (max-width:480px)': {
-        fontSize: '2rem'
+        fontSize: '2.5rem'
       }
     },
     h2: {
-      fontFamily: '"Syne", sans-serif',
-      fontWeight: 700,
-      fontSize: '2.5rem',
-      letterSpacing: '0.05em',
-      textTransform: 'uppercase',
+      fontFamily: '"Montserrat", sans-serif',
+      fontWeight: 800,
+      fontSize: '2.8rem',
+      letterSpacing: '-0.01em',
       '@media (max-width:768px)': {
-        fontSize: '2rem'
+        fontSize: '2.2rem'
       },
       '@media (max-width:480px)': {
-        fontSize: '1.6rem'
+        fontSize: '1.8rem'
       }
     },
     h3: {
-      fontFamily: '"Space Grotesk", sans-serif',
-      fontWeight: 600,
+      fontFamily: '"Poppins", sans-serif',
+      fontWeight: 700,
       fontSize: '2rem',
-      letterSpacing: '0.02em',
+      letterSpacing: '-0.01em',
       '@media (max-width:768px)': {
         fontSize: '1.6rem'
       },
@@ -94,41 +94,41 @@ const theme = createTheme({
       }
     },
     h4: {
-      fontFamily: '"Outfit", sans-serif',
+      fontFamily: '"Space Grotesk", sans-serif',
       fontWeight: 600,
       fontSize: '1.5rem',
-      letterSpacing: '0.05em',
+      letterSpacing: '0.01em',
       color: '#1e293b'
     },
+    h5: {
+      fontFamily: '"Outfit", sans-serif',
+      fontWeight: 600,
+      fontSize: '1.3rem',
+      letterSpacing: '0.02em'
+    },
     h6: {
-      fontFamily: '"Caveat", cursive',
+      fontFamily: '"DM Sans", sans-serif',
       fontWeight: 500,
       fontSize: '1.2rem',
       letterSpacing: '0em',
       color: '#475569'
     },
-    h5: {
-      fontFamily: '"Space Grotesk", sans-serif',
-      fontWeight: 500,
-      fontSize: '1.3rem',
-      letterSpacing: '0.02em'
-    },
     body1: {
-      fontFamily: '"Inter", sans-serif',
+      fontFamily: '"Plus Jakarta Sans", sans-serif',
       fontWeight: 400,
       fontSize: '1rem',
       lineHeight: 1.7
     },
     body2: {
-      fontFamily: '"Inter", sans-serif',
-      fontWeight: 300,
+      fontFamily: '"DM Sans", sans-serif',
+      fontWeight: 400,
       fontSize: '0.9rem',
       lineHeight: 1.6
     },
     button: {
-      fontFamily: '"Outfit", sans-serif',
-      fontWeight: 500,
-      letterSpacing: '0.05em',
+      fontFamily: '"Montserrat", sans-serif',
+      fontWeight: 600,
+      letterSpacing: '0.08em',
       textTransform: 'uppercase',
       fontSize: '0.9rem'
     }

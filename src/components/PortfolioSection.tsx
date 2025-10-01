@@ -11,9 +11,10 @@ import GoogleAnalyticsDashboard from './GoogleAnalyticsDashboard';
 import StrategicRebalancingDashboard from './StrategicRebalancingDashboard';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: '#ffffff',
+  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
   padding: '8rem 0',
   color: '#000000',
+  position: 'relative',
   [theme.breakpoints.down('md')]: {
     padding: '4rem 0'
   },
@@ -22,12 +23,23 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   }
 }));
 
+const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
+  position: 'absolute',
+  top: side === 'left' ? '10%' : '15%',
+  [side]: '5%',
+  width: '60px',
+  height: '3px',
+  backgroundColor: '#fb923c',
+  transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
+  opacity: 0.6
+}));
+
 const ContentWrapper = styled(Box)({
   width: '100%',
   margin: '0 auto'
 });
 
-const FilterButton = styled(Typography)<{ active?: boolean }>(({ active }) => ({
+const FilterButton = styled(Typography)<{ active?: boolean }>(({ active, theme }) => ({
   color: active ? '#000000' : '#999999',
   fontFamily: '"Outfit", sans-serif',
   fontSize: '1rem',
@@ -38,6 +50,10 @@ const FilterButton = styled(Typography)<{ active?: boolean }>(({ active }) => ({
   textTransform: 'uppercase',
   '&:hover': {
     color: '#000000'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.85rem',
+    letterSpacing: '0.03em'
   }
 }));
 
@@ -53,7 +69,7 @@ const ProjectItem = styled(Box)({
   minHeight: 'auto',
   position: 'relative',
   overflow: 'hidden',
-  backgroundColor: '#f8f8f8',
+  backgroundColor: 'transparent',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center'
@@ -62,7 +78,7 @@ const ProjectItem = styled(Box)({
 
 const CustomProjectContent = styled(Box)({
   width: '100%',
-  padding: '1rem'
+  padding: '0'
 });
 
 // Portfolio data with custom components
@@ -152,6 +168,8 @@ const PortfolioSection = () => {
 
   return (
     <SectionContainer id="portfolio">
+      <DecorativeLine side="left" />
+      <DecorativeLine side="right" />
       <ContentWrapper>
         <Box textAlign="center" mb={8} px={4}>
           <Typography 

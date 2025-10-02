@@ -7,7 +7,31 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-const HeroContainer = styled(Box)(({ theme }) => ({
+// Add hook for dynamic viewport height
+const useViewportHeight = () => {
+  const [vh, setVh] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const updateVh = () => {
+      setVh(window.innerHeight);
+    };
+
+    window.addEventListener('resize', updateVh);
+    window.addEventListener('orientationchange', updateVh);
+    
+    // Initial update
+    updateVh();
+
+    return () => {
+      window.removeEventListener('resize', updateVh);
+      window.removeEventListener('orientationchange', updateVh);
+    };
+  }, []);
+
+  return vh;
+};
+
+const HeroContainer = styled(Box)<{ dynamicHeight?: number }>(({ theme, dynamicHeight }) => ({
   minHeight: '100vh',
   position: 'relative',
   overflow: 'hidden',
@@ -17,8 +41,13 @@ const HeroContainer = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   paddingTop: '100px',
   [theme.breakpoints.down('md')]: {
-    minHeight: '76vh', // Increased from 'auto' to 120vh for mobile
-    paddingBottom: '2rem'
+    minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
+    paddingBottom: '2rem',
+    paddingTop: '80px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    minHeight: dynamicHeight ? `${Math.max(dynamicHeight * 0.9, 600)}px` : '90vh',
+    paddingTop: '60px'
   }
 }));
 
@@ -290,6 +319,7 @@ const HeroSection = () => {
   const [helloText, setHelloText] = useState('Hello!');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const viewportHeight = useViewportHeight();
 
   const greetings = ['Hello!', 'வணக்கம்!', 'ನಮಸ್ಕಾರ!'];
 
@@ -326,14 +356,19 @@ const HeroSection = () => {
   };
 
   return (
-    <HeroContainer id="hero">
+    <HeroContainer id="hero" dynamicHeight={isMobile ? viewportHeight : undefined}>
       <DecorativeLine side="left" />
       <DecorativeLine side="right" />
       
       {/* Top Content - No Container */}
       <HelloBubble animate={animate}>{helloText}</HelloBubble>
       
-      <Box sx={{ marginTop: { xs: '40px', md: '80px' } }} />
+      <Box sx={{ 
+        marginTop: { 
+          xs: `${Math.min(viewportHeight * 0.05, 40)}px`, 
+          md: '80px' 
+        } 
+      }} />
       
       <MainTitle animate={animate}>
         I'm <span className="name">Barath R</span> <span className="emoji">👋</span>
@@ -343,11 +378,11 @@ const HeroSection = () => {
         Meta Ads Specialist & Digital Marketing Professional
       </Subtitle>
 
-      {/* Floating Badges */}
+      {/* Floating Badges with dynamic positioning */}
       <FloatingBadge 
         delay={0.5} 
         sx={{ 
-          top: isMobile ? '24%' : '35%', // Changed from '30%' to '28%' for mobile
+          top: isMobile ? `${viewportHeight * 0.2}px` : '35%',
           left: isMobile ? '4%' : '15%' 
         }}
       >
@@ -370,7 +405,7 @@ const HeroSection = () => {
       <FloatingBadge 
         delay={1} 
         sx={{ 
-          bottom: isMobile ? '35%' : '30%', 
+          bottom: isMobile ? `${viewportHeight * 0.35}px` : '30%',
           left: isMobile ? '2%' : '12%' 
         }}
       >
@@ -381,7 +416,7 @@ const HeroSection = () => {
       <FloatingBadge 
         delay={1.5} 
         sx={{ 
-          top: isMobile ? '8%' : '20%', 
+          top: isMobile ? `${viewportHeight * 0.1}px` : '20%',
           right: isMobile ? '4%' : '15%' 
         }}
       >
@@ -411,7 +446,7 @@ const HeroSection = () => {
       <FloatingBadge 
         delay={2} 
         sx={{ 
-          bottom: isMobile ? '38%' : '38%', 
+          bottom: isMobile ? `${viewportHeight * 0.32}px` : '38%',
           right: isMobile ? '2%' : '12%' 
         }}
       >
@@ -425,15 +460,20 @@ const HeroSection = () => {
       {/* Profile Image over semi-circle */}
       <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" animate={animate} />
 
-      {/* Buttons over profile image */}
-      <TubeContainer animate={animate}>
-  <PortfolioButton onClick={handlePortfolioClick}>
-    Portfolio ↗
-  </PortfolioButton>
-  <HireMeButton onClick={handleHireMeClick}>
-    Hire me
-  </HireMeButton>
-</TubeContainer>
+      {/* Buttons over profile image with dynamic positioning */}
+      <TubeContainer 
+        animate={animate}
+        sx={{
+          bottom: isMobile ? `${Math.min(viewportHeight * 0.05, 20)}px` : '20px'
+        }}
+      >
+        <PortfolioButton onClick={handlePortfolioClick}>
+          Portfolio ↗
+        </PortfolioButton>
+        <HireMeButton onClick={handleHireMeClick}>
+          Hire me
+        </HireMeButton>
+      </TubeContainer>
     </HeroContainer>
   );
 };

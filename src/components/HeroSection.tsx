@@ -46,8 +46,8 @@ const HeroContainer = styled(Box)<{ dynamicHeight?: number }>(({ theme, dynamicH
     paddingTop: '80px'
   },
   [theme.breakpoints.down('sm')]: {
-    minHeight: dynamicHeight ? `${Math.max(dynamicHeight * 0.9, 600)}px` : '90vh',
-    paddingTop: '60px'
+    minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
+    paddingTop: '60px',
   }
 }));
 

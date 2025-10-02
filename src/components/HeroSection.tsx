@@ -71,43 +71,41 @@ const fadeInUp = keyframes`
   }
 `;
 const TubeContainer = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
-  // Base styles (mobile)
+  // Mobile-first styles
   position: 'absolute',
-  bottom: '20px',
+  bottom: animate ? '4px' : '-6px', // Changed from '8px' to '20px' and from '-26px' to '-6px'
   left: '50%',
   transform: 'translateX(-50%)',
   display: 'flex',
-  gap: '0.5rem',
+  flexDirection: 'row',
+  gap: '8px',
   alignItems: 'center',
   backgroundColor: '#ffffff36',
   borderRadius: '50px',
-  padding: '10px 16px',
+  padding: '8px',
   boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
   opacity: animate ? 1 : 0,
-  animation: animate ? `${fadeInUp} 0.8s ease-out 1.2s forwards` : 'none',
+  transition: 'opacity 0.8s ease-out 1.2s, bottom 0.8s ease-out 1.2s',
   zIndex: 5,
-  flexDirection: 'column',
-  width: '90%',
-  maxWidth: '320px',
+  width: 'calc(100% - 24px)',
+  maxWidth: '500px',
 
-  // Mobile specific styles
-  [theme.breakpoints.down('sm')]: {
-    bottom: '4px',
-    left: '10%',
-    transform: 'translateX(-50%)',
-    flexDirection: 'column',
-    width: '90%',
-    maxWidth: '300px',
+  '& > .MuiButton-root': {
+    flex: 1,
   },
 
-  // Desktop styles
-  [theme.breakpoints.up('sm')]: {
-    flexDirection: 'row',
+  // Desktop styles (md and up)
+  [theme.breakpoints.up('md')]: {
     width: 'auto',
     maxWidth: 'none',
-    left: '42%',
+    left: '53%',
     transform: 'translateX(-70%)',
-    bottom: '4px',
+    bottom: animate ? '6px' : '-5px', // Changed from '15px' to '25px' and from '-15px' to '-5px'
+    gap: '1rem',
+    padding: '10px 16px',
+    '& > .MuiButton-root': {
+      flex: 'none',
+    },
   }
 }));
 
@@ -122,7 +120,7 @@ const HelloBubble = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
   color: '#1a1a1a',
   position: 'relative',
   marginBottom: '2.5rem',
-  marginTop: '-5rem',
+  marginTop: '-6rem',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.6s ease-out forwards` : 'none',
   boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
@@ -162,7 +160,7 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   fontWeight: 400,
   fontFamily: '"Bebas Neue", sans-serif',
   textAlign: 'center',
-  marginTop: '-7.5rem',
+  marginTop: '-8.5rem',
   letterSpacing: '0.05em',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out 0.2s forwards` : 'none',
@@ -189,9 +187,9 @@ const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) =
   marginBottom: '10rem',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out 0.4s forwards` : 'none',
-  [theme.breakpoints.down('md')]: {
-    marginBottom: '1rem'
-  }
+  [theme.breakpoints.up('md')]: {
+    marginTop: '-1rem',
+  },
 }));
 
 const SemiCircle = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
@@ -259,26 +257,6 @@ const FloatingBadge = styled(Box)<{ delay: number }>(({ delay, theme }) => ({
   }
 }));
 
-const DescriptionText = styled(Typography)<{ animate: boolean }>(({ animate, theme }) => ({
-  fontSize: '1rem',
-  fontWeight: 400,
-  fontFamily: '"Plus Jakarta Sans", sans-serif',
-  color: '#666',
-  textAlign: 'center',
-  maxWidth: '700px',
-  lineHeight: 1.6,
-  marginBottom: '2rem',
-  opacity: animate ? 1 : 0,
-  animation: animate ? `${fadeInUp} 0.8s ease-out 0.6s forwards` : 'none',
-  zIndex: 10,
-  position: 'relative',
-  [theme.breakpoints.down('md')]: {
-    fontSize: '0.95rem',
-    maxWidth: '90%',
-    marginBottom: '1rem'
-  }
-}));
-
 const PortfolioButton = styled(Button)(({ theme }) => ({
   backgroundColor: '#fb923c',
   color: '#ffffff',
@@ -318,7 +296,8 @@ const HireMeButton = styled(Button)(({ theme }) => ({
     padding: '8px 16px'
   }
 }));
-const HeroSection = () => {
+
+const HeroSection: React.FC = () => {
   const [animate, setAnimate] = useState(false);
   const [helloText, setHelloText] = useState('Hello!');
   const theme = useTheme();
@@ -379,17 +358,16 @@ const HeroSection = () => {
       </MainTitle>
       
       <Subtitle animate={animate}>
-        Meta Ads Specialist & Digital Marketing Professional
+        A Growth-Focused Marketing Specialist
       </Subtitle>
-
-      <DescriptionText animate={animate}>
-        I specialize in transforming data into actionable insights that drive informed business decisions with expertise in analytics and marketing.
-      </DescriptionText>
 
       {/* Floating Badges with dynamic positioning */}
       <FloatingBadge 
         delay={0.5} 
-        sx={{ top: isMobile ? `${viewportHeight * 0.14}px` : '10%', left: isMobile ? '4%' : '15%' }}
+        sx={{ 
+          top: isMobile ? `${viewportHeight * 0.14}px` : '10%',
+          left: isMobile ? '4%' : '15%' 
+        }}
       >
         <BarChartIcon />
         Meta Ads Specialist
@@ -417,24 +395,39 @@ const HeroSection = () => {
         Google Ads
       </FloatingBadge>
 
-      {!isMobile && (
-        <Box sx={{
-          position: 'absolute',
-          top: '45%',
-          right: '10%',
-          transform: 'translateY(-50%)',
+      {/* Moved the experience badge here - between Google Ads and SEO Expert */}
+      <FloatingBadge
+        delay={0.8}
+        sx={{
+          top: isMobile ? `${viewportHeight * 0.35}px` : '32%', // Changed from 0.25 to 0.35 for mobile only
+          right: isMobile ? '8%' : '8%', // Slightly more to the left to create visual balance
+          transform: 'translateX(0)', // Remove the centering transform
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '4px',
+          padding: { xs: '12px 16px', md: '16px 24px' },
           textAlign: 'center',
-          opacity: 0,
-          animation: animate ? `${fadeInUp} 0.8s ease-out 1s forwards` : 'none',
+          whiteSpace: 'normal',
+          lineHeight: 1.4
+        }}
+      >
+        <Typography variant="h6" sx={{ 
+          fontSize: { xs: '1.2rem', md: '1.4rem' }, 
+          fontWeight: 700, 
+          color: '#fb923c',
+          marginBottom: '2px'
         }}>
-          <Typography variant="h3" sx={{ fontSize: '2rem', fontWeight: 700, color: '#1a1a1a', mb: 0.5 }}>
-            1+ Years
-          </Typography>
-          <Typography variant="body2" sx={{ fontSize: '0.75rem', color: '#666', lineHeight: 1.4 }}>
-            Experience in Meta Ads Specialist &<br />Digital Marketing
-          </Typography>
-        </Box>
-      )}
+          1+ Years
+        </Typography>
+        <Typography variant="body2" sx={{ 
+          fontSize: { xs: '0.75rem', md: '0.85rem' }, 
+          fontWeight: 500,
+          textAlign: 'center',
+          lineHeight: 1.2
+        }}>
+          Experience in Meta Ads Specialist &<br />Digital Marketing
+        </Typography>
+      </FloatingBadge>
 
       <FloatingBadge 
         delay={2} 
@@ -447,19 +440,11 @@ const HeroSection = () => {
         SEO Expert
       </FloatingBadge>
 
-      {/* Semi-circle at bottom */}
       <SemiCircle animate={animate} />
 
-      {/* Profile Image over semi-circle */}
       <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" animate={animate} />
 
-      {/* Buttons over profile image with dynamic positioning */}
-      <TubeContainer 
-        animate={animate}
-        sx={{
-          bottom: isMobile ? `${Math.min(viewportHeight * 0.05, 20)}px` : '20px'
-        }}
-      >
+      <TubeContainer animate={animate}>
         <PortfolioButton onClick={handlePortfolioClick}>
           Portfolio ↗
         </PortfolioButton>

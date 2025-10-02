@@ -382,7 +382,7 @@ const HeroSection = () => {
       <FloatingBadge 
         delay={0.5} 
         sx={{ 
-          top: isMobile ? `${viewportHeight * 0.2}px` : '35%',
+          top: isMobile ? `${viewportHeight * 0.25}px` : '40%',
           left: isMobile ? '4%' : '15%' 
         }}
       >

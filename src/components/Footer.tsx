@@ -33,24 +33,42 @@ const BackToTopButton = styled(Box)(() => ({
   cursor: 'pointer',
   color: '#1a1a1a',
   '&:hover': {
-    color: '#fb923c'
+    color: '#604ce5',
+    transform: 'translateY(-2px)',
+    '& svg': {
+      animation: 'bounce 0.6s ease-in-out infinite'
+    }
   },
-  transition: 'color 0.3s ease'
+  transition: 'all 0.3s ease',
+  '@keyframes bounce': {
+    '0%, 100%': {
+      transform: 'translateY(0)'
+    },
+    '50%': {
+      transform: 'translateY(-4px)'
+    }
+  }
 }));
 
 const SocialIconButton = styled(IconButton)({
   color: '#ffffff',
-  backgroundColor: '#fb923c',
+  backgroundColor: '#604ce5',
   margin: '0 0.5rem',
-  width: '40px',
-  height: '40px',
+  width: '44px',
+  height: '44px',
+  boxShadow: '0 4px 12px rgba(96, 76, 229, 0.25)',
   '&:hover': {
-    backgroundColor: '#f97316',
-    transform: 'translateY(-2px)'
+    backgroundColor: '#bc5704',
+    transform: 'translateY(-4px) scale(1.05)',
+    boxShadow: '0 6px 20px rgba(188, 87, 4, 0.35)'
   },
-  transition: 'all 0.3s ease',
+  '&:active': {
+    transform: 'translateY(-2px) scale(1.02)'
+  },
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   '& svg': {
-    color: '#ffffff'
+    color: '#ffffff',
+    fontSize: '1.3rem'
   }
 });
 
@@ -89,7 +107,7 @@ const Footer = () => {
               <EmailIcon />
             </SocialIconButton>
           </a>
-          <a href="https://www.linkedin.com/in/barathxo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ textDecoration: 'none' }}>
+          <a href="https://www.linkedin.com/in/barathroy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ textDecoration: 'none' }}>
             <SocialIconButton>
               <LinkedInIcon />
             </SocialIconButton>

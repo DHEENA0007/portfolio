@@ -27,7 +27,7 @@ const MainTitle = styled(Typography)({
   marginBottom: '4rem',
   letterSpacing: '-0.02em',
   lineHeight: 1.1,
-  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
+  background: 'linear-gradient(135deg, #7f6fe5 0%, #6657d5 50%, #5b4dcb 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',

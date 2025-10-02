@@ -20,7 +20,7 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   [side]: '5%',
   width: '60px',
   height: '3px',
-  backgroundColor: '#fb923c',
+  backgroundColor: '#604ce5',
   transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
   opacity: 0.6
 }));
@@ -33,15 +33,17 @@ const ContentWrapper = styled(Box)({
 const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     backgroundColor: 'transparent',
+    transition: 'all 0.3s ease',
     '& fieldset': {
       border: 'none',
       borderBottom: '3px solid #1a1a1a'
     },
     '&:hover fieldset': {
-      borderBottom: '3px solid #fb923c'
+      borderBottom: '3px solid #604ce5'
     },
     '&.Mui-focused fieldset': {
-      borderBottom: '3px solid #fb923c'
+      borderBottom: '3px solid #604ce5',
+      borderBottomWidth: '3px'
     }
   },
   '& .MuiInputLabel-root': {
@@ -51,32 +53,42 @@ const StyledTextField = styled(TextField)({
     fontSize: '0.9rem',
     letterSpacing: '0.05em',
     textTransform: 'uppercase',
+    transition: 'all 0.3s ease',
     '&.Mui-focused': {
-      color: '#fb923c'
+      color: '#604ce5'
     }
   },
   '& .MuiInputBase-input': {
     padding: '1rem 0',
     fontFamily: '"Inter", sans-serif',
     fontSize: '1rem',
-    color: '#1a1a1a'
+    color: '#1a1a1a',
+    '&::placeholder': {
+      color: '#999',
+      opacity: 0.7
+    }
   }
 });
 
 const SubmitButton = styled(Button)({
-  backgroundColor: '#fb923c',
+  backgroundColor: '#604ce5',
   color: '#ffffff',
   fontFamily: '"Outfit", sans-serif',
   fontWeight: 700,
   fontSize: '1.1rem',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  padding: '12px 32px',
-  borderRadius: '25px',
+  padding: '14px 40px',
+  borderRadius: '30px',
   minWidth: 'auto',
+  boxShadow: '0 4px 20px rgba(96, 76, 229, 0.3)',
   '&:hover': {
-    backgroundColor: '#f97316',
-    transform: 'translateY(-2px)'
+    backgroundColor: '#523ddb',
+    transform: 'translateY(-3px)',
+    boxShadow: '0 6px 28px rgba(96, 76, 229, 0.4)'
+  },
+  '&:active': {
+    transform: 'translateY(-1px)'
   },
   transition: 'all 0.3s ease'
 });

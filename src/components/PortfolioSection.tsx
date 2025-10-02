@@ -29,7 +29,7 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   [side]: '5%',
   width: '60px',
   height: '3px',
-  backgroundColor: '#fb923c',
+  backgroundColor: '#604ce5',
   transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
   opacity: 0.6
 }));
@@ -40,7 +40,7 @@ const ContentWrapper = styled(Box)({
 });
 
 const FilterButton = styled(Typography)<{ active?: boolean }>(({ active, theme }) => ({
-  color: active ? '#000000' : '#999999',
+  color: active ? '#000000' : '#666666',
   fontFamily: '"Outfit", sans-serif',
   fontSize: '1rem',
   fontWeight: active ? 600 : 400,

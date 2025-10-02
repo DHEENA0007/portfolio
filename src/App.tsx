@@ -4,10 +4,11 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { useEffect } from 'react';
 import theme from './theme';
-import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import ITBerriesSection from './components/ITBerriesSection';
 import AboutSection from './components/AboutSection';
+import ExperienceEducationSection from './components/ExperienceEducationSection';
+import { mockRootProps } from './components/ExperienceEducationSectionMockData';
 import SkillsCertificationsSection from './components/SkillsCertificationsSection';
 import PortfolioSection from './components/PortfolioSection';
 import ContactSection from './components/ContactSection';
@@ -36,10 +37,10 @@ function App() {
           background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
           backgroundAttachment: 'fixed'
         }}>
-          <Navigation />
           <HeroSection />
           <ITBerriesSection />
           <AboutSection />
+          <ExperienceEducationSection {...mockRootProps} />
           <SkillsCertificationsSection />
           <PortfolioSection />
           <ContactSection />

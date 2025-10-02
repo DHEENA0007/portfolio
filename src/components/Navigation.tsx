@@ -4,20 +4,29 @@ import { useState, useEffect } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-const StyledAppBar = styled(AppBar)<{ isVisible: boolean }>(({ isVisible }) => ({
-  backgroundColor: 'transparent',
-  boxShadow: 'none',
+const StyledAppBar = styled(AppBar)<{ isVisible: boolean }>(({ isVisible, theme }) => ({
+  backgroundColor: isVisible ? 'transparent' : 'rgba(254, 249, 245, 0.95)',
+  backdropFilter: isVisible ? 'none' : 'blur(10px)',
+  boxShadow: isVisible ? 'none' : '0 2px 20px rgba(0, 0, 0, 0.05)',
   position: 'fixed',
   zIndex: 1100,
   transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-  transition: 'transform 0.3s ease-in-out'
+  transition: 'all 0.3s ease-in-out',
+  [theme.breakpoints.down('md')]: {
+    backgroundColor: 'rgba(254, 249, 245, 0.98)',
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)'
+  }
 }));
 
 const MobileMenuButton = styled(IconButton)({
-  color: '#ffffff',
+  color: '#1a1a1a',
+  backgroundColor: 'rgba(96, 76, 229, 0.1)',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)'
-  }
+    backgroundColor: 'rgba(96, 76, 229, 0.2)',
+    transform: 'scale(1.05)'
+  },
+  transition: 'all 0.3s ease'
 });
 
 const MobileDrawer = styled(Drawer)({
@@ -111,7 +120,24 @@ const Navigation = () => {
     <>
       <StyledAppBar isVisible={isVisible}>
         <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
-          <Typography variant="h6" component="div" sx={{ fontWeight: 700, color: '#000000ff', fontSize: '1.5rem', fontFamily: '"Caveat", cursive', letterSpacing: '0.02em' }}>
+          <Typography 
+            variant="h6" 
+            component="div" 
+            sx={{ 
+              fontWeight: 700, 
+              color: '#1a1a1a', 
+              fontSize: '1.5rem', 
+              fontFamily: '"Caveat", cursive', 
+              letterSpacing: '0.02em',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                color: '#604ce5',
+                transform: 'scale(1.05)'
+              }
+            }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             &lt;/barath_R/&gt;
           </Typography>
           

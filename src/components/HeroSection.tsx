@@ -2,6 +2,7 @@ import { Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material'
 import { styled, keyframes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import profileImage from '../assets/profile.png';
+import backgroundImage from '../assets/BG.png';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
@@ -35,19 +36,22 @@ const HeroContainer = styled(Box)<{ dynamicHeight?: number }>(({ theme, dynamicH
   minHeight: '100vh',
   position: 'relative',
   overflow: 'hidden',
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: `url(${backgroundImage})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: '100px',
+  paddingTop: '40px',
   [theme.breakpoints.down('md')]: {
     minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
     paddingBottom: '2rem',
-    paddingTop: '80px'
+    paddingTop: '30px'
   },
   [theme.breakpoints.down('sm')]: {
     minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
-    paddingTop: '60px',
+    paddingTop: '20px',
   }
 }));
 
@@ -109,6 +113,34 @@ const TubeContainer = styled(Box)<{ animate: boolean }>(({ animate, theme }) => 
   }
 }));
 
+const LogoText = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  color: '#1a1a1a',
+  fontSize: '1.5rem',
+  fontFamily: '"Caveat", cursive',
+  letterSpacing: '0.02em',
+  position: 'absolute',
+  top: '20px',
+  left: '40px',
+  cursor: 'pointer',
+  transition: 'all 0.3s ease',
+  zIndex: 10,
+  '&:hover': {
+    color: '#604ce5',
+    transform: 'scale(1.05)'
+  },
+  [theme.breakpoints.down('md')]: {
+    fontSize: '1.3rem',
+    top: '15px',
+    left: '30px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.2rem',
+    top: '10px',
+    left: '20px'
+  }
+}));
+
 const HelloBubble = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
   backgroundColor: '#ffffff',
   border: '2px solid #1a1a1a',
@@ -120,7 +152,7 @@ const HelloBubble = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
   color: '#1a1a1a',
   position: 'relative',
   marginBottom: '2.5rem',
-  marginTop: '-6rem',
+  marginTop: '2rem',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.6s ease-out forwards` : 'none',
   boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
@@ -139,7 +171,7 @@ const HelloBubble = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
     borderRadius: '0 0 0 5px'
   },
   [theme.breakpoints.down('sm')]: {
-    marginTop: '-2rem',
+    marginTop: '1rem',
     marginBottom: '1.5rem',
   }
 }));
@@ -150,7 +182,7 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   [side]: '5%',
   width: '60px',
   height: '3px',
-  backgroundColor: '#fb923c',
+  backgroundColor: '#604ce5',
   transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
   opacity: 0.6
 }));
@@ -165,7 +197,7 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out 0.2s forwards` : 'none',
   '& .name': {
-    color: '#fb923c',
+    color: '#604ce5',
     display: 'inline-block',
     fontFamily: '"Bebas Neue", sans-serif'
   },
@@ -192,26 +224,24 @@ const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) =
   },
 }));
 
-const SemiCircle = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
+const BackgroundImage = styled('img')<{ animate: boolean }>(({ animate, theme }) => ({
   position: 'absolute',
   bottom: 0,
   left: '50%',
   transform: 'translateX(-50%)',
   width: 'clamp(600px, 55vw, 750px)',
-  height: 'clamp(400px, 27.5vw, 325px)',
-  backgroundColor: '#fb923c',
-  borderRadius: '650px 650px 0 0',
+  height: 'auto',
   opacity: animate ? 1 : 0,
   transition: 'all 0.8s ease-out',
   zIndex: 2,
+  objectFit: 'contain',
   [theme.breakpoints.down('md')]: {
-    width: 'clamp(380px, 65vw, 500px)',
-    height: 'clamp(210px, 32.5vw, 250px)'
+    width: 'clamp(380px, 65vw, 500px)'
   }
 }));
 
 const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) => ({
-  width: 'clamp(400px, 50vw, 670px)',
+  width: 'clamp(400px, 50vw, 800px)',
   height: 'auto',
   position: 'absolute',
   bottom: 0,
@@ -258,7 +288,7 @@ const FloatingBadge = styled(Box)<{ delay: number }>(({ delay, theme }) => ({
 }));
 
 const PortfolioButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#fb923c',
+  backgroundColor: '#8B7FD8',
   color: '#ffffff',
   padding: '10px 20px',
   borderRadius: '25px',
@@ -266,7 +296,7 @@ const PortfolioButton = styled(Button)(({ theme }) => ({
   fontWeight: 600,
   textTransform: 'none',
   '&:hover': {
-    backgroundColor: '#f97316',
+    backgroundColor: '#6657d5',
     transform: 'translateY(-2px)'
   },
   transition: 'all 0.3s ease',
@@ -338,8 +368,16 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <HeroContainer id="hero" dynamicHeight={isMobile ? viewportHeight : undefined}>
+      <LogoText onClick={scrollToTop}>
+        &lt;/barath_R/&gt;
+      </LogoText>
+      
       <DecorativeLine side="left" />
       <DecorativeLine side="right" />
       
@@ -414,7 +452,7 @@ const HeroSection: React.FC = () => {
         <Typography variant="h6" sx={{ 
           fontSize: { xs: '1.2rem', md: '1.4rem' }, 
           fontWeight: 700, 
-          color: '#fb923c',
+          color: '#604ce5',
           marginBottom: '2px'
         }}>
           1+ Years
@@ -440,7 +478,7 @@ const HeroSection: React.FC = () => {
         SEO Expert
       </FloatingBadge>
 
-      <SemiCircle animate={animate} />
+      <BackgroundImage src="/BG.png" alt="" animate={animate} />
 
       <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" animate={animate} />
 

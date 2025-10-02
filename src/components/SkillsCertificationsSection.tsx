@@ -1,6 +1,5 @@
 import { Box, Typography, Card, Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import SchoolIcon from '@mui/icons-material/School';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
@@ -60,7 +59,7 @@ const MainTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Dancing Script", cursive',
   fontSize: '4.5rem',
   fontWeight: 700,
-  color: '#fb923c',
+  color: '#7f6fe5',
   textAlign: 'center',
   marginBottom: '1rem',
   letterSpacing: '0.02em',
@@ -94,8 +93,8 @@ const SkillChip = styled(Chip)({
   color: '#1a1a1a',
   transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: '#fb923c',
-    borderColor: '#fb923c',
+    backgroundColor: '#604ce5',
+    borderColor: '#604ce5',
     color: '#ffffff',
     transform: 'translateY(-2px)'
   },
@@ -121,7 +120,7 @@ const SectionTitle = styled(Typography)({
   fontFamily: '"Satisfy", cursive',
   fontSize: '3rem',
   fontWeight: 400,
-  color: '#fb923c',
+  color: '#bc5704',
   marginBottom: '2rem',
   letterSpacing: '0.02em'
 });
@@ -164,10 +163,30 @@ const ToolItem = styled(Box)({
   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
+  animation: 'fadeInUp 0.6s ease-out backwards, float 3s ease-in-out infinite',
   '&:hover': {
     transform: 'translateY(-2px)',
     boxShadow: '0 4px 16px rgba(251, 146, 60, 0.15)',
-    borderColor: 'rgba(251, 146, 60, 0.3)'
+    borderColor: 'rgba(251, 146, 60, 0.3)',
+    animationPlayState: 'paused'
+  },
+  '@keyframes fadeInUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(20px)'
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    }
+  },
+  '@keyframes float': {
+    '0%, 100%': {
+      transform: 'translateY(0px)'
+    },
+    '50%': {
+      transform: 'translateY(-8px)'
+    }
   }
 });
 
@@ -221,7 +240,7 @@ const CertIconWrapper = styled(Box)({
   width: '48px',
   height: '48px',
   borderRadius: '12px',
-  backgroundColor: '#fb923c',
+  backgroundColor: '#604ce5',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -249,37 +268,6 @@ const CertDate = styled(Typography)({
   fontFamily: '"DM Sans", sans-serif',
   fontSize: '0.875rem',
   color: '#666666'
-});
-
-const EducationCard = styled(Card)({
-  backgroundColor: '#ffffff',
-  borderRadius: '20px',
-  padding: '2rem',
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid rgba(251, 146, 60, 0.1)'
-});
-
-const EducationTitle = styled(Typography)({
-  fontFamily: '"Space Grotesk", sans-serif',
-  fontSize: '1.3rem',
-  fontWeight: 600,
-  color: '#1a1a1a',
-  marginBottom: '0.5rem',
-  lineHeight: 1.3
-});
-
-const EducationDetails = styled(Typography)({
-  fontFamily: '"Plus Jakarta Sans", sans-serif',
-  fontSize: '1rem',
-  color: '#666666',
-  marginBottom: '0.5rem'
-});
-
-const GPAText = styled(Typography)({
-  fontFamily: '"Montserrat", sans-serif',
-  fontSize: '1rem',
-  color: '#fb923c',
-  fontWeight: 700
 });
 
 const skillCategories = [
@@ -369,7 +357,12 @@ const SkillsCertificationsSection = () => {
                 <CategoryTitle>Programming Analytics</CategoryTitle>
                 <ToolsGrid>
                   {toolsData.programmingAnalytics.map((tool, index) => (
-                    <ToolItem key={index}>
+                    <ToolItem 
+                      key={index} 
+                      sx={{ 
+                        animationDelay: `${index * 0.1}s, ${index * 0.2}s` 
+                      }}
+                    >
                       <ToolIcon>
                         {tool.icon === 'custom' && tool.customIcon ? (
                           <tool.customIcon />
@@ -387,7 +380,12 @@ const SkillsCertificationsSection = () => {
                 <CategoryTitle>Digital Marketing</CategoryTitle>
                 <ToolsGrid>
                   {toolsData.digitalMarketing.map((tool, index) => (
-                    <ToolItem key={index}>
+                    <ToolItem 
+                      key={index} 
+                      sx={{ 
+                        animationDelay: `${index * 0.1}s, ${index * 0.2}s` 
+                      }}
+                    >
                       <ToolIcon>
                         {tool.icon === 'custom' && tool.customIcon ? (
                           <tool.customIcon />
@@ -405,7 +403,12 @@ const SkillsCertificationsSection = () => {
                 <CategoryTitle>Web Analytics & PPC</CategoryTitle>
                 <ToolsGrid>
                   {toolsData.webAnalyticsPPC.map((tool, index) => (
-                    <ToolItem key={index}>
+                    <ToolItem 
+                      key={index} 
+                      sx={{ 
+                        animationDelay: `${index * 0.1}s, ${index * 0.2}s` 
+                      }}
+                    >
                       <ToolIcon>
                         {tool.icon === 'custom' && tool.customIcon ? (
                           <tool.customIcon />
@@ -441,23 +444,6 @@ const SkillsCertificationsSection = () => {
                 </CertificationCard>
               );
             })}
-
-            <Box mt={3}>
-              <EducationCard>
-                <Box display="flex" alignItems="center" gap={1} mb={1}>
-                  <SchoolIcon sx={{ fontSize: '2rem', color: '#fb923c' }} />
-                  <EducationTitle>
-                    Bachelor of Computer Science and Technology
-                  </EducationTitle>
-                </Box>
-                <EducationDetails>
-                  SNS College of Engineering (2020 - 2024)
-                </EducationDetails>
-                <GPAText>
-                  Cumulative GPA: 8.4
-                </GPAText>
-              </EducationCard>
-            </Box>
           </Box>
         </ContentGrid>
       </ContentWrapper>

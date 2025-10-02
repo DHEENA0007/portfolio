@@ -1,7 +1,8 @@
-import { Box, Typography, Stack } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled, keyframes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import profileImage from '../assets/profile.png';
+import profileImage2 from '../assets/profile2.png';
 import backgroundImage from '../assets/BG.png';
 
 const AboutContainer = styled(Box)(({ theme }) => ({
@@ -18,9 +19,16 @@ const AboutContainer = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   padding: '2rem',
   [theme.breakpoints.down('md')]: {
-    minHeight: 'auto',
-    padding: '3rem 1rem',
-    display: 'block'
+    minHeight: '50vh',
+    padding: '1rem 1.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '0.75rem 1rem',
+    minHeight: '45vh'
   }
 }));
 
@@ -46,43 +54,33 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   opacity: 0.6
 }));
 
-const MobileContentWrapper = styled(Stack)(({ theme }) => ({
+const MobileContentWrapper = styled(Box)(({ theme }) => ({
   display: 'none',
   [theme.breakpoints.down('md')]: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: '1.5rem',
+    display: 'block',
     position: 'relative',
-    zIndex: 2
-  },
-  [theme.breakpoints.down('sm')]: {
-    gap: '1rem'
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+    flex: 1
   }
 }));
 
 const MobileTextContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
-    flex: '0 0 55%',
-    maxWidth: '55%'
-  },
-  [theme.breakpoints.down('sm')]: {
-    flex: '0 0 50%',
-    maxWidth: '50%'
-  }
-}));
-
-const MobileImageContent = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down('md')]: {
-    flex: '0 0 45%',
-    maxWidth: '45%',
+    width: '50%',
+    maxWidth: '50%',
     display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'center'
+    flexDirection: 'column',
+    justifyContent: 'center',
+    position: 'relative',
+    zIndex: 3,
+    paddingTop: '2rem'
   },
   [theme.breakpoints.down('sm')]: {
-    flex: '0 0 50%',
-    maxWidth: '50%'
+    width: '48%',
+    maxWidth: '48%',
+    paddingTop: '1.5rem'
   }
 }));
 
@@ -104,15 +102,19 @@ const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) =>
   opacity: animate ? 1 : 0,
   transition: 'all 0.8s ease-out 0.3s',
   [theme.breakpoints.down('md')]: {
-    position: 'static',
-    width: '100%',
-    maxWidth: '280px',
-    transform: 'none',
-    right: 'auto',
-    bottom: 'auto'
+    position: 'absolute',
+    width: 'auto',
+    maxWidth: 'none',
+    height: '110%',
+    objectFit: 'contain',
+    bottom: 0,
+    right: '-15%',
+    zIndex: 2
   },
   [theme.breakpoints.down('sm')]: {
-    maxWidth: '200px'
+    height: '105%',
+    bottom: 0,
+    right: '-18%'
   }
 }));
 
@@ -120,8 +122,8 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   fontSize: 'clamp(2.5rem, 6vw, 4rem)',
   fontWeight: 800,
   fontFamily: '"Montserrat", sans-serif',
-  marginBottom: '1rem',
-  marginTop: '15rem',
+  marginBottom: '2rem',
+  marginTop: '3rem',
   color: '#1a1a1a',
   lineHeight: 1.1,
   letterSpacing: '-0.02em',
@@ -130,20 +132,23 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   textAlign: 'left',
   zIndex: 4,
   position: 'relative',
-  maxWidth: '800px',
-  marginLeft: '-50%',
+  maxWidth: '700px',
+  marginLeft: '-25%',
   [theme.breakpoints.down('md')]: {
     marginLeft: '0',
+    textAlign: 'left',
     marginTop: '0',
     marginBottom: '1rem',
-    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)'
+    fontSize: 'clamp(1.5rem, 4.5vw, 2rem)',
+    width: '100%',
+    maxWidth: '100%'
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: '1.5rem',
+    fontSize: '1.4rem',
     marginBottom: '0.75rem'
   },
   '& .highlight': {
-    color: '#604ce5',
+    color: '#8B7FD8',
     display: 'inline-block',
     fontFamily: '"Pacifico", cursive',
     fontWeight: 400,
@@ -152,7 +157,7 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
 }));
 
 const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>(({ animate, delay = 0.4, theme }) => ({
-  fontSize: '1.3rem',
+  fontSize: '1rem',
   lineHeight: 1.7,
   fontFamily: '"Plus Jakarta Sans", sans-serif',
   color: '#666',
@@ -162,16 +167,19 @@ const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>
   maxWidth: '800px',
   zIndex: 4,
   position: 'relative',
-  marginLeft: '-50%',
+  marginLeft: '-25%',
   [theme.breakpoints.down('md')]: {
-    fontSize: '0.85rem',
-    lineHeight: 1.5,
+    fontSize: '0.8rem',
+    lineHeight: 1.6,
+    maxWidth: '100%',
     marginLeft: '0',
-    maxWidth: '100%'
+    textAlign: 'left',
+    width: '100%',
+    padding: '0'
   },
   [theme.breakpoints.down('sm')]: {
     fontSize: '0.75rem',
-    lineHeight: 1.4
+    lineHeight: 1.5
   }
 }));
 
@@ -228,7 +236,7 @@ const AboutSection = () => {
         />
       </DesktopContent>
 
-      {/* Mobile View - Side by Side Layout */}
+      {/* Mobile View - Text on Left, Image Positioned Absolutely */}
       <MobileContentWrapper>
         <MobileTextContent>
           <MainTitle animate={animate}>
@@ -244,13 +252,11 @@ const AboutSection = () => {
           </DescriptionText>
         </MobileTextContent>
 
-        <MobileImageContent>
-          <ProfileImage 
-            src={profileImage} 
-            alt="Barath R - Data Analyst & Digital Marketing Professional" 
-            animate={animate} 
-          />
-        </MobileImageContent>
+        <ProfileImage 
+          src={profileImage2} 
+          alt="Barath R - Data Analyst & Digital Marketing Professional" 
+          animate={animate} 
+        />
       </MobileContentWrapper>
     </AboutContainer>
   );

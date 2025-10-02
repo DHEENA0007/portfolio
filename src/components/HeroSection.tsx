@@ -78,7 +78,7 @@ const TubeContainer = styled(Box)<{ animate: boolean }>(({ animate, theme }) => 
   // Mobile-first styles
   position: 'absolute',
   bottom: animate ? '4px' : '-6px', // Changed from '8px' to '20px' and from '-26px' to '-6px'
-  left: '50%',
+  left: '48%',
   transform: 'translateX(-50%)',
   display: 'flex',
   flexDirection: 'row',
@@ -91,7 +91,7 @@ const TubeContainer = styled(Box)<{ animate: boolean }>(({ animate, theme }) => 
   opacity: animate ? 1 : 0,
   transition: 'opacity 0.8s ease-out 1.2s, bottom 0.8s ease-out 1.2s',
   zIndex: 5,
-  width: 'calc(100% - 24px)',
+  width: 'calc(100% - 55px)',
   maxWidth: '500px',
 
   '& > .MuiButton-root': {
@@ -252,7 +252,7 @@ const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) =>
   opacity: animate ? 1 : 0,
   transition: 'all 0.8s ease-out 0.3s',
   [theme.breakpoints.down('md')]: {
-    width: 'clamp(350px, 60vw, 500px)'
+    width: 'clamp(600px, 60vw, 500px)'
   }
 }));
 
@@ -414,7 +414,7 @@ const HeroSection: React.FC = () => {
       <FloatingBadge 
         delay={1} 
         sx={{ 
-          bottom: isMobile ? `${viewportHeight * 0.35}px` : '30%',
+          bottom: isMobile ? `${viewportHeight * 0.47}px` : '30%',
           left: isMobile ? '2%' : '12%' 
         }}
       >
@@ -437,7 +437,7 @@ const HeroSection: React.FC = () => {
       <FloatingBadge
         delay={0.8}
         sx={{
-          top: isMobile ? `${viewportHeight * 0.35}px` : '32%', // Changed from 0.25 to 0.35 for mobile only
+          top: isMobile ? `${viewportHeight * 0.30}px` : '32%', // Changed from 0.35 to 0.25 for mobile only
           right: isMobile ? '8%' : '8%', // Slightly more to the left to create visual balance
           transform: 'translateX(0)', // Remove the centering transform
           flexDirection: 'column',
@@ -470,7 +470,7 @@ const HeroSection: React.FC = () => {
       <FloatingBadge 
         delay={2} 
         sx={{ 
-          bottom: isMobile ? `${viewportHeight * 0.32}px` : '38%',
+          bottom: isMobile ? `${viewportHeight * 0.49}px` : '38%',
           right: isMobile ? '2%' : '12%' 
         }}
       >

@@ -180,7 +180,7 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   }
 }));
 
-const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate }) => ({
+const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) => ({
   fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
   fontWeight: 600,
   fontFamily: '"Poppins", sans-serif',
@@ -188,7 +188,10 @@ const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate }) => ({
   textAlign: 'center',
   marginBottom: '10rem',
   opacity: animate ? 1 : 0,
-  animation: animate ? `${fadeInUp} 0.8s ease-out 0.4s forwards` : 'none'
+  animation: animate ? `${fadeInUp} 0.8s ease-out 0.4s forwards` : 'none',
+  [theme.breakpoints.down('md')]: {
+    marginBottom: '1rem'
+  }
 }));
 
 const SemiCircle = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
@@ -271,7 +274,8 @@ const DescriptionText = styled(Typography)<{ animate: boolean }>(({ animate, the
   position: 'relative',
   [theme.breakpoints.down('md')]: {
     fontSize: '0.95rem',
-    maxWidth: '90%'
+    maxWidth: '90%',
+    marginBottom: '1rem'
   }
 }));
 
@@ -378,29 +382,18 @@ const HeroSection = () => {
         Meta Ads Specialist & Digital Marketing Professional
       </Subtitle>
 
+      <DescriptionText animate={animate}>
+        I specialize in transforming data into actionable insights that drive informed business decisions with expertise in analytics and marketing.
+      </DescriptionText>
+
       {/* Floating Badges with dynamic positioning */}
       <FloatingBadge 
         delay={0.5} 
-        sx={{ 
-          top: isMobile ? `${viewportHeight * 0.25}px` : '40%',
-          left: isMobile ? '4%' : '15%' 
-        }}
+        sx={{ top: isMobile ? `${viewportHeight * 0.14}px` : '10%', left: isMobile ? '4%' : '15%' }}
       >
         <BarChartIcon />
         Meta Ads Specialist
       </FloatingBadge>
-
-      {!isMobile && (
-        <DescriptionText animate={animate} sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '18%',
-          transform: 'translate(-50%, -50%)',
-          maxWidth: '300px'
-        }}>
-          I specialize in transforming data into actionable insights that drive informed business decisions with expertise in analytics and marketing.
-        </DescriptionText>
-      )}
 
       <FloatingBadge 
         delay={1} 

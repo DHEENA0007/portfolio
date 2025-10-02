@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import { styled, keyframes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import profileImage from '../assets/profile.png';
@@ -19,7 +19,8 @@ const AboutContainer = styled(Box)(({ theme }) => ({
   padding: '2rem',
   [theme.breakpoints.down('md')]: {
     minHeight: 'auto',
-    padding: '2rem 1rem'
+    padding: '3rem 1rem',
+    display: 'block'
   }
 }));
 
@@ -45,6 +46,53 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   opacity: 0.6
 }));
 
+const MobileContentWrapper = styled(Stack)(({ theme }) => ({
+  display: 'none',
+  [theme.breakpoints.down('md')]: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: '1.5rem',
+    position: 'relative',
+    zIndex: 2
+  },
+  [theme.breakpoints.down('sm')]: {
+    gap: '1rem'
+  }
+}));
+
+const MobileTextContent = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    flex: '0 0 55%',
+    maxWidth: '55%'
+  },
+  [theme.breakpoints.down('sm')]: {
+    flex: '0 0 50%',
+    maxWidth: '50%'
+  }
+}));
+
+const MobileImageContent = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    flex: '0 0 45%',
+    maxWidth: '45%',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center'
+  },
+  [theme.breakpoints.down('sm')]: {
+    flex: '0 0 50%',
+    maxWidth: '50%'
+  }
+}));
+
+const DesktopContent = styled(Box)(({ theme }) => ({
+  display: 'block',
+  [theme.breakpoints.down('md')]: {
+    display: 'none'
+  }
+}));
+
 const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) => ({
   width: 'clamp(350px, 35vw, 650px)',
   height: 'auto',
@@ -56,9 +104,15 @@ const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) =>
   opacity: animate ? 1 : 0,
   transition: 'all 0.8s ease-out 0.3s',
   [theme.breakpoints.down('md')]: {
-    right: '50%',
-    transform: 'translateX(50%)',
-    width: 'clamp(280px, 50vw, 350px)'
+    position: 'static',
+    width: '100%',
+    maxWidth: '280px',
+    transform: 'none',
+    right: 'auto',
+    bottom: 'auto'
+  },
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '200px'
   }
 }));
 
@@ -66,8 +120,8 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   fontSize: 'clamp(2.5rem, 6vw, 4rem)',
   fontWeight: 800,
   fontFamily: '"Montserrat", sans-serif',
-  marginBottom: '1rem', // Changed from '20rem' to '2rem' to move it down
-  marginTop: '15rem', // Added top margin to push it down further
+  marginBottom: '1rem',
+  marginTop: '15rem',
   color: '#1a1a1a',
   lineHeight: 1.1,
   letterSpacing: '-0.02em',
@@ -79,16 +133,14 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   maxWidth: '800px',
   marginLeft: '-50%',
   [theme.breakpoints.down('md')]: {
-    marginLeft: '5%',
-    textAlign: 'left',
-    marginTop: '2rem', // Smaller top margin on mobile
-    marginBottom: '1.5rem'
+    marginLeft: '0',
+    marginTop: '0',
+    marginBottom: '1rem',
+    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)'
   },
   [theme.breakpoints.down('sm')]: {
-    marginLeft: '2%',
-    textAlign: 'left',
-    marginTop: '1.5rem', // Even smaller on small screens
-    marginBottom: '1rem'
+    fontSize: '1.5rem',
+    marginBottom: '0.75rem'
   },
   '& .highlight': {
     color: '#604ce5',
@@ -106,21 +158,20 @@ const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>
   color: '#666',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out ${delay}s forwards` : 'none',
-  textAlign: 'left', // Changed from 'center' to 'left'
+  textAlign: 'left',
   maxWidth: '800px',
   zIndex: 4,
   position: 'relative',
-  marginLeft: '-50%', // Added left margin to shift text left
+  marginLeft: '-50%',
   [theme.breakpoints.down('md')]: {
-    fontSize: '0.95rem',
-    lineHeight: 1.6,
-    maxWidth: '600px',
-    marginLeft: '5%', // Smaller left margin on mobile
-    textAlign: 'left' // Keep left alignment on mobile
+    fontSize: '0.85rem',
+    lineHeight: 1.5,
+    marginLeft: '0',
+    maxWidth: '100%'
   },
   [theme.breakpoints.down('sm')]: {
-    marginLeft: '2%', // Even smaller margin on small screens
-    textAlign: 'left'
+    fontSize: '0.75rem',
+    lineHeight: 1.4
   }
 }));
 
@@ -156,23 +207,51 @@ const AboutSection = () => {
       <DecorativeLine side="left" />
       <DecorativeLine side="right" />
       
-      <MainTitle animate={animate}>
-        <span className="highlight">About</span> Me.
-      </MainTitle>
-      
-      <DescriptionText animate={animate} delay={0.4}>
-        Detail-oriented and analytical professional with 1+ year of experience in digital marketing and currently working as a
-        Data Analyst Intern. Proficient in SEO, Google Ads, and social media marketing, with hands-on experience in data
-        analysis using Excel, Python, and Tableau. Strong communicator with proven problem-solving abilities and a passion
-        for continuous learning in analytics and business intelligence. Actively seeking a full-time Data Analyst position to
-        apply analytical skills and contribute to organizational growth.
-      </DescriptionText>
+      {/* Desktop View - Original Layout */}
+      <DesktopContent>
+        <MainTitle animate={animate}>
+          <span className="highlight">About</span> Me.
+        </MainTitle>
+        
+        <DescriptionText animate={animate} delay={0.4}>
+          Detail-oriented and analytical professional with 1+ year of experience in digital marketing and currently working as a
+          Data Analyst Intern. Proficient in SEO, Google Ads, and social media marketing, with hands-on experience in data
+          analysis using Excel, Python, and Tableau. Strong communicator with proven problem-solving abilities and a passion
+          for continuous learning in analytics and business intelligence. Actively seeking a full-time Data Analyst position to
+          apply analytical skills and contribute to organizational growth.
+        </DescriptionText>
 
-      <ProfileImage 
-        src={profileImage} 
-        alt="Barath R - Data Analyst & Digital Marketing Professional" 
-        animate={animate} 
-      />
+        <ProfileImage 
+          src={profileImage} 
+          alt="Barath R - Data Analyst & Digital Marketing Professional" 
+          animate={animate} 
+        />
+      </DesktopContent>
+
+      {/* Mobile View - Side by Side Layout */}
+      <MobileContentWrapper>
+        <MobileTextContent>
+          <MainTitle animate={animate}>
+            <span className="highlight">About</span> Me.
+          </MainTitle>
+          
+          <DescriptionText animate={animate} delay={0.4}>
+            Detail-oriented and analytical professional with 1+ year of experience in digital marketing and currently working as a
+            Data Analyst Intern. Proficient in SEO, Google Ads, and social media marketing, with hands-on experience in data
+            analysis using Excel, Python, and Tableau. Strong communicator with proven problem-solving abilities and a passion
+            for continuous learning in analytics and business intelligence. Actively seeking a full-time Data Analyst position to
+            apply analytical skills and contribute to organizational growth.
+          </DescriptionText>
+        </MobileTextContent>
+
+        <MobileImageContent>
+          <ProfileImage 
+            src={profileImage} 
+            alt="Barath R - Data Analyst & Digital Marketing Professional" 
+            animate={animate} 
+          />
+        </MobileImageContent>
+      </MobileContentWrapper>
     </AboutContainer>
   );
 };

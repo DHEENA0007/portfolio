@@ -3,7 +3,7 @@
 export const mockRootProps = {
   activeUsers: "299K",
   newUsers: "300K",
-  activeUsersLast30Min: 24,
+  activeUsersLast30Min: 23,
   timeSeriesData: [
     { month: "Oct", value: 1100 },
     { month: "Nov", value: 1200 },

@@ -258,6 +258,18 @@ interface CountriesTableProps {
   countries: Array<{ country: string; users: number }>;
 }
 
+interface GoogleAnalyticsDashboardProps {
+  data?: {
+    activeUsers: string;
+    newUsers: string;
+    activeUsersLast30Min: number;
+    timeSeriesData: Array<{ month: string; value: number }>;
+    activeUsersPerMinute: Array<{ time: number; users: number }>;
+    topCountries: Array<{ country: string; users: number }>;
+  };
+  title?: string;
+}
+
 const CountriesTable = ({ countries }: CountriesTableProps) => (
   <Table size="small">
     <TableBody>
@@ -277,16 +289,17 @@ const CountriesTable = ({ countries }: CountriesTableProps) => (
   </Table>
 );
 
-const GoogleAnalyticsDashboard = () => {
+const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acquisition Overview" }: GoogleAnalyticsDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const data = mockRootProps;
 
   return (
     <DashboardContainer>
-      <DashboardTitle>
-        Analytics Acquisition Overview
-      </DashboardTitle>
+      {title && (
+        <DashboardTitle>
+          {title}
+        </DashboardTitle>
+      )}
       
       {/* Desktop Layout */}
       {!isMobile && (
@@ -350,33 +363,36 @@ const GoogleAnalyticsDashboard = () => {
 
         {/* Mobile Time Series Chart */}
         <SidebarCard>
-          <Typography variant="h6" sx={{ mb: 2, fontSize: '1rem', fontWeight: 600 }}>
+          <Typography variant="h6" sx={{ mb: 1.5, fontSize: '0.9rem', fontWeight: 600 }}>
             User Acquisition Timeline
           </Typography>
-          <LineChart
-            width={320}
-            height={200}
-            series={[
-              {
-                data: data.timeSeriesData.map(d => d.value),
-                color: '#4285f4'
-              }
-            ]}
-            xAxis={[{
-              scaleType: 'point',
-              data: data.timeSeriesData.map(d => d.month),
-              tickLabelStyle: {
-                fontSize: 10,
-                fill: '#5f6368'
-              }
-            }]}
-            yAxis={[{
-              tickLabelStyle: {
-                fontSize: 10,
-                fill: '#5f6368'
-              }
-            }]}
-          />
+          <Box sx={{ marginLeft: '-10px' }}>
+            <LineChart
+              width={280}
+              height={160}
+              series={[
+                {
+                  data: data.timeSeriesData.map(d => d.value),
+                  color: '#4285f4'
+                }
+              ]}
+              xAxis={[{
+                scaleType: 'point',
+                data: data.timeSeriesData.map(d => d.month),
+                tickLabelStyle: {
+                  fontSize: 9,
+                  fill: '#5f6368'
+                }
+              }]}
+              yAxis={[{
+                tickLabelStyle: {
+                  fontSize: 9,
+                  fill: '#5f6368'
+                }
+              }]}
+              margin={{ left: 0, right: 20, top: 20, bottom: 40 }}
+            />
+          </Box>
         </SidebarCard>
 
         {/* Mobile Active Users */}

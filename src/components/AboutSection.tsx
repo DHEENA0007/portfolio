@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import profileImage from '../assets/profile.png';
 import profileImage2 from '../assets/profile2.png';
 import backgroundImage from '../assets/BG.png';
+import backgroundImage2 from '../assets/BG2.png';
 
 const AboutContainer = styled(Box)(({ theme }) => ({
   minHeight: '70vh',
@@ -24,11 +25,21 @@ const AboutContainer = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    background: `url(${backgroundImage2})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'right 95%',
+    backgroundRepeat: 'no-repeat',
+    transform: 'scaleX(-1)'
   },
   [theme.breakpoints.down('sm')]: {
     padding: '0.75rem 1rem',
-    minHeight: '45vh'
+    minHeight: '45vh',
+    background: `url(${backgroundImage2})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'right 45%',
+    backgroundRepeat: 'no-repeat',
+    transform: 'scaleX(-1)'
   }
 }));
 
@@ -43,7 +54,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
+const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side, theme }) => ({
   position: 'absolute',
   top: side === 'left' ? '15%' : '20%',
   [side]: '5%',
@@ -51,7 +62,10 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   height: '3px',
   backgroundColor: '#604ce5',
   transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
-  opacity: 0.6
+  opacity: 0.6,
+  [theme.breakpoints.down('md')]: {
+    transform: `${side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)'} scaleX(-1)`
+  }
 }));
 
 const MobileContentWrapper = styled(Box)(({ theme }) => ({
@@ -62,7 +76,8 @@ const MobileContentWrapper = styled(Box)(({ theme }) => ({
     zIndex: 2,
     width: '100%',
     height: '100%',
-    flex: 1
+    flex: 1,
+    transform: 'scaleX(-1)'
   }
 }));
 
@@ -107,13 +122,13 @@ const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) =>
     maxWidth: 'none',
     height: '110%',
     objectFit: 'contain',
-    bottom: 0,
+    bottom: '-20px',
     right: '-15%',
     zIndex: 2
   },
   [theme.breakpoints.down('sm')]: {
     height: '105%',
-    bottom: 0,
+    bottom: '-15px',
     right: '-25%'
   }
 }));
@@ -155,7 +170,7 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
     fontSize: '1.1em',
      [theme.breakpoints.down('md')]: {
       fontSize: '1.1em',
-      color: '#604ce5',
+      color: '#cbc6ebff',
     }
   }
 }));

@@ -7,7 +7,7 @@ import CampaignDeepDive from './CampaignDeepDive';
 import SEOPerformanceDashboard from './SEOPerformanceDashboard';
 import TrafficImpactDashboard from './TrafficImpactDashboard';
 import SEOFrameworkDashboard from './SEOFrameworkDashboard';
-import GoogleAnalyticsDashboard from './GoogleAnalyticsDashboard';
+import CombinedAnalyticsDashboard from './CombinedAnalyticsDashboard';
 import StrategicRebalancingDashboard from './StrategicRebalancingDashboard';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
@@ -134,7 +134,7 @@ const portfolioData = [
   },
   {
     id: 8,
-    title: 'Google Analytics Overview',
+    title: 'Analytics Acquisition Overview',
     category: 'Web Analytics',
     component: 'GoogleAnalytics',
     isCustom: true
@@ -233,7 +233,7 @@ const PortfolioSection = () => {
                 {project.component === 'SEOPerformance' && <SEOPerformanceDashboard />}
                 {project.component === 'TrafficImpact' && <TrafficImpactDashboard />}
                 {project.component === 'SEOFramework' && <SEOFrameworkDashboard />}
-                {project.component === 'GoogleAnalytics' && <GoogleAnalyticsDashboard />}
+                {project.component === 'GoogleAnalytics' && <CombinedAnalyticsDashboard />}
                 {project.component === 'StrategicRebalancing' && <StrategicRebalancingDashboard />}
               </CustomProjectContent>
             </ProjectItem>

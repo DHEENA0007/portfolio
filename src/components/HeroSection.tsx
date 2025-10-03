@@ -3,6 +3,7 @@ import { styled, keyframes } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import profileImage from '../assets/profile.png';
 import backgroundImage from '../assets/BG.png';
+import backgroundImage2 from '../assets/BG2.png';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
@@ -47,11 +48,19 @@ const HeroContainer = styled(Box)<{ dynamicHeight?: number }>(({ theme, dynamicH
   [theme.breakpoints.down('md')]: {
     minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
     paddingBottom: '2rem',
-    paddingTop: '30px'
+    paddingTop: '30px',
+    background: `url(${backgroundImage2})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center 90%',
+    backgroundRepeat: 'no-repeat'
   },
   [theme.breakpoints.down('sm')]: {
     minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
     paddingTop: '20px',
+    background: `url(${backgroundImage2})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center 90%',
+    backgroundRepeat: 'no-repeat'
   }
 }));
 
@@ -190,16 +199,25 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
 const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) => ({
   fontSize: 'clamp(2.5rem, 8vw, 5rem)',
   fontWeight: 400,
-  fontFamily: '"Bebas Neue", sans-serif',
+  fontFamily: '"Poppins", sans-serif',
   textAlign: 'center',
   marginTop: '-8.5rem',
-  letterSpacing: '0.05em',
+  letterSpacing: '0.02em',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out 0.2s forwards` : 'none',
+  color: '#1a1a1a',
+  '& .im-text': {
+    fontFamily: '"Caveat", cursive',
+    fontWeight: 600,
+    fontSize: 'clamp(2.8rem, 8.5vw, 5.5rem)'
+  },
   '& .name': {
     color: '#604ce5',
     display: 'inline-block',
-    fontFamily: '"Bebas Neue", sans-serif'
+    fontFamily: '"Caveat", cursive',
+    fontWeight: 700,
+    letterSpacing: '0.02em',
+    fontSize: 'clamp(2.8rem, 8.5vw, 5.5rem)'
   },
   '& .emoji': {
     display: 'inline-block',
@@ -236,7 +254,10 @@ const BackgroundImage = styled('img')<{ animate: boolean }>(({ animate, theme })
   zIndex: 2,
   objectFit: 'contain',
   [theme.breakpoints.down('md')]: {
-    width: 'clamp(380px, 65vw, 500px)'
+    display: 'none'
+  },
+  [theme.breakpoints.down('sm')]: {
+    display: 'none'
   }
 }));
 
@@ -392,7 +413,7 @@ const HeroSection: React.FC = () => {
       }} />
       
       <MainTitle animate={animate}>
-        I'm <span className="name">Barath R</span> <span className="emoji">👋</span>
+        <span className="im-text">I'm</span> <span className="name">Barath R</span> <span className="emoji">👋</span>
       </MainTitle>
       
       <Subtitle animate={animate}>
@@ -478,7 +499,11 @@ const HeroSection: React.FC = () => {
         SEO Expert
       </FloatingBadge>
 
-      <BackgroundImage src="/BG.png" alt="" animate={animate} />
+      <BackgroundImage 
+        src="/BG.png" 
+        alt="" 
+        animate={animate} 
+      />
 
       <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" animate={animate} />
 

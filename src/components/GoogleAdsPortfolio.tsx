@@ -5,7 +5,7 @@ import type { GoogleAdsPortfolioData } from './GoogleAdsPortfolioMockData';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 const PortfolioContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '4rem 2rem',
   borderRadius: '16px',
   margin: '0',
@@ -29,10 +29,10 @@ const MainTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Darker Grotesque", "Space Grotesk", sans-serif',
   fontSize: '3.2rem',
   fontWeight: 800,
-  color: '#1e293b',
+  color: '#2d1b4e',
   marginBottom: '0.5rem',
   letterSpacing: '-0.03em',
-  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%)',
+  background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
@@ -47,7 +47,7 @@ const MainTitle = styled(Typography)(({ theme }) => ({
 const Subtitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1rem',
-  color: '#64748b',
+  color: '#6b5b98',
   fontWeight: 400,
   [theme.breakpoints.down('sm')]: {
     fontSize: '0.9rem'
@@ -93,7 +93,7 @@ const MetricLabel = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
   fontWeight: 600,
-  color: '#64748b',
+  color: '#6b5b98',
   textAlign: 'center',
   marginBottom: '0.5rem',
   letterSpacing: '0.05em',
@@ -107,7 +107,7 @@ const MetricValue = styled(Typography)<{ color?: string }>(({ color, theme }) =>
   fontFamily: '"Inter", sans-serif',
   fontSize: '2.25rem',
   fontWeight: 700,
-  color: color || '#1e293b',
+  color: color || '#2d1b4e',
   textAlign: 'center',
   lineHeight: 1.2,
   [theme.breakpoints.down('sm')]: {
@@ -136,7 +136,7 @@ const ChartTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1.5rem',
   fontWeight: 700,
-  color: '#1e293b',
+  color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '2rem',
   [theme.breakpoints.down('sm')]: {
@@ -148,7 +148,7 @@ const ChartTitle = styled(Typography)(({ theme }) => ({
 const ChartDescription = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
-  color: '#64748b',
+  color: '#6b5b98',
   textAlign: 'center',
   lineHeight: 1.6,
   marginTop: '2rem',
@@ -244,20 +244,20 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
               tickLabelStyle: {
                 fontSize: isMobile ? 10 : 14, // Mobile: 10px, Desktop: 14px
                 fontFamily: '"Inter", sans-serif',
-                fill: '#64748b'
+                fill: '#6b5b98'
               }
             }]}
             yAxis={[{
               tickLabelStyle: {
                 fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
                 fontFamily: '"Inter", sans-serif',
-                fill: '#64748b'
+                fill: '#6b5b98'
               },
               label: 'ROAS',
               labelStyle: {
                 fontSize: isMobile ? 12 : 14, // Mobile: 12px, Desktop: 14px
                 fontFamily: '"Inter", sans-serif',
-                fill: '#1e293b'
+                fill: '#2d1b4e'
               }
             }]}
             margin={{ 

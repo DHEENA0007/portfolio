@@ -2,7 +2,7 @@ import { Box, Typography, Card, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const DashboardContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
   margin: '0',
@@ -18,11 +18,11 @@ const DashboardTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
   fontSize: '2.8rem',
   fontWeight: 800,
-  color: '#1e293b',
+  color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '1.5rem',
   letterSpacing: '-0.02em',
-  background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%)',
+  background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
@@ -38,7 +38,7 @@ const DashboardTitle = styled(Typography)(({ theme }) => ({
 const DashboardDescription = styled(Typography)(({ theme }) => ({
   fontFamily: '"Lato", sans-serif',
   fontSize: '1rem',
-  color: '#64748b',
+  color: '#6b5b98',
   textAlign: 'center',
   marginBottom: '3rem',
   maxWidth: '700px',
@@ -160,7 +160,7 @@ const BulletList = styled(Box)(({ theme }) => ({
 const BulletPoint = styled(Typography)(({ theme }) => ({
   fontFamily: '"Lato", sans-serif',
   fontSize: '0.875rem',
-  color: '#64748b',
+  color: '#6b5b98',
   lineHeight: 1.5,
   position: 'relative',
   paddingLeft: '1rem',
@@ -168,7 +168,7 @@ const BulletPoint = styled(Typography)(({ theme }) => ({
     content: '"•"',
     position: 'absolute',
     left: 0,
-    color: '#64748b',
+    color: '#6b5b98',
     fontWeight: 'bold'
   },
   [theme.breakpoints.down('sm')]: {

@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import CountUp from './CountUpAnimation';
 
 const DashboardContainer = styled(Box)({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
   margin: '0'
@@ -13,11 +13,11 @@ const DashboardTitle = styled(Typography)({
   fontFamily: '"Satoshi", "Inter", sans-serif',
   fontSize: '3rem',
   fontWeight: 700,
-  color: '#1e293b',
+  color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '1rem',
   letterSpacing: '-0.025em',
-  background: 'linear-gradient(135deg, #7f6fe5 0%, #6657d5 50%, #5b4dcb 100%)',
+  background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'
@@ -26,7 +26,7 @@ const DashboardTitle = styled(Typography)({
 const DashboardSubtitle = styled(Typography)({
   fontFamily: '"General Sans", "Inter", sans-serif',
   fontSize: '1.125rem',
-  color: '#64748b',
+  color: '#6b5b98',
   textAlign: 'center',
   marginBottom: '3rem',
   maxWidth: '600px',
@@ -71,7 +71,7 @@ const MetricLabel = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
   fontWeight: 500,
-  color: '#64748b',
+  color: '#6b5b98',
   marginBottom: '1rem',
   letterSpacing: '0.05em',
   textTransform: 'uppercase'
@@ -89,7 +89,7 @@ const MetricValue = styled(Typography)<{ valueColor: string }>(({ valueColor }) 
 const MetricDescription = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
-  color: '#64748b',
+  color: '#6b5b98',
   lineHeight: 1.5
 });
 

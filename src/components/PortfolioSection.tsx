@@ -11,7 +11,7 @@ import GoogleAnalyticsDashboard from './GoogleAnalyticsDashboard';
 import StrategicRebalancingDashboard from './StrategicRebalancingDashboard';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '8rem 0',
   color: '#000000',
   position: 'relative',
@@ -29,7 +29,7 @@ const DecorativeLine = styled(Box)<{ side: 'left' | 'right' }>(({ side }) => ({
   [side]: '5%',
   width: '60px',
   height: '3px',
-  backgroundColor: '#604ce5',
+  backgroundColor: '#8b7ab8',
   transform: side === 'left' ? 'rotate(-30deg)' : 'rotate(30deg)',
   opacity: 0.6
 }));

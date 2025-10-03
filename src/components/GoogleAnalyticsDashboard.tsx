@@ -6,7 +6,7 @@ import CountUp from './CountUpAnimation';
 import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
 
 const DashboardContainer = styled(Box)({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
   margin: '0'
@@ -16,11 +16,11 @@ const DashboardTitle = styled(Typography)({
   fontFamily: '"DM Sans", "Manrope", sans-serif',
   fontSize: '3rem',
   fontWeight: 700,
-  color: '#1e293b',
+  color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '3rem',
   letterSpacing: '-0.025em',
-  background: 'linear-gradient(135deg, #7f6fe5 0%, #6657d5 50%, #5b4dcb 100%)',
+  background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'

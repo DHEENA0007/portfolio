@@ -7,7 +7,7 @@ import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import type { ExperienceEducationSectionProps } from './ExperienceEducationSectionMockData';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '4rem 2rem 6rem 2rem',
   position: 'relative',
   [theme.breakpoints.down('md')]: {
@@ -53,21 +53,21 @@ const ExperienceCard = styled(Card)({
   borderRadius: '20px',
   padding: '1.5rem',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid rgba(139, 127, 216, 0.1)',
+  border: '1px solid rgba(139, 122, 184, 0.1)',
   marginBottom: '1.5rem',
   transition: 'all 0.3s ease',
   display: 'flex',
   gap: '1rem',
   '&:hover': {
     transform: 'translateY(-4px)',
-    boxShadow: '0 8px 30px rgba(139, 127, 216, 0.15)'
+    boxShadow: '0 8px 30px rgba(139, 122, 184, 0.15)'
   }
 });
 
 const CompanyLogo = styled(Avatar)({
   width: '56px',
   height: '56px',
-  backgroundColor: '#7f6fe5',
+  backgroundColor: '#8b7ab8',
   flexShrink: 0,
   '& .MuiSvgIcon-root': {
     fontSize: '1.75rem',
@@ -117,7 +117,7 @@ const EducationCard = styled(Card)({
   borderRadius: '20px',
   padding: '2rem',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid rgba(139, 127, 216, 0.1)',
+  border: '1px solid rgba(139, 122, 184, 0.1)',
   marginBottom: '2rem'
 });
 
@@ -140,7 +140,7 @@ const EducationDetails = styled(Typography)({
 const GPAText = styled(Typography)({
   fontFamily: '"Montserrat", sans-serif',
   fontSize: '1rem',
-  color: '#7f6fe5',
+  color: '#8b7ab8',
   fontWeight: 700
 });
 
@@ -168,7 +168,7 @@ const PlayfulText = styled(Typography)(({ theme }) => ({
   fontFamily: '"Caveat", cursive',
   fontSize: '3.2rem',
   fontWeight: 400,
-  color: '#7462e8',
+  color: '#8b7ab8',
   marginBottom: '2rem',
   lineHeight: 1.2,
   textAlign: 'left',
@@ -262,7 +262,7 @@ const QuoteText = styled(Typography)(({ theme }) => ({
   marginTop: '0.5rem',
   marginBottom: '1rem',
   paddingLeft: '1rem',
-  borderLeft: '3px solid #7462e8',
+  borderLeft: '3px solid #8b7ab8',
   fontWeight: 400,
   [theme.breakpoints.down('sm')]: {
     fontSize: '1rem',
@@ -308,7 +308,7 @@ const ExperienceEducationSection: React.FC<ExperienceEducationSectionProps> = ({
             
             <EducationCard>
               <Box display="flex" alignItems="center" gap={1} mb={1}>
-                <SchoolIcon sx={{ fontSize: '2rem', color: '#7f6fe5' }} />
+                <SchoolIcon sx={{ fontSize: '2rem', color: '#8b7ab8' }} />
                 <EducationTitle>
                   {education.degree}
                 </EducationTitle>

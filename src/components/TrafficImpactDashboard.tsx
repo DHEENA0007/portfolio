@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const DashboardContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
   margin: '0',
@@ -19,11 +19,11 @@ const DashboardTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"PP Neue Montreal", "Outfit", sans-serif',
   fontSize: '2.8rem',
   fontWeight: 700,
-  color: '#1e293b',
+  color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '1.5rem',
   letterSpacing: '-0.02em',
-  background: 'linear-gradient(135deg, #7f6fe5 0%, #6657d5 50%, #5b4dcb 100%)',
+  background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
@@ -39,7 +39,7 @@ const DashboardTitle = styled(Typography)(({ theme }) => ({
 const DashboardDescription = styled(Typography)(({ theme }) => ({
   fontFamily: '"Manrope", "Inter", sans-serif',
   fontSize: '1rem',
-  color: '#64748b',
+  color: '#6b5b98',
   textAlign: 'center',
   marginBottom: '3rem',
   maxWidth: '800px',
@@ -101,7 +101,7 @@ const LegendColor = styled(Box)<{ color: string }>(({ color }) => ({
 const LegendText = styled(Typography)(({ theme }) => ({
   fontFamily: '"Lato", sans-serif',
   fontSize: '0.875rem',
-  color: '#64748b',
+  color: '#6b5b98',
   fontWeight: 500,
   [theme.breakpoints.down('sm')]: {
     fontSize: '0.8rem'
@@ -172,7 +172,7 @@ const TrafficImpactDashboard = () => {
                 data: months,
                 tickLabelStyle: {
                   fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
-                  fill: '#64748b',
+                  fill: '#6b5b98',
                   fontFamily: '"Inter", sans-serif'
                 }
               }
@@ -182,12 +182,12 @@ const TrafficImpactDashboard = () => {
                 label: 'Users (K)',
                 labelStyle: {
                   fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
-                  fill: '#64748b',
+                  fill: '#6b5b98',
                   fontFamily: '"Inter", sans-serif'
                 },
                 tickLabelStyle: {
                   fontSize: isMobile ? 9 : 12, // Mobile: 9px, Desktop: 12px
-                  fill: '#64748b',
+                  fill: '#6b5b98',
                   fontFamily: '"Inter", sans-serif'
                 },
                 max: 3000,

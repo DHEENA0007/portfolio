@@ -114,7 +114,7 @@ const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) =>
   [theme.breakpoints.down('sm')]: {
     height: '105%',
     bottom: 0,
-    right: '-18%'
+    right: '-25%'
   }
 }));
 
@@ -133,7 +133,7 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
   zIndex: 4,
   position: 'relative',
   maxWidth: '700px',
-  marginLeft: '-25%',
+  marginLeft: '-32%',
   [theme.breakpoints.down('md')]: {
     marginLeft: '0',
     textAlign: 'left',
@@ -148,26 +148,30 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
     marginBottom: '0.75rem'
   },
   '& .highlight': {
-    color: '#8B7FD8',
+    color: '#cbc6ebff',
     display: 'inline-block',
     fontFamily: '"Pacifico", cursive',
     fontWeight: 400,
-    fontSize: '1.1em'
+    fontSize: '1.1em',
+     [theme.breakpoints.down('md')]: {
+      fontSize: '1.1em',
+      color: '#604ce5',
+    }
   }
 }));
 
 const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>(({ animate, delay = 0.4, theme }) => ({
-  fontSize: '1rem',
-  lineHeight: 1.7,
+  fontSize: '2rem',
+  lineHeight: 1,
   fontFamily: '"Plus Jakarta Sans", sans-serif',
-  color: '#666',
+  color: '#1a1a1a',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out ${delay}s forwards` : 'none',
   textAlign: 'left',
   maxWidth: '800px',
   zIndex: 4,
   position: 'relative',
-  marginLeft: '-25%',
+  marginLeft: '-32%',
   [theme.breakpoints.down('md')]: {
     fontSize: '0.8rem',
     lineHeight: 1.6,
@@ -178,8 +182,9 @@ const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>
     padding: '0'
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: '0.75rem',
-    lineHeight: 1.5
+    fontSize: '1.062rem',
+    lineHeight: 1.2,
+    fontWeight: 'bold'
   }
 }));
 
@@ -222,11 +227,9 @@ const AboutSection = () => {
         </MainTitle>
         
         <DescriptionText animate={animate} delay={0.4}>
-          Detail-oriented and analytical professional with 1+ year of experience in digital marketing and currently working as a
-          Data Analyst Intern. Proficient in SEO, Google Ads, and social media marketing, with hands-on experience in data
-          analysis using Excel, Python, and Tableau. Strong communicator with proven problem-solving abilities and a passion
-          for continuous learning in analytics and business intelligence. Actively seeking a full-time Data Analyst position to
-          apply analytical skills and contribute to organizational growth.
+          I’m a Digital Marketing Executive with one year of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. 
+          I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. 
+          With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
         </DescriptionText>
 
         <ProfileImage 
@@ -244,11 +247,9 @@ const AboutSection = () => {
           </MainTitle>
           
           <DescriptionText animate={animate} delay={0.4}>
-            Detail-oriented and analytical professional with 1+ year of experience in digital marketing and currently working as a
-            Data Analyst Intern. Proficient in SEO, Google Ads, and social media marketing, with hands-on experience in data
-            analysis using Excel, Python, and Tableau. Strong communicator with proven problem-solving abilities and a passion
-            for continuous learning in analytics and business intelligence. Actively seeking a full-time Data Analyst position to
-            apply analytical skills and contribute to organizational growth.
+            I’m a Digital Marketing Executive with one year of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. 
+            I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. 
+            With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
           </DescriptionText>
         </MobileTextContent>
 

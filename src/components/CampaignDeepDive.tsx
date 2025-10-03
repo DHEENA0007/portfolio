@@ -6,7 +6,7 @@ import franceLogo from '../assets/GoFrance.jpeg';
 import ukLogo from '../assets/GoUk.jpeg';
 
 const DashboardContainer = styled(Box)({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
   margin: '0'
@@ -16,11 +16,11 @@ const DashboardTitle = styled(Typography)({
   fontFamily: '"Bricolage Grotesque", "Outfit", sans-serif',
   fontSize: '3rem',
   fontWeight: 700,
-  color: '#1e293b',
+  color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '3rem',
   letterSpacing: '-0.025em',
-  background: 'linear-gradient(135deg, #7f6fe5 0%, #6657d5 50%, #5b4dcb 100%)',
+  background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text'
@@ -74,7 +74,7 @@ const CountryName = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1.125rem',
   fontWeight: 600,
-  color: '#475569'
+  color: '#6b5b98'
 });
 
 const MetricsRow = styled(Box)({
@@ -91,7 +91,7 @@ const MetricLabel = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.75rem',
   fontWeight: 500,
-  color: '#64748b',
+  color: '#6b5b98',
   marginBottom: '0.25rem',
   letterSpacing: '0.05em'
 });
@@ -100,7 +100,7 @@ const MetricValue = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '1rem',
   fontWeight: 600,
-  color: '#1e293b'
+  color: '#2d1b4e'
 });
 
 const ChartContainer = styled(Box)({
@@ -120,7 +120,7 @@ const AchievementTitle = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.875rem',
   fontWeight: 600,
-  color: '#475569',
+  color: '#6b5b98',
   marginBottom: '0.75rem',
   textAlign: 'center'
 });
@@ -128,7 +128,7 @@ const AchievementTitle = styled(Typography)({
 const AchievementText = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
   fontSize: '0.75rem',
-  color: '#64748b',
+  color: '#6b5b98',
   lineHeight: 1.5,
   textAlign: 'center'
 });

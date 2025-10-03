@@ -11,6 +11,7 @@ import ExperienceEducationSection from './components/ExperienceEducationSection'
 import { mockRootProps } from './components/ExperienceEducationSectionMockData';
 import SkillsCertificationsSection from './components/SkillsCertificationsSection';
 import PortfolioSection from './components/PortfolioSection';
+import WhyHireMeSection from './components/WhyHireMeSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
@@ -34,7 +35,7 @@ function App() {
         <CssBaseline />
         <Box sx={{ 
           minHeight: '100vh',
-          background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+          background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
           backgroundAttachment: 'fixed'
         }}>
           <HeroSection />
@@ -43,6 +44,7 @@ function App() {
           <ExperienceEducationSection {...mockRootProps} />
           <SkillsCertificationsSection />
           <PortfolioSection />
+          <WhyHireMeSection />
           <ContactSection />
           <Footer />
         </Box>

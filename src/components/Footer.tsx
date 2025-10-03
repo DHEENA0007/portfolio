@@ -6,7 +6,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   color: '#1a1a1a',
   borderTop: '1px solid rgba(251, 146, 60, 0.2)',
@@ -33,7 +33,7 @@ const BackToTopButton = styled(Box)(() => ({
   cursor: 'pointer',
   color: '#1a1a1a',
   '&:hover': {
-    color: '#604ce5',
+    color: '#8b7ab8',
     transform: 'translateY(-2px)',
     '& svg': {
       animation: 'bounce 0.6s ease-in-out infinite'
@@ -52,15 +52,15 @@ const BackToTopButton = styled(Box)(() => ({
 
 const SocialIconButton = styled(IconButton)({
   color: '#ffffff',
-  backgroundColor: '#604ce5',
+  backgroundColor: '#8b7ab8',
   margin: '0 0.5rem',
   width: '44px',
   height: '44px',
-  boxShadow: '0 4px 12px rgba(96, 76, 229, 0.25)',
+  boxShadow: '0 4px 12px rgba(139, 122, 184, 0.25)',
   '&:hover': {
-    backgroundColor: '#bc5704',
+    backgroundColor: '#6b5b98',
     transform: 'translateY(-4px) scale(1.05)',
-    boxShadow: '0 6px 20px rgba(188, 87, 4, 0.35)'
+    boxShadow: '0 6px 20px rgba(107, 91, 152, 0.35)'
   },
   '&:active': {
     transform: 'translateY(-2px) scale(1.02)'

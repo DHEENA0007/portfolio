@@ -4,15 +4,15 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#2563eb',
-      light: '#1a1a1a',
-      dark: '#000000',
+      main: '#8b7ab8',
+      light: '#ab9ad8',
+      dark: '#6b5b98',
       contrastText: '#ffffff'
     },
     secondary: {
-      main: '#64748b',
-      light: '#2d2d2d',
-      dark: '#0d0d0d',
+      main: '#9b8ac8',
+      light: '#bbaae8',
+      dark: '#7b6ba8',
       contrastText: '#ffffff'
     },
     success: {
@@ -34,24 +34,24 @@ const theme = createTheme({
       contrastText: '#ffffff'
     },
     background: {
-      default: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+      default: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
       paper: '#ffffff'
     },
     text: {
-      primary: '#1e293b',
-      secondary: '#64748b'
+      primary: '#2d1b4e',
+      secondary: '#6b5b98'
     },
     grey: {
-      50: '#fafafa',
-      100: '#f5f5f5',
-      200: '#eeeeee',
-      300: '#e0e0e0',
-      400: '#bdbdbd',
-      500: '#9e9e9e',
-      600: '#757575',
-      700: '#616161',
-      800: '#424242',
-      900: '#212121'
+      50: '#faf9fc',
+      100: '#f3f0fa',
+      200: '#e8e3f5',
+      300: '#d4cce8',
+      400: '#b8aed0',
+      500: '#9b8ac8',
+      600: '#7b6ba8',
+      700: '#6b5b98',
+      800: '#4b3b78',
+      900: '#3b2b68'
     }
   },
   typography: {
@@ -98,7 +98,7 @@ const theme = createTheme({
       fontWeight: 600,
       fontSize: '1.5rem',
       letterSpacing: '0.01em',
-      color: '#1e293b'
+      color: '#2d1b4e'
     },
     h5: {
       fontFamily: '"Outfit", sans-serif',
@@ -111,7 +111,7 @@ const theme = createTheme({
       fontWeight: 500,
       fontSize: '1.2rem',
       letterSpacing: '0em',
-      color: '#475569'
+      color: '#6b5b98'
     },
     body1: {
       fontFamily: '"Plus Jakarta Sans", sans-serif',

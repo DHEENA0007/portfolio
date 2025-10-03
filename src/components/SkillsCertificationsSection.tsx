@@ -14,7 +14,7 @@ import {
 } from './icons/CustomIcons';
 
 const SectionContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+  background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '2rem 2rem',
   position: 'relative',
   marginTop: '-80px',
@@ -26,7 +26,7 @@ const SectionContainer = styled(Box)(({ theme }) => ({
     left: 0,
     right: 0,
     height: '80px',
-    background: 'linear-gradient(135deg, #fef9f5 0%, #fff8f3 50%, #fef9f5 100%)',
+    background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
     borderRadius: '0 0 50% 50% / 0 0 100% 100%',
     zIndex: 1
   },
@@ -59,7 +59,7 @@ const MainTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Dancing Script", cursive',
   fontSize: '4.5rem',
   fontWeight: 700,
-  color: '#7f6fe5',
+  color: '#8b7ab8',
   textAlign: 'center',
   marginBottom: '1rem',
   letterSpacing: '0.02em',
@@ -93,8 +93,8 @@ const SkillChip = styled(Chip)({
   color: '#1a1a1a',
   transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: '#604ce5',
-    borderColor: '#604ce5',
+    backgroundColor: '#8b7ab8',
+    borderColor: '#8b7ab8',
     color: '#ffffff',
     transform: 'translateY(-2px)'
   },
@@ -120,7 +120,7 @@ const SectionTitle = styled(Typography)({
   fontFamily: '"Satisfy", cursive',
   fontSize: '3rem',
   fontWeight: 400,
-  color: '#bc5704',
+  color: '#8b7ab8',
   marginBottom: '2rem',
   letterSpacing: '0.02em'
 });
@@ -240,7 +240,7 @@ const CertIconWrapper = styled(Box)({
   width: '48px',
   height: '48px',
   borderRadius: '12px',
-  backgroundColor: '#604ce5',
+  backgroundColor: '#8b7ab8',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -269,6 +269,8 @@ const CertDate = styled(Typography)({
   fontSize: '0.875rem',
   color: '#666666'
 });
+
+
 
 const skillCategories = [
   'Python',
@@ -446,6 +448,7 @@ const SkillsCertificationsSection = () => {
             })}
           </Box>
         </ContentGrid>
+
       </ContentWrapper>
     </SectionContainer>
   );

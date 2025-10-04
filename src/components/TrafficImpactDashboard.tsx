@@ -1,6 +1,6 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LineChart } from '@mui/x-charts/LineChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const DashboardContainer = styled(Box)(({ theme }) => ({
   background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
@@ -93,9 +93,9 @@ const LegendItem = styled(Box)({
 
 const LegendColor = styled(Box)<{ color: string }>(({ color }) => ({
   width: '16px',
-  height: '3px',
+  height: '16px',
   backgroundColor: color,
-  borderRadius: '2px'
+  borderRadius: '3px'
 }));
 
 const LegendText = styled(Typography)(({ theme }) => ({
@@ -134,7 +134,7 @@ const TrafficImpactDashboard = () => {
         <LegendContainer>
           <LegendItem>
             <LegendColor color="#ef4444" />
-            <LegendText>Current Year (Your Work)</LegendText>
+            <LegendText>Current Year (My Work)</LegendText>
           </LegendItem>
           <LegendItem>
             <LegendColor color="#6366f1" />
@@ -144,34 +144,34 @@ const TrafficImpactDashboard = () => {
         
         <Box sx={{ 
           width: '100%', 
-          height: { xs: '350px', md: '400px' },
+          height: { xs: '350px', md: '450px' },
           display: 'flex', 
           justifyContent: 'center',
           overflow: 'hidden'
         }}>
-          <LineChart
-            width={isMobile ? 325 : isTablet ? 700 : 900} // Responsive width
-            height={isMobile ? 260 : 400} // Responsive height
+          <BarChart
+            width={isMobile ? 325 : isTablet ? 700 : 900}
+            height={isMobile ? 300 : 450}
             series={[
               {
                 data: currentYearData,
-                label: 'Current Year (Your Work)',
+                label: 'Current Year (My Work)',
                 color: '#ef4444',
-                curve: 'linear'
+                id: 'currentYear'
               },
               {
                 data: baselineData,
                 label: 'Previous Year (Baseline)',
                 color: '#6366f1',
-                curve: 'linear'
+                id: 'baseline'
               }
             ]}
             xAxis={[
               {
-                scaleType: 'point',
+                scaleType: 'band',
                 data: months,
                 tickLabelStyle: {
-                  fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
+                  fontSize: isMobile ? 10 : 12,
                   fill: '#6b5b98',
                   fontFamily: '"Inter", sans-serif'
                 }
@@ -181,37 +181,42 @@ const TrafficImpactDashboard = () => {
               {
                 label: 'Users (K)',
                 labelStyle: {
-                  fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
+                  fontSize: isMobile ? 10 : 12,
                   fill: '#6b5b98',
                   fontFamily: '"Inter", sans-serif'
                 },
                 tickLabelStyle: {
-                  fontSize: isMobile ? 9 : 12, // Mobile: 9px, Desktop: 12px
+                  fontSize: isMobile ? 9 : 12,
                   fill: '#6b5b98',
                   fontFamily: '"Inter", sans-serif'
                 },
                 max: 3000,
-                tickNumber: isMobile ? 4 : 6 // Fewer ticks on mobile
+                tickNumber: isMobile ? 4 : 6
               }
             ]}
-            grid={{ horizontal: true, vertical: true }}
+            grid={{ horizontal: true }}
             margin={{ 
-              left: isMobile ? 5 : 80,    // Mobile: 2px, Desktop: 80px
-              right: isMobile ? 20 : 50,   // Mobile: 20px, Desktop: 50px
-              top: isMobile ? 30 : 50,     // Mobile: 30px, Desktop: 50px
-              bottom: isMobile ? 60 : 80   // Mobile: 60px, Desktop: 80px
+              left: isMobile ? 40 : 80,
+              right: isMobile ? 20 : 50,
+              top: isMobile ? 30 : 50,
+              bottom: isMobile ? 60 : 80
             }}
+            borderRadius={8}
             sx={{
-              '& .MuiLineElement-root': {
-                strokeWidth: isMobile ? 2 : 3 // Thinner lines on mobile
-              },
-              '& .MuiMarkElement-root': {
-                r: isMobile ? 3 : 4, // Smaller markers on mobile
-                strokeWidth: 2,
-                stroke: '#ffffff'
+              '& .MuiBarElement-root': {
+                rx: 4,
+                ry: 4
               },
               '& .MuiChartsGrid-line': {
                 stroke: '#e2e8f0',
+                strokeWidth: 1
+              },
+              '& .MuiChartsAxis-line': {
+                stroke: '#d1d5db',
+                strokeWidth: 1
+              },
+              '& .MuiChartsAxis-tick': {
+                stroke: '#d1d5db',
                 strokeWidth: 1
               }
             }}

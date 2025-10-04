@@ -9,24 +9,18 @@ const PortfolioContainer = styled(Box)(({ theme }) => ({
   padding: '4rem 2rem',
   borderRadius: '16px',
   margin: '0',
-  [theme.breakpoints.down('md')]: {
-    padding: '3rem 1.5rem'
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: '2rem 1rem'
-  }
+  [theme.breakpoints.down('md')]: { padding: '3rem 1.5rem' },
+  [theme.breakpoints.down('sm')]: { padding: '2rem 1rem' }
 }));
 
 const HeaderSection = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   marginBottom: '3rem',
-  [theme.breakpoints.down('sm')]: {
-    marginBottom: '2rem'
-  }
+  [theme.breakpoints.down('sm')]: { marginBottom: '2rem' }
 }));
 
 const MainTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: '"Darker Grotesque", "Space Grotesk", sans-serif',
+  fontFamily: '"Darker Grotesque", "Space Grokest", sans-serif',
   fontSize: '3.2rem',
   fontWeight: 800,
   color: '#2d1b4e',
@@ -36,12 +30,8 @@ const MainTitle = styled(Typography)(({ theme }) => ({
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
-  [theme.breakpoints.down('md')]: {
-    fontSize: '2.5rem'
-  },
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '2rem'
-  }
+  [theme.breakpoints.down('md')]: { fontSize: '2.5rem' },
+  [theme.breakpoints.down('sm')]: { fontSize: '2rem' }
 }));
 
 const Subtitle = styled(Typography)(({ theme }) => ({
@@ -49,9 +39,7 @@ const Subtitle = styled(Typography)(({ theme }) => ({
   fontSize: '1rem',
   color: '#6b5b98',
   fontWeight: 400,
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '0.9rem'
-  }
+  [theme.breakpoints.down('sm')]: { fontSize: '0.9rem' }
 }));
 
 const MetricsGrid = styled(Box)(({ theme }) => ({
@@ -98,9 +86,7 @@ const MetricLabel = styled(Typography)(({ theme }) => ({
   marginBottom: '0.5rem',
   letterSpacing: '0.05em',
   textTransform: 'uppercase',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '0.75rem'
-  }
+  [theme.breakpoints.down('sm')]: { fontSize: '0.75rem' }
 }));
 
 const MetricValue = styled(Typography)<{ color?: string }>(({ color, theme }) => ({
@@ -110,22 +96,17 @@ const MetricValue = styled(Typography)<{ color?: string }>(({ color, theme }) =>
   color: color || '#2d1b4e',
   textAlign: 'center',
   lineHeight: 1.2,
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.75rem'
-  }
+  [theme.breakpoints.down('sm')]: { fontSize: '1.75rem' }
 }));
 
 const ChartSection = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
   borderRadius: '20px',
-  padding: '3rem 2rem',
+  padding: '2rem 1.5rem',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
   border: '1px solid rgba(251, 146, 60, 0.1)',
-  maxWidth: '1000px',
+  width: '100%',
   margin: '0 auto',
-  [theme.breakpoints.down('md')]: {
-    padding: '2rem 1.5rem'
-  },
   [theme.breakpoints.down('sm')]: {
     padding: '1.5rem 1rem',
     borderRadius: '16px'
@@ -139,10 +120,7 @@ const ChartTitle = styled(Typography)(({ theme }) => ({
   color: '#2d1b4e',
   textAlign: 'center',
   marginBottom: '2rem',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.25rem',
-    marginBottom: '1.5rem'
-  }
+  [theme.breakpoints.down('sm')]: { fontSize: '1.25rem', marginBottom: '1.5rem' }
 }));
 
 const ChartDescription = styled(Typography)({
@@ -154,6 +132,42 @@ const ChartDescription = styled(Typography)({
   marginTop: '2rem',
   maxWidth: '800px',
   margin: '2rem auto 0'
+});
+
+
+const CampaignLabelsContainer = styled(Box)(({ theme }) => ({
+  display: 'none',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '3rem',
+  marginTop: '2rem',
+  marginBottom: '1rem',
+  [theme.breakpoints.up('md')]: {
+    display: 'flex' // Show only on desktop
+  }
+}));
+
+const CampaignLabelItem = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '0.5rem'
+});
+
+const CampaignName = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '1rem',
+  fontWeight: 600,
+  color: '#2d1b4e',
+  textAlign: 'center'
+});
+
+const CampaignROAS = styled(Typography)({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '1.5rem',
+  fontWeight: 700,
+  color: '#f59e0b',
+  textAlign: 'center'
 });
 
 interface MetricCardProps {
@@ -179,7 +193,6 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
-  // Default data if none provided
   const portfolioData: GoogleAdsPortfolioData = data || {
     totalBudget: '₹27,812,351.10',
     totalRevenue: '₹318,600,000',
@@ -220,61 +233,99 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
       </MetricsGrid>
 
       <ChartSection>
-        <ChartTitle>Return on Ad Spend (ROAS) Comparison</ChartTitle>
+        <ChartTitle>Return on Ad Spend Comparison</ChartTitle>
         
         <Box sx={{ 
           width: '100%', 
-          height: { xs: '300px', md: '400px' },
+          height: isMobile ? '350px' : '450px',
           display: 'flex', 
           justifyContent: 'center',
+          alignItems: 'center',
           overflow: 'hidden'
         }}>
           <BarChart
-            width={isMobile ? 350 : 600} // Responsive width: mobile vs desktop
-            height={isMobile ? 280 : 350} // Responsive height: mobile vs desktop
-            series={[
-              {
-                data: chartData,
-                color: '#f59e0b'
-              }
-            ]}
+            width={isMobile ? 325 : 800}
+            height={isMobile ? 300 : 400}
+            series={[{ 
+              data: chartData, 
+              color: '#f59e0b', 
+              label: 'ROAS',
+              valueFormatter: (value) => `${value}x`
+            }]}
             xAxis={[{
               data: chartLabels,
               scaleType: 'band',
               tickLabelStyle: {
-                fontSize: isMobile ? 10 : 14, // Mobile: 10px, Desktop: 14px
+                angle: 0,
+                textAnchor: 'middle',
+                fontSize: isMobile ? 11 : 14,
                 fontFamily: '"Inter", sans-serif',
-                fill: '#6b5b98'
-              }
+                fontWeight: 600,
+                fill: '#2d1b4e'
+              },
+              tickLabelPlacement: 'middle',
+              tickPlacement: 'middle'
             }]}
             yAxis={[{
               tickLabelStyle: {
-                fontSize: isMobile ? 10 : 12, // Mobile: 10px, Desktop: 12px
+                fontSize: isMobile ? 10 : 12,
                 fontFamily: '"Inter", sans-serif',
                 fill: '#6b5b98'
               },
               label: 'ROAS',
               labelStyle: {
-                fontSize: isMobile ? 12 : 14, // Mobile: 12px, Desktop: 14px
+                fontSize: isMobile ? 14 : 16,
                 fontFamily: '"Inter", sans-serif',
-                fill: '#2d1b4e'
+                fill: '#2d1b4e',
+                fontWeight: '600'
               }
             }]}
             margin={{ 
-              left: isMobile ? 8 : 80,    // Mobile: 8px, Desktop: 80px
-              right: isMobile ? 50 : 30,   // Mobile: 50px, Desktop: 30px
-              top: isMobile ? 20 : 30,     // Mobile: 20px, Desktop: 30px
-              bottom: isMobile ? 40 : 60   // Mobile: 40px, Desktop: 60px
+              left: isMobile ? 10 : 80, 
+              right: isMobile ? 20 : 40, 
+              top: isMobile ? 30 : 50, 
+              bottom: isMobile ? 60 : 80 
             }}
-            slotProps={{
-              bar: {
-                style: {
-                  cursor: 'pointer'
-                }
+            slotProps={{ 
+              bar: { 
+                style: { 
+                  cursor: 'pointer',
+                  borderRadius: isMobile ? '2px' : '4px'
+                } 
+              }
+            }}
+            grid={{ vertical: false, horizontal: true }}
+            borderRadius={8}
+            sx={{
+              '& .MuiBarElement-root': {
+                rx: 4,
+                ry: 4
+              },
+              '& .MuiChartsGrid-line': {
+                stroke: '#e2e8f0',
+                strokeWidth: 1
+              },
+              '& .MuiChartsAxis-line': {
+                stroke: '#d1d5db',
+                strokeWidth: 1
+              },
+              '& .MuiChartsAxis-tick': {
+                stroke: '#d1d5db',
+                strokeWidth: 1
               }
             }}
           />
         </Box>
+
+        {/* Campaign Labels for Desktop Only */}
+        <CampaignLabelsContainer>
+          {portfolioData.campaigns.map((campaign, index) => (
+            <CampaignLabelItem key={index}>
+              <CampaignName>{campaign.name}</CampaignName>
+              <CampaignROAS>{campaign.roas}x ROAS</CampaignROAS>
+            </CampaignLabelItem>
+          ))}
+        </CampaignLabelsContainer>
 
         <ChartDescription>
           This chart compares the ROAS for each campaign, highlighting the efficiency of ad spend. 

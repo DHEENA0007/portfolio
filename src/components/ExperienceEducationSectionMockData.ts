@@ -33,19 +33,19 @@ export const mockRootProps: ExperienceEducationSectionProps = {
   experiences: [
     {
       id: 1,
-      company: "Preston Consulting and EdTech Pvt Ltd - Gostudy",
-      position: "Digital Marketing Executive",
-      duration: "May 2024 - June 2025",
-      description: "Managed and optimized SEO, Google Ads, GMB, and social media campaigns to drive traffic, engagement, and conversions. Conducted keyword research and data-driven optimizations to improve online visibility and campaign performance.",
-      logo: "gostudy-logo"
-    },
-    {
-      id: 2,
       company: "AKodefy Info Tech",
       position: "Marketing Analyst",
       duration: "Oct 2025 - Present",
       description: "Planned, managed, and optimized YouTube and Meta campaigns, driving engagement, audience growth, and conversions through targeted content and data-driven strategies.",
       logo: "akodefy-logo"
+    },
+    {
+      id: 2,
+      company: "Preston Consulting and EdTech Pvt Ltd - Gostudy",
+      position: "Digital Marketing Executive",
+      duration: "May 2024 - June 2025",
+      description: "Managed and optimized SEO, Google Ads, GMB, and social media campaigns to drive traffic, engagement, and conversions. Conducted keyword research and data-driven optimizations to improve online visibility and campaign performance.",
+      logo: "gostudy-logo"
     }
   ],
   education: {

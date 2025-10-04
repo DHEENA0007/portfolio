@@ -17,6 +17,11 @@ const AboutContainer = styled(Box)(({ theme }) => ({
   padding: '2rem',
   width: '100%',
   maxWidth: '100vw',
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    minHeight: '50vh',
+    padding: '1.5rem 2rem'
+  },
   [theme.breakpoints.down('md')]: {
     minHeight: '30vh',
     padding: '2rem 1.5rem',
@@ -230,6 +235,12 @@ const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>
   marginLeft: '0',
   marginRight: '2rem',
   width: '100%',
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    fontSize: '1rem',
+    lineHeight: 1.5,
+    maxWidth: '85%'
+  },
   [theme.breakpoints.down('md')]: {
     fontSize: '0.8rem',
     lineHeight: 1.6,
@@ -287,7 +298,7 @@ const AboutSection = () => {
         </MainTitle>
         
         <DescriptionText animate={animate} delay={0.4}>
-          I’m a Digital Marketing Executive with one plus year of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. 
+          I’m a Digital Marketer with one plus years of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. 
           I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. 
           With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
         </DescriptionText>
@@ -307,7 +318,7 @@ const AboutSection = () => {
           </MainTitle>
           
           <DescriptionText animate={animate} delay={0.4}>
-            I’m a Digital Marketing Executive with one plus year of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
+            I’m a Digital Marketer with one plus years of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
           </DescriptionText>
         </MobileTextContent>
 

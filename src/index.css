@@ -34,6 +34,24 @@ body {
   }
 }
 
+/* Ultra-wide short screens (aspect ratio > 2.5:1) */
+@media (min-aspect-ratio: 5/2) {
+  html {
+    font-size: 15px;
+  }
+  
+  body {
+    overflow-y: auto;
+  }
+}
+
+/* Standard laptop screens optimization */
+@media (min-width: 1400px) and (max-width: 1600px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 #root {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%);

@@ -15,6 +15,10 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   padding: '8rem 0',
   color: '#000000',
   position: 'relative',
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    padding: '4rem 0'
+  },
   [theme.breakpoints.down('md')]: {
     padding: '4rem 0'
   },

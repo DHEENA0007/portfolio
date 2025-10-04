@@ -41,10 +41,30 @@ const HeroContainer = styled(Box)<{ dynamicHeight?: number }>(({ theme, dynamicH
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
+  backgroundAttachment: 'scroll',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   paddingTop: '40px',
+  // Ultra-wide short screens (aspect ratio > 2.5:1)
+  '@media (min-aspect-ratio: 5/2)': {
+    minHeight: '100vh',
+    paddingTop: '20px',
+    paddingBottom: '20px',
+    justifyContent: 'center',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center'
+  },
+  // Standard laptop screens (1400-1600px width)
+  '@media (min-width: 1400px) and (max-width: 1600px)': {
+    paddingTop: '30px',
+    backgroundSize: 'cover'
+  },
+  // Very wide screens
+  '@media (min-width: 1920px)': {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center'
+  },
   [theme.breakpoints.down('md')]: {
     minHeight: dynamicHeight ? `${dynamicHeight}px` : '100vh',
     paddingBottom: '2rem',
@@ -179,6 +199,13 @@ const HelloBubble = styled(Box)<{ animate: boolean }>(({ animate, theme }) => ({
     transform: 'rotate(-45deg)',
     borderRadius: '0 0 0 5px'
   },
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    fontSize: '1.1rem',
+    padding: '10px 20px',
+    marginTop: '1rem',
+    marginBottom: '1.5rem'
+  },
   [theme.breakpoints.down('sm')]: {
     marginTop: '1rem',
     marginBottom: '1.5rem',
@@ -223,6 +250,17 @@ const MainTitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) 
     display: 'inline-block',
     animation: `${float} 2s ease-in-out infinite`
   },
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+    marginTop: '-3rem',
+    '& .im-text': {
+      fontSize: 'clamp(2.2rem, 6.5vw, 4rem)'
+    },
+    '& .name': {
+      fontSize: 'clamp(2.2rem, 6.5vw, 4rem)'
+    }
+  },
   [theme.breakpoints.down('sm')]: {
     marginTop: '-1rem',
   }
@@ -237,28 +275,15 @@ const Subtitle = styled(Typography)<{ animate: boolean }>(({ animate, theme }) =
   marginBottom: '10rem',
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out 0.4s forwards` : 'none',
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    fontSize: 'clamp(1rem, 2.5vw, 1.4rem)',
+    marginBottom: '4rem',
+    marginTop: '-0.5rem'
+  },
   [theme.breakpoints.up('md')]: {
     marginTop: '-1rem',
   },
-}));
-
-const BackgroundImage = styled('img')<{ animate: boolean }>(({ animate, theme }) => ({
-  position: 'absolute',
-  bottom: 0,
-  left: '50%',
-  transform: 'translateX(-50%)',
-  width: 'clamp(600px, 55vw, 750px)',
-  height: 'auto',
-  opacity: animate ? 1 : 0,
-  transition: 'all 0.8s ease-out',
-  zIndex: 2,
-  objectFit: 'contain',
-  [theme.breakpoints.down('md')]: {
-    display: 'none'
-  },
-  [theme.breakpoints.down('sm')]: {
-    display: 'none'
-  }
 }));
 
 const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) => ({
@@ -272,6 +297,12 @@ const ProfileImage = styled('img')<{ animate: boolean }>(({ animate, theme }) =>
   objectFit: 'cover',
   opacity: animate ? 1 : 0,
   transition: 'all 0.8s ease-out 0.3s',
+  // Ultra-wide short screens - scale down image
+  '@media (min-aspect-ratio: 5/2)': {
+    width: 'clamp(350px, 40vw, 600px)',
+    maxHeight: '70vh',
+    objectFit: 'contain'
+  },
   [theme.breakpoints.down('md')]: {
     width: 'clamp(600px, 60vw, 500px)'
   }
@@ -435,7 +466,7 @@ const HeroSection: React.FC = () => {
       <FloatingBadge 
         delay={1} 
         sx={{ 
-          top: isMobile ? `${viewportHeight * 0.30}px` : '35%',
+          top: isMobile ? `${viewportHeight * 0.45}px` : '50%',
           left: isMobile ? '2%' : '28%' 
         }}
       >
@@ -458,22 +489,20 @@ const HeroSection: React.FC = () => {
       <FloatingBadge
         delay={0.8}
         sx={{
-          top: { xs: `${viewportHeight * 0.38}px`, md: 'auto' },
-          bottom: { xs: 'auto', md: '20%' },
-          left: { xs: '2%', md: '8%' },
-          right: { xs: 'auto', md: 'auto' },
-          display: 'flex',
+          display: { xs: 'none', md: 'flex' },
+          bottom: '20%',
+          left: '8%',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '4px',
-          padding: { xs: '12px 16px', md: '16px 24px' },
+          padding: '16px 24px',
           textAlign: 'center',
           whiteSpace: 'normal',
           lineHeight: 1.4,
         }}
       >
         <Typography variant="h6" sx={{ 
-          fontSize: { xs: '1.2rem', md: '1.4rem' }, 
+          fontSize: '1.4rem', 
           fontWeight: 700, 
           color: '#604ce5',
           marginBottom: '2px'
@@ -481,7 +510,7 @@ const HeroSection: React.FC = () => {
           1+ Years
         </Typography>
         <Typography variant="body2" sx={{ 
-          fontSize: { xs: '0.75rem', md: '0.85rem' }, 
+          fontSize: '0.85rem', 
           fontWeight: 500,
           textAlign: 'center',
           lineHeight: 1.2
@@ -500,12 +529,6 @@ const HeroSection: React.FC = () => {
         <ManageSearchIcon />
         SEO Expert
       </FloatingBadge>
-
-      <BackgroundImage 
-        src="/BG.png" 
-        alt="" 
-        animate={animate} 
-      />
 
       <ProfileImage src={profileImage} alt="Barath R - Data Analyst & Digital Marketing Professional" animate={animate} />
 

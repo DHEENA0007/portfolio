@@ -1,0 +1,137 @@
+/* Responsive utilities for target screen sizes */
+
+/* Container constraints for different screen sizes */
+.container-1920 {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container-1366 {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Specific breakpoint utilities */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .responsive-padding-large {
+    padding: 4rem 2rem !important;
+  }
+  
+  .responsive-margin-large {
+    margin: 2rem 0 !important;
+  }
+  
+  .responsive-text-large {
+    font-size: 1.1em !important;
+    line-height: 1.6 !important;
+  }
+  
+  .responsive-title-large {
+    font-size: 3.2rem !important;
+  }
+  
+  .responsive-subtitle-large {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+  .responsive-padding-medium {
+    padding: 3rem 1.5rem !important;
+  }
+  
+  .responsive-margin-medium {
+    margin: 1.5rem 0 !important;
+  }
+  
+  .responsive-text-medium {
+    font-size: 1em !important;
+    line-height: 1.5 !important;
+  }
+  
+  .responsive-title-medium {
+    font-size: 2.8rem !important;
+  }
+  
+  .responsive-subtitle-medium {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* Grid optimizations */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .grid-large {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+    gap: 2.5rem !important;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+  .grid-medium {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Image sizing optimizations */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .image-responsive-large {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+  .image-responsive-medium {
+    max-width: 95% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Dashboard and component specific optimizations */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .dashboard-container-large {
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    padding: 3rem 2rem !important;
+  }
+  
+  .card-grid-large {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)) !important;
+    gap: 2.5rem !important;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+  .dashboard-container-medium {
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 2.5rem 1.5rem !important;
+  }
+  
+  .card-grid-medium {
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)) !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Typography scales */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .heading-xl-large { font-size: 4.2rem !important; }
+  .heading-l-large { font-size: 3.2rem !important; }
+  .heading-m-large { font-size: 2.4rem !important; }
+  .heading-s-large { font-size: 1.8rem !important; }
+  .body-large { font-size: 1.1rem !important; line-height: 1.7 !important; }
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+  .heading-xl-medium { font-size: 3.6rem !important; }
+  .heading-l-medium { font-size: 2.8rem !important; }
+  .heading-m-medium { font-size: 2.1rem !important; }
+  .heading-s-medium { font-size: 1.6rem !important; }
+  .body-medium { font-size: 1rem !important; line-height: 1.6 !important; }
+}

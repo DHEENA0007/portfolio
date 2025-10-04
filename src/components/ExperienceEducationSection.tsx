@@ -10,6 +10,10 @@ const SectionContainer = styled(Box)(({ theme }) => ({
   background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '4rem 2rem 6rem 2rem',
   position: 'relative',
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    padding: '3rem 2rem 4rem 2rem'
+  },
   [theme.breakpoints.down('md')]: {
     padding: '3rem 1rem 5rem 1rem'
   },

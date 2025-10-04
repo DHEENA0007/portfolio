@@ -30,6 +30,15 @@ const SectionContainer = styled(Box)(({ theme }) => ({
     borderRadius: '0 0 50% 50% / 0 0 100% 100%',
     zIndex: 1
   },
+  // Ultra-wide short screens
+  '@media (min-aspect-ratio: 5/2)': {
+    padding: '1.5rem 2rem',
+    marginTop: '-60px',
+    paddingTop: 'calc(1.5rem + 60px)',
+    '&::before': {
+      height: '60px'
+    }
+  },
   [theme.breakpoints.down('md')]: {
     padding: '2rem 1rem',
     marginTop: '-60px',

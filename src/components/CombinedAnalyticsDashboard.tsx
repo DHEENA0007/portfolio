@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import GoogleAnalyticsDashboard from './GoogleAnalyticsDashboard';
 import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
 import { mockRootProps2 } from './GoogleAnalyticsDashboardMockData2';
+import Analysis1 from '../assets/Analysis1.png';
+import Analysis2 from '../assets/Analysis2.png';
 
 const CombinedContainer = styled(Box)({
   background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
@@ -40,11 +42,21 @@ const CombinedAnalyticsDashboard = () => {
       </MainTitle>
       
       <DashboardWrapper>
-        <GoogleAnalyticsDashboard data={mockRootProps} title="" />
+        <GoogleAnalyticsDashboard 
+          data={mockRootProps} 
+          title="" 
+          dateRange="1 Sept 2023 - 31 Jul 2024"
+          mobileImageSrc={Analysis1}
+        />
       </DashboardWrapper>
       
       <DashboardWrapper>
-        <GoogleAnalyticsDashboard data={mockRootProps2} title="" />
+        <GoogleAnalyticsDashboard 
+          data={mockRootProps2} 
+          title="" 
+          dateRange="1 Sept 2024 - 31 Jul 2024"
+          mobileImageSrc={Analysis2}
+        />
       </DashboardWrapper>
     </CombinedContainer>
   );

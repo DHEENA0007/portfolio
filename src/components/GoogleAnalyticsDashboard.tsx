@@ -5,12 +5,18 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import CountUp from './CountUpAnimation';
 import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
 
-const DashboardContainer = styled(Box)({
+const DashboardContainer = styled(Box)(({ theme }) => ({
   background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
   padding: '3rem 2rem',
   borderRadius: '16px',
-  margin: '0'
-});
+  margin: '0',
+  [theme.breakpoints.down('md')]: {
+    background: 'none',
+    padding: '1rem 0',
+    borderRadius: '0',
+    boxShadow: 'none'
+  }
+}));
 
 const DashboardTitle = styled(Typography)({
   fontFamily: '"DM Sans", "Manrope", sans-serif',
@@ -219,8 +225,8 @@ interface ActiveUsersBarChartProps {
 
 const ActiveUsersBarChart = ({ data }: ActiveUsersBarChartProps) => (
   <BarChart
-    width={280}
-    height={120}
+    width={380}
+    height={180}
     series={[
       {
         data: data.map(d => d.users),
@@ -232,7 +238,7 @@ const ActiveUsersBarChart = ({ data }: ActiveUsersBarChartProps) => (
         scaleType: 'band',
         data: data.map(d => d.time.toString()),
         tickLabelStyle: {
-          fontSize: 10,
+          fontSize: 12,
           fill: '#5f6368'
         }
       }
@@ -240,12 +246,12 @@ const ActiveUsersBarChart = ({ data }: ActiveUsersBarChartProps) => (
     yAxis={[
       {
         tickLabelStyle: {
-          fontSize: 10,
+          fontSize: 12,
           fill: '#5f6368'
         }
       }
     ]}
-    margin={{ left: 30, right: 10, top: 10, bottom: 30 }}
+    margin={{ left: 1, right: 20, top: 15, bottom: 10 }}
     sx={{
       '& .MuiBarElement-root': {
         rx: 2
@@ -268,6 +274,8 @@ interface GoogleAnalyticsDashboardProps {
     topCountries: Array<{ country: string; users: number }>;
   };
   title?: string;
+  dateRange?: string;
+  mobileImageSrc?: string;
 }
 
 const CountriesTable = ({ countries }: CountriesTableProps) => (
@@ -289,7 +297,22 @@ const CountriesTable = ({ countries }: CountriesTableProps) => (
   </Table>
 );
 
-const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acquisition Overview" }: GoogleAnalyticsDashboardProps) => {
+const DateRangeLabel = styled(Typography)(({ theme }) => ({
+  fontFamily: '"Inter", sans-serif',
+  fontSize: '1.125rem',
+  fontWeight: 700,
+  color: '#5f6368',
+  marginBottom: '1.5rem',
+  letterSpacing: '0.02em',
+  textAlign: 'right',
+  maxWidth: '100%',
+  paddingRight: '13rem',
+  [theme.breakpoints.down('md')]: {
+    display: 'none'
+  }
+}));
+
+const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acquisition Overview", dateRange, mobileImageSrc }: GoogleAnalyticsDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -299,6 +322,12 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
         <DashboardTitle>
           {title}
         </DashboardTitle>
+      )}
+      
+      {dateRange && (
+        <DateRangeLabel>
+          {dateRange}
+        </DateRangeLabel>
       )}
       
       {/* Desktop Layout */}
@@ -350,72 +379,101 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
 
     {/* Mobile Stack Layout */}
     {isMobile && (
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        {/* Mobile Metrics */}
-        <MetricCardComponent
-          label="Active users"
-          value={data.activeUsers}
-        />
-        <MetricCardComponent
-          label="New users"
-          value={data.newUsers}
-        />
-
-        {/* Mobile Time Series Chart */}
-        <SidebarCard>
-          <Typography variant="h6" sx={{ mb: 1.5, fontSize: '0.9rem', fontWeight: 600 }}>
-            User Acquisition Timeline
-          </Typography>
-          <Box sx={{ marginLeft: '-10px' }}>
-            <LineChart
-              width={280}
-              height={160}
-              series={[
-                {
-                  data: data.timeSeriesData.map(d => d.value),
-                  color: '#4285f4'
-                }
-              ]}
-              xAxis={[{
-                scaleType: 'point',
-                data: data.timeSeriesData.map(d => d.month),
-                tickLabelStyle: {
-                  fontSize: 9,
-                  fill: '#5f6368'
-                }
-              }]}
-              yAxis={[{
-                tickLabelStyle: {
-                  fontSize: 9,
-                  fill: '#5f6368'
-                }
-              }]}
-              margin={{ left: 0, right: 20, top: 20, bottom: 40 }}
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: '1rem',
+        background: 'none',
+        padding: 0,
+        margin: 0,
+        boxShadow: 'none'
+      }}>
+        {mobileImageSrc ? (
+          <img 
+            src={mobileImageSrc} 
+            alt={`Analytics dashboard for ${dateRange || 'selected period'}`}
+            loading="lazy"
+            style={{
+              width: '113%',
+              height: 'auto',
+              display: 'block',
+              objectFit: 'contain',
+              marginLeft: '-8.5%',
+              border: 'none',
+              boxShadow: 'none',
+              background: 'none',
+              borderRadius: '8px'
+            }}
+          />
+        ) : (
+          <>
+            {/* Mobile Metrics */}
+            <MetricCardComponent
+              label="Active users"
+              value={data.activeUsers}
             />
-          </Box>
-        </SidebarCard>
+            <MetricCardComponent
+              label="New users"
+              value={data.newUsers}
+            />
 
-        {/* Mobile Active Users */}
-        <SidebarCard>
-          <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
-            Active Users (Last 30 Min)
-          </Typography>
-          <CountUp end={data.activeUsersLast30Min}>
-            {(value) => (
-              <Typography sx={{ fontSize: '2rem', fontWeight: 700, color: '#202124' }}>
-                {value}
+            {/* Mobile Time Series Chart */}
+            <SidebarCard>
+              <Typography variant="h6" sx={{ mb: 1.5, fontSize: '0.9rem', fontWeight: 600 }}>
+                User Acquisition Timeline
               </Typography>
-            )}
-          </CountUp>
-        </SidebarCard>
+              <Box sx={{ marginLeft: '-10px' }}>
+                <LineChart
+                  width={280}
+                  height={160}
+                  series={[
+                    {
+                      data: data.timeSeriesData.map(d => d.value),
+                      color: '#4285f4'
+                    }
+                  ]}
+                  xAxis={[{
+                    scaleType: 'point',
+                    data: data.timeSeriesData.map(d => d.month),
+                    tickLabelStyle: {
+                      fontSize: 9,
+                      fill: '#5f6368'
+                    }
+                  }]}
+                  yAxis={[{
+                    tickLabelStyle: {
+                      fontSize: 9,
+                      fill: '#5f6368'
+                    }
+                  }]}
+                  margin={{ left: 0, right: 20, top: 20, bottom: 40 }}
+                />
+              </Box>
+            </SidebarCard>
 
-        {/* Mobile Top Countries */}
-        <SidebarCard>
-          <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
-            Top Countries
-          </Typography>
-          <CountriesTable countries={data.topCountries} />
-        </SidebarCard>
+            {/* Mobile Active Users */}
+            <SidebarCard>
+              <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
+                Active Users (Last 30 Min)
+              </Typography>
+              <CountUp end={data.activeUsersLast30Min}>
+                {(value) => (
+                  <Typography sx={{ fontSize: '2rem', fontWeight: 700, color: '#202124' }}>
+                    {value}
+                  </Typography>
+                )}
+              </CountUp>
+            </SidebarCard>
+
+            {/* Mobile Top Countries */}
+            <SidebarCard>
+              <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
+                Top Countries
+              </Typography>
+              <CountriesTable countries={data.topCountries} />
+            </SidebarCard>
+          </>
+        )}
       </Box>
     )}
     </DashboardContainer>

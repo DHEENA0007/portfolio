@@ -13,7 +13,7 @@ const AboutContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
+  leftContent: 'center',
   padding: '2rem',
   width: '100%',
   maxWidth: '100vw',
@@ -22,7 +22,7 @@ const AboutContainer = styled(Box)(({ theme }) => ({
     padding: '2rem 1.5rem',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    leftContent: 'center',
     alignItems: 'flex-start',
     transform: 'scaleX(-1)',
     width: '100%'
@@ -79,7 +79,7 @@ const MobileTextContent = styled(Box)(({ theme }) => ({
     maxWidth: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    leftContent: 'center',
     position: 'relative',
     zIndex: 3,
     paddingTop: '2rem'
@@ -224,16 +224,18 @@ const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>
   opacity: animate ? 1 : 0,
   animation: animate ? `${fadeInUp} 0.8s ease-out ${delay}s forwards` : 'none',
   textAlign: 'left',
-  maxWidth: '100%',
+  maxWidth: '90%',
   zIndex: 4,
   position: 'relative',
   marginLeft: '0',
+  marginRight: '2rem',
   width: '100%',
   [theme.breakpoints.down('md')]: {
     fontSize: '0.8rem',
     lineHeight: 1.6,
-    maxWidth: '100%',
+    maxWidth: '85%',
     marginLeft: '0',
+    marginRight: '1.5rem',
     textAlign: 'left',
     width: '100%',
     padding: '0'
@@ -241,7 +243,8 @@ const DescriptionText = styled(Typography)<{ animate: boolean; delay?: number }>
   [theme.breakpoints.down('sm')]: {
     fontSize: '1.062rem',
     lineHeight: 1.2,
-    fontWeight: 'bold'
+    maxWidth: '80%',
+    marginRight: '1rem'
   }
 }));
 
@@ -304,9 +307,7 @@ const AboutSection = () => {
           </MainTitle>
           
           <DescriptionText animate={animate} delay={0.4}>
-            I'm a Digital Marketing Executive with one plus year of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. 
-            I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. 
-            With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
+            I’m a Digital Marketing Executive with one plus year of experience driving results through Google Ads, Meta campaigns, SEO, and data analysis. I thrive on blending strategic thinking with data-driven insights to design campaigns that boost visibility, generate quality leads, and maximize ROI. With a passion for continuous learning and adapting to the latest digital trends, I bring a results-oriented mindset and the ability to turn marketing challenges into growth opportunities.
           </DescriptionText>
         </MobileTextContent>
 

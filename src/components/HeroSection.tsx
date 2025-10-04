@@ -435,8 +435,8 @@ const HeroSection: React.FC = () => {
       <FloatingBadge 
         delay={1} 
         sx={{ 
-          bottom: isMobile ? `${viewportHeight * 0.47}px` : '30%',
-          left: isMobile ? '2%' : '12%' 
+          top: isMobile ? `${viewportHeight * 0.30}px` : '35%',
+          left: isMobile ? '2%' : '28%' 
         }}
       >
         <TrendingUpIcon />
@@ -454,20 +454,22 @@ const HeroSection: React.FC = () => {
         Google Ads
       </FloatingBadge>
 
-      {/* Moved the experience badge here - between Google Ads and SEO Expert */}
+      {/* Combined Experience Badge */}
       <FloatingBadge
         delay={0.8}
         sx={{
-          top: isMobile ? `${viewportHeight * 0.30}px` : '32%', // Changed from 0.35 to 0.25 for mobile only
-          right: isMobile ? '8%' : '8%', // Slightly more to the left to create visual balance
-          transform: 'translateX(0)', // Remove the centering transform
+          top: { xs: `${viewportHeight * 0.38}px`, md: 'auto' },
+          bottom: { xs: 'auto', md: '20%' },
+          left: { xs: '2%', md: '8%' },
+          right: { xs: 'auto', md: 'auto' },
+          display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '4px',
           padding: { xs: '12px 16px', md: '16px 24px' },
           textAlign: 'center',
           whiteSpace: 'normal',
-          lineHeight: 1.4
+          lineHeight: 1.4,
         }}
       >
         <Typography variant="h6" sx={{ 

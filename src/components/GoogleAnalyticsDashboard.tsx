@@ -1,9 +1,12 @@
-import { Box, Typography, Card, Table, TableBody, TableRow, TableCell, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, Card, Table, TableBody, TableRow, TableCell, useMediaQuery, useTheme, Modal, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LineChart } from '@mui/x-charts/LineChart';
-import { BarChart } from '@mui/x-charts/BarChart';
 import CountUp from './CountUpAnimation';
 import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
+import Analysis from '../assets/Analysis.png';
+import CloseIcon from '@mui/icons-material/Close';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import { useState } from 'react';
 
 const DashboardContainer = styled(Box)(({ theme }) => ({
   background: 'linear-gradient(135deg, #f8f6fc 0%, #f3f0fa 50%, #f8f6fc 100%)',
@@ -32,32 +35,7 @@ const DashboardTitle = styled(Typography)({
   backgroundClip: 'text'
 });
 
-const MainContent = styled(Box)({
-  display: 'grid',
-  gridTemplateColumns: '2fr 1fr',
-  gap: '2rem',
-  maxWidth: '1400px',
-  margin: '0 auto'
-});
 
-const LeftPanel = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '2rem'
-});
-
-const RightPanel = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '2rem'
-});
-
-const MetricsContainer = styled(Box)({
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  gap: '2rem',
-  marginBottom: '2rem'
-});
 
 const MetricCard = styled(Card)({
   backgroundColor: '#ffffff',
@@ -88,14 +66,6 @@ const MetricValue = styled(Typography)({
   lineHeight: 1
 });
 
-const ChartContainer = styled(Card)({
-  backgroundColor: '#ffffff',
-  borderRadius: '20px',
-  padding: '2rem',
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid rgba(251, 146, 60, 0.1)'
-});
-
 const SidebarCard = styled(Card)({
   backgroundColor: '#ffffff',
   borderRadius: '20px',
@@ -104,23 +74,7 @@ const SidebarCard = styled(Card)({
   border: '1px solid rgba(251, 146, 60, 0.1)'
 });
 
-const SidebarTitle = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '0.875rem',
-  fontWeight: 500,
-  color: '#5f6368',
-  marginBottom: '1rem',
-  letterSpacing: '0.05em',
-  textTransform: 'uppercase'
-});
 
-const RealtimeValue = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2rem',
-  fontWeight: 700,
-  color: '#202124',
-  marginBottom: '1rem'
-});
 
 const CountryRow = styled(TableRow)({
   '&:hover': {
@@ -162,103 +116,7 @@ const MetricCardComponent = ({ label, value }: MetricCardProps) => {
   );
 };
 
-interface TimeSeriesChartProps {
-  data: Array<{ month: string; value: number }>;
-}
 
-const TimeSeriesChart = ({ data }: TimeSeriesChartProps) => (
-  <ChartContainer>
-    <LineChart
-      width={700}
-      height={300}
-      series={[
-        {
-          data: data.map(d => d.value),
-          color: '#1a73e8',
-          curve: 'linear'
-        }
-      ]}
-      xAxis={[
-        {
-          scaleType: 'point',
-          data: data.map(d => d.month),
-          tickLabelStyle: {
-            fontSize: 12,
-            fill: '#5f6368'
-          }
-        }
-      ]}
-      yAxis={[
-        {
-          tickLabelStyle: {
-            fontSize: 12,
-            fill: '#5f6368'
-          },
-          max: 4000,
-          tickNumber: 5
-        }
-      ]}
-      grid={{ horizontal: true, vertical: true }}
-      margin={{ left: 60, right: 30, top: 30, bottom: 60 }}
-      sx={{
-        '& .MuiLineElement-root': {
-          strokeWidth: 2
-        },
-        '& .MuiMarkElement-root': {
-          r: 4,
-          strokeWidth: 2,
-          stroke: '#ffffff',
-          fill: '#1a73e8'
-        },
-        '& .MuiChartsGrid-line': {
-          stroke: '#e8eaed',
-          strokeWidth: 1
-        }
-      }}
-    />
-  </ChartContainer>
-);
-
-interface ActiveUsersBarChartProps {
-  data: Array<{ time: number; users: number }>;
-}
-
-const ActiveUsersBarChart = ({ data }: ActiveUsersBarChartProps) => (
-  <BarChart
-    width={380}
-    height={180}
-    series={[
-      {
-        data: data.map(d => d.users),
-        color: '#1a73e8'
-      }
-    ]}
-    xAxis={[
-      {
-        scaleType: 'band',
-        data: data.map(d => d.time.toString()),
-        tickLabelStyle: {
-          fontSize: 12,
-          fill: '#5f6368'
-        }
-      }
-    ]}
-    yAxis={[
-      {
-        tickLabelStyle: {
-          fontSize: 12,
-          fill: '#5f6368'
-        }
-      }
-    ]}
-    margin={{ left: 1, right: 20, top: 15, bottom: 10 }}
-    sx={{
-      '& .MuiBarElement-root': {
-        rx: 2
-      }
-    }}
-  />
-);
 
 interface CountriesTableProps {
   countries: Array<{ country: string; users: number }>;
@@ -276,6 +134,7 @@ interface GoogleAnalyticsDashboardProps {
   title?: string;
   dateRange?: string;
   mobileImageSrc?: string;
+  desktopImageSrc?: string;
 }
 
 const CountriesTable = ({ countries }: CountriesTableProps) => (
@@ -312,9 +171,116 @@ const DateRangeLabel = styled(Typography)(({ theme }) => ({
   }
 }));
 
-const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acquisition Overview", dateRange, mobileImageSrc }: GoogleAnalyticsDashboardProps) => {
+const DesktopImageContainer = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  '&:hover': {
+    transform: 'translateY(-4px)',
+    boxShadow: '0 8px 30px rgba(139, 122, 184, 0.15)',
+    '& img': {
+      transform: 'scale(1.02)'
+    }
+  },
+  '& img': {
+    width: '100%',
+    height: 'auto',
+    display: 'block',
+    objectFit: 'contain',
+    transition: 'transform 0.3s ease'
+  }
+});
+
+const MobileImageContainer = styled(Box)({
+  position: 'relative',
+  display: 'inline-block',
+  cursor: 'pointer',
+  '&:hover .zoom-icon': {
+    opacity: 1
+  }
+});
+
+const ZoomIcon = styled(Box)({
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  backgroundColor: 'rgba(139, 122, 184, 0.9)',
+  borderRadius: '50%',
+  width: '40px',
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#ffffff',
+  opacity: 0,
+  transition: 'opacity 0.3s ease',
+  zIndex: 2,
+  '&:hover': {
+    backgroundColor: 'rgba(139, 122, 184, 1)',
+    transform: 'scale(1.1)'
+  }
+});
+
+const ImageModal = styled(Modal)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '20px'
+});
+
+const ModalContent = styled(Box)({
+  position: 'relative',
+  maxWidth: '98vw',  
+  maxHeight: '98vh',
+  width: 'auto',
+  height: 'auto',
+  outline: 'none',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+  '& img': {
+    width: 'auto',
+    height: 'auto',
+    maxWidth: '98vw',
+    maxHeight: '98vh',
+    minWidth: '80vw',
+    objectFit: 'contain',
+    display: 'block'
+  }
+});
+
+const CloseButton = styled(IconButton)({
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  color: '#ffffff',
+  zIndex: 10,
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    transform: 'scale(1.1)'
+  },
+  transition: 'all 0.3s ease'
+});
+
+const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acquisition Overview", dateRange, mobileImageSrc, desktopImageSrc }: GoogleAnalyticsDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <DashboardContainer>
@@ -332,49 +298,13 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
       
       {/* Desktop Layout */}
       {!isMobile && (
-      <MainContent>
-        <LeftPanel>
-          <MetricsContainer>
-            <MetricCardComponent
-              label="Active users"
-              value={data.activeUsers}
-            />
-            <MetricCardComponent
-              label="New users"
-              value={data.newUsers}
-            />
-          </MetricsContainer>
-          
-          <TimeSeriesChart data={data.timeSeriesData} />
-        </LeftPanel>
-        
-        <RightPanel>
-          <SidebarCard>
-            <SidebarTitle>Active Users in Last 30 Minutes</SidebarTitle>
-            <CountUp end={data.activeUsersLast30Min}>
-              {(value) => <RealtimeValue>{value}</RealtimeValue>}
-            </CountUp>
-          </SidebarCard>
-          
-          <SidebarCard>
-            <SidebarTitle>Active Users Per Minute</SidebarTitle>
-            <ActiveUsersBarChart data={data.activeUsersPerMinute} />
-          </SidebarCard>
-          
-          <SidebarCard>
-            <SidebarTitle>Top Countries</SidebarTitle>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-              <Typography variant="caption" sx={{ color: '#5f6368', fontWeight: 500 }}>
-                TOP COUNTRIES
-              </Typography>
-              <Typography variant="caption" sx={{ color: '#5f6368', fontWeight: 500 }}>
-                ACTIVE USERS
-              </Typography>
-            </Box>
-            <CountriesTable countries={data.topCountries} />
-          </SidebarCard>
-        </RightPanel>
-      </MainContent>
+        <DesktopImageContainer>
+          <img 
+            src={desktopImageSrc || Analysis} 
+            alt={`Analytics dashboard for ${dateRange || 'selected period'}`}
+            loading="lazy"
+          />
+        </DesktopImageContainer>
       )}
 
     {/* Mobile Stack Layout */}
@@ -389,22 +319,27 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
         boxShadow: 'none'
       }}>
         {mobileImageSrc ? (
-          <img 
-            src={mobileImageSrc} 
-            alt={`Analytics dashboard for ${dateRange || 'selected period'}`}
-            loading="lazy"
-            style={{
-              width: '113%',
-              height: 'auto',
-              display: 'block',
-              objectFit: 'contain',
-              marginLeft: '-8.5%',
-              border: 'none',
-              boxShadow: 'none',
-              background: 'none',
-              borderRadius: '8px'
-            }}
-          />
+          <MobileImageContainer onClick={handleImageClick}>
+            <img 
+              src={mobileImageSrc} 
+              alt={`Analytics dashboard for ${dateRange || 'selected period'}`}
+              loading="lazy"
+              style={{
+                width: '113%',
+                height: 'auto',
+                display: 'block',
+                objectFit: 'contain',
+                marginLeft: '-6.8%',
+                border: 'none',
+                boxShadow: 'none',
+                background: 'none',
+                borderRadius: '8px'
+              }}
+            />
+            <ZoomIcon className="zoom-icon">
+              <ZoomInIcon />
+            </ZoomIcon>
+          </MobileImageContainer>
         ) : (
           <>
             {/* Mobile Metrics */}
@@ -476,6 +411,25 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
         )}
       </Box>
     )}
+
+    {/* Image Preview Modal */}
+    <ImageModal
+      open={isModalOpen}
+      onClose={handleCloseModal}
+      aria-labelledby="image-preview-modal"
+      aria-describedby="analytics-dashboard-preview"
+    >
+      <ModalContent>
+        <CloseButton onClick={handleCloseModal} aria-label="Close preview">
+          <CloseIcon />
+        </CloseButton>
+        <img 
+          src={mobileImageSrc || desktopImageSrc} 
+          alt={`Analytics dashboard preview for ${dateRange || 'selected period'}`}
+          loading="lazy"
+        />
+      </ModalContent>
+    </ImageModal>
     </DashboardContainer>
   );
 };

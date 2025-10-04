@@ -1,9 +1,8 @@
-import { Box, Typography, Card, Table, TableBody, TableRow, TableCell, useMediaQuery, useTheme, Modal, IconButton } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme, Modal, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LineChart } from '@mui/x-charts/LineChart';
-import CountUp from './CountUpAnimation';
-import { mockRootProps } from './GoogleAnalyticsDashboardMockData';
 import Analysis from '../assets/Analysis.png';
+import Analysis1 from '../assets/Analysis1.png';
+import Analysis2 from '../assets/Analysis2.png';
 import CloseIcon from '@mui/icons-material/Close';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import { useState } from 'react';
@@ -37,124 +36,16 @@ const DashboardTitle = styled(Typography)({
 
 
 
-const MetricCard = styled(Card)({
-  backgroundColor: '#ffffff',
-  borderRadius: '20px',
-  padding: '2rem',
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid rgba(251, 146, 60, 0.1)',
-  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '0 8px 30px rgba(251, 146, 60, 0.15)'
-  }
-});
 
-const MetricLabel = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '0.875rem',
-  fontWeight: 500,
-  color: '#1a73e8',
-  marginBottom: '0.5rem'
-});
-
-const MetricValue = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '2.5rem',
-  fontWeight: 700,
-  color: '#202124',
-  lineHeight: 1
-});
-
-const SidebarCard = styled(Card)({
-  backgroundColor: '#ffffff',
-  borderRadius: '20px',
-  padding: '1.5rem',
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  border: '1px solid rgba(251, 146, 60, 0.1)'
-});
-
-
-
-const CountryRow = styled(TableRow)({
-  '&:hover': {
-    backgroundColor: '#f8f9fa'
-  }
-});
-
-const CountryName = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '0.875rem',
-  color: '#202124',
-  fontWeight: 400
-});
-
-const CountryUsers = styled(Typography)({
-  fontFamily: '"Inter", sans-serif',
-  fontSize: '0.875rem',
-  color: '#202124',
-  fontWeight: 500,
-  textAlign: 'right'
-});
-
-interface MetricCardProps {
-  label: string;
-  value: string;
-}
-
-const MetricCardComponent = ({ label, value }: MetricCardProps) => {
-  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
-  const suffix = value.includes('K') ? 'K' : '';
-  
-  return (
-    <MetricCard>
-      <MetricLabel>{label}</MetricLabel>
-      <CountUp end={numericValue} suffix={suffix}>
-        {(animatedValue) => <MetricValue>{animatedValue}</MetricValue>}
-      </CountUp>
-    </MetricCard>
-  );
-};
-
-
-
-interface CountriesTableProps {
-  countries: Array<{ country: string; users: number }>;
-}
 
 interface GoogleAnalyticsDashboardProps {
-  data?: {
-    activeUsers: string;
-    newUsers: string;
-    activeUsersLast30Min: number;
-    timeSeriesData: Array<{ month: string; value: number }>;
-    activeUsersPerMinute: Array<{ time: number; users: number }>;
-    topCountries: Array<{ country: string; users: number }>;
-  };
   title?: string;
   dateRange?: string;
   mobileImageSrc?: string;
   desktopImageSrc?: string;
 }
 
-const CountriesTable = ({ countries }: CountriesTableProps) => (
-  <Table size="small">
-    <TableBody>
-      {countries.map((country, index) => (
-        <CountryRow key={index}>
-          <TableCell sx={{ border: 'none', padding: '0.5rem 0' }}>
-            <CountryName>{country.country}</CountryName>
-          </TableCell>
-          <TableCell sx={{ border: 'none', padding: '0.5rem 0' }}>
-            <CountUp end={country.users}>
-              {(value) => <CountryUsers>{value}</CountryUsers>}
-            </CountUp>
-          </TableCell>
-        </CountryRow>
-      ))}
-    </TableBody>
-  </Table>
-);
+
 
 const DateRangeLabel = styled(Typography)(({ theme }) => ({
   fontFamily: '"Inter", sans-serif',
@@ -269,14 +160,11 @@ const CloseButton = styled(IconButton)({
   transition: 'all 0.3s ease'
 });
 
-const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acquisition Overview", dateRange, mobileImageSrc, desktopImageSrc }: GoogleAnalyticsDashboardProps) => {
+const GoogleAnalyticsDashboard = ({ title = "Analytics Acquisition Overview", dateRange, mobileImageSrc, desktopImageSrc }: GoogleAnalyticsDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleImageClick = () => {
-    setIsModalOpen(true);
-  };
+  const [modalImageSrc, setModalImageSrc] = useState<string>('');
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -298,7 +186,10 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
       
       {/* Desktop Layout */}
       {!isMobile && (
-        <DesktopImageContainer>
+        <DesktopImageContainer onClick={() => {
+          setModalImageSrc(desktopImageSrc || Analysis);
+          setIsModalOpen(true);
+        }}>
           <img 
             src={desktopImageSrc || Analysis} 
             alt={`Analytics dashboard for ${dateRange || 'selected period'}`}
@@ -318,99 +209,61 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
         margin: 0,
         boxShadow: 'none'
       }}>
-        {mobileImageSrc ? (
-          <MobileImageContainer onClick={handleImageClick}>
-            <img 
-              src={mobileImageSrc} 
-              alt={`Analytics dashboard for ${dateRange || 'selected period'}`}
-              loading="lazy"
-              style={{
-                width: '113%',
-                height: 'auto',
-                display: 'block',
-                objectFit: 'contain',
-                marginLeft: '-6.8%',
-                border: 'none',
-                boxShadow: 'none',
-                background: 'none',
-                borderRadius: '8px'
-              }}
-            />
-            <ZoomIcon className="zoom-icon">
-              <ZoomInIcon />
-            </ZoomIcon>
-          </MobileImageContainer>
-        ) : (
-          <>
-            {/* Mobile Metrics */}
-            <MetricCardComponent
-              label="Active users"
-              value={data.activeUsers}
-            />
-            <MetricCardComponent
-              label="New users"
-              value={data.newUsers}
-            />
+        {/* Stacked Analysis Images */}
+        <MobileImageContainer onClick={() => {
+          setModalImageSrc(Analysis1);
+          setIsModalOpen(true);
+        }}>
+          <img 
+            src={Analysis1} 
+            alt="Analytics dashboard part 1"
+            loading="lazy"
+            style={{
+              width: '113%',
+              height: 'auto',
+              display: 'block',
+              objectFit: 'contain',
+              marginLeft: '-6.8%',
+              border: 'none',
+              boxShadow: 'none',
+              background: 'none',
+              borderRadius: '8px',
+              marginBottom: '0.5rem'
+            }}
+          />
+          <ZoomIcon className="zoom-icon">
+            <ZoomInIcon />
+          </ZoomIcon>
+        </MobileImageContainer>
 
-            {/* Mobile Time Series Chart */}
-            <SidebarCard>
-              <Typography variant="h6" sx={{ mb: 1.5, fontSize: '0.9rem', fontWeight: 600 }}>
-                User Acquisition Timeline
-              </Typography>
-              <Box sx={{ marginLeft: '-10px' }}>
-                <LineChart
-                  width={280}
-                  height={160}
-                  series={[
-                    {
-                      data: data.timeSeriesData.map(d => d.value),
-                      color: '#4285f4'
-                    }
-                  ]}
-                  xAxis={[{
-                    scaleType: 'point',
-                    data: data.timeSeriesData.map(d => d.month),
-                    tickLabelStyle: {
-                      fontSize: 9,
-                      fill: '#5f6368'
-                    }
-                  }]}
-                  yAxis={[{
-                    tickLabelStyle: {
-                      fontSize: 9,
-                      fill: '#5f6368'
-                    }
-                  }]}
-                  margin={{ left: 0, right: 20, top: 20, bottom: 40 }}
-                />
-              </Box>
-            </SidebarCard>
-
-            {/* Mobile Active Users */}
-            <SidebarCard>
-              <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
-                Active Users (Last 30 Min)
-              </Typography>
-              <CountUp end={data.activeUsersLast30Min}>
-                {(value) => (
-                  <Typography sx={{ fontSize: '2rem', fontWeight: 700, color: '#202124' }}>
-                    {value}
-                  </Typography>
-                )}
-              </CountUp>
-            </SidebarCard>
-
-            {/* Mobile Top Countries */}
-            <SidebarCard>
-              <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem', fontWeight: 600 }}>
-                Top Countries
-              </Typography>
-              <CountriesTable countries={data.topCountries} />
-            </SidebarCard>
-          </>
-        )}
+        <MobileImageContainer onClick={() => {
+          setModalImageSrc(Analysis2);
+          setIsModalOpen(true);
+        }}>
+          <img 
+            src={Analysis2} 
+            alt="Analytics dashboard part 2"
+            loading="lazy"
+            style={{
+              width: '113%',
+              height: 'auto',
+              display: 'block',
+              objectFit: 'contain',
+              marginLeft: '-6.8%',
+              border: 'none',
+              boxShadow: 'none',
+              background: 'none',
+              borderRadius: '8px'
+            }}
+          />
+          <ZoomIcon className="zoom-icon">
+            <ZoomInIcon />
+          </ZoomIcon>
+        </MobileImageContainer>
       </Box>
     )}
+
+
 
     {/* Image Preview Modal */}
     <ImageModal
@@ -424,7 +277,7 @@ const GoogleAnalyticsDashboard = ({ data = mockRootProps, title = "Analytics Acq
           <CloseIcon />
         </CloseButton>
         <img 
-          src={mobileImageSrc || desktopImageSrc} 
+          src={modalImageSrc || mobileImageSrc || desktopImageSrc} 
           alt={`Analytics dashboard preview for ${dateRange || 'selected period'}`}
           loading="lazy"
         />

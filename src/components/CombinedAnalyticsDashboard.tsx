@@ -33,6 +33,24 @@ const MainTitle = styled(Typography)(({ theme }) => ({
   }
 }));
 
+const Subtitle = styled(Typography)(({ theme }) => ({
+  fontFamily: '"DM Sans", "Manrope", sans-serif',
+  fontSize: '1.5rem',
+  fontWeight: 400,
+  color: '#4a3a6e',
+  textAlign: 'center',
+  marginBottom: '3rem',
+  letterSpacing: '-0.025em',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '1.2rem',
+    marginBottom: '2rem'
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1rem',
+    marginBottom: '1.5rem'
+  }
+}));
+
 const DashboardWrapper = styled(Box)({
   marginBottom: '2rem',
   '&:last-child': {
@@ -132,12 +150,15 @@ const CombinedAnalyticsDashboard = () => {
   return (
     <CombinedContainer>
       <MainTitle>
-        Year-over-Year Website Growth (2023–2024 vs 2024–2025)
+        Google Analytics Acquisition Overview
       </MainTitle>
+      <Subtitle>
+        Year-over-Year Website Growth (2023–2024 vs 2024–2025)
+      </Subtitle>
       
       <DashboardWrapper>
         <GoogleAnalyticsDashboard 
-          data={mockRootProps} 
+          {...mockRootProps}
           title="" 
           mobileImageSrc={Analysis}
           desktopImageSrc={Analysis}

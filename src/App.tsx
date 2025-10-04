@@ -5,7 +5,6 @@ import { CacheProvider } from '@emotion/react';
 import { useEffect } from 'react';
 import theme from './theme';
 import HeroSection from './components/HeroSection';
-import ITBerriesSection from './components/ITBerriesSection';
 import AboutSection from './components/AboutSection';
 import ExperienceEducationSection from './components/ExperienceEducationSection';
 import { mockRootProps } from './components/ExperienceEducationSectionMockData';
@@ -39,7 +38,6 @@ function App() {
           backgroundAttachment: 'fixed'
         }}>
           <HeroSection />
-          <ITBerriesSection />
           <AboutSection />
           <ExperienceEducationSection {...mockRootProps} />
           <SkillsCertificationsSection />

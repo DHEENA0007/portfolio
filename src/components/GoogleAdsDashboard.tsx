@@ -12,7 +12,7 @@ const DashboardContainer = styled(Box)({
   margin: '0'
 });
 
-const DashboardTitle = styled(Typography)({
+const DashboardTitle = styled(Typography)(({ theme }) => ({
   fontFamily: '"Cabinet Grotesk", "Space Grotesk", sans-serif',
   fontSize: '3rem',
   fontWeight: 800,
@@ -23,8 +23,12 @@ const DashboardTitle = styled(Typography)({
   background: 'linear-gradient(135deg, #8b7ab8 0%, #7b6ba8 50%, #6b5b98 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text'
-});
+  backgroundClip: 'text',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: '2rem'
+  }
+}));
 
 const CampaignGrid = styled(Box)({
   display: 'grid',

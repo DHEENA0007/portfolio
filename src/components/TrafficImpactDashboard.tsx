@@ -155,13 +155,11 @@ const TrafficImpactDashboard = () => {
             series={[
               {
                 data: currentYearData,
-                label: 'Current Year (My Work)',
                 color: '#ef4444',
                 id: 'currentYear'
               },
               {
                 data: baselineData,
-                label: 'Previous Year (Baseline)',
                 color: '#6366f1',
                 id: 'baseline'
               }

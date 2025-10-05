@@ -137,22 +137,29 @@ const ChartDescription = styled(Typography)({
 
 const CampaignLabelsContainer = styled(Box)(({ theme }) => ({
   display: 'none',
-  justifyContent: 'center',
-  alignItems: 'center',
-  gap: '3rem',
-  marginTop: '2rem',
+  position: 'relative',
+  height: '80px',
+  marginTop: '-4rem',
   marginBottom: '1rem',
+  maxWidth: '800px',
+  margin: '-4rem auto 1rem',
+  paddingLeft: '80px',
+  paddingRight: '40px',
   [theme.breakpoints.up('md')]: {
-    display: 'flex' // Show only on desktop
+    display: 'block' // Show only on desktop
   }
 }));
 
-const CampaignLabelItem = styled(Box)({
+const CampaignLabelItem = styled(Box)<{ placement?: string }>(({ placement }) => ({
+  position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '0.5rem'
-});
+  gap: '0.5rem',
+  ...(placement === 'ireland' && { left: '22%' }),
+  ...(placement === 'france' && { left: '49%' }),
+  ...(placement === 'uk' && { right: '12%' })
+}));
 
 const CampaignName = styled(Typography)({
   fontFamily: '"Inter", sans-serif',
@@ -319,12 +326,15 @@ const GoogleAdsPortfolio = ({ data }: GoogleAdsPortfolioProps) => {
 
         {/* Campaign Labels for Desktop Only */}
         <CampaignLabelsContainer>
-          {portfolioData.campaigns.map((campaign, index) => (
-            <CampaignLabelItem key={index}>
-              <CampaignName>{campaign.name}</CampaignName>
-              <CampaignROAS>{campaign.roas}x ROAS</CampaignROAS>
-            </CampaignLabelItem>
-          ))}
+          {portfolioData.campaigns.map((campaign, index) => {
+            const positions = ['ireland', 'france', 'uk'];
+            return (
+              <CampaignLabelItem key={index} placement={positions[index]}>
+                <CampaignName>{campaign.name}</CampaignName>
+                <CampaignROAS>{campaign.roas}x ROAS</CampaignROAS>
+              </CampaignLabelItem>
+            );
+          })}
         </CampaignLabelsContainer>
 
         <ChartDescription>
